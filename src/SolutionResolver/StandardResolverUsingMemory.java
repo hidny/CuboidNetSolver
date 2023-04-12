@@ -19,9 +19,10 @@ public class StandardResolverUsingMemory implements SolutionResolverInterface {
 		//TODO: Maybe have global vars elsewhere? 
 		numFound++;
 		
-		if(numFound % 100000 == 0) {
+		if(numFound % 1000000 == 0) {
 			System.out.println(numFound +
 				" (num unique: " + BasicUniqueCheckImproved.uniqList.size() + ")");
+			Utils.printFoldWithIndex(indexCuboidonPaper[0]);
 		}
 		
 		if(BasicUniqueCheckImproved.isUnique(paperToDevelop, paperUsed)) {
@@ -46,6 +47,6 @@ public class StandardResolverUsingMemory implements SolutionResolverInterface {
 	@Override
 	public long getNumUniqueFound() {
 		// TODO Auto-generated method stub
-		return 0;
+		return BasicUniqueCheckImproved.uniqList.size();
 	}
 }

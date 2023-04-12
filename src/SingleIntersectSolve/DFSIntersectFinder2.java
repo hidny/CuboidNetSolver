@@ -2,22 +2,17 @@ package SingleIntersectSolve;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 
 import Coord.Coord2D;
 import Coord.CoordWithRotationAndIndex;
 //import Cuboid.SymmetryResolver.SymmetryResolver;
-//import DupRemover.BasicUniqueCheckImproved;
-//import FancyTricks.ThreeBombHandler;
-//import FoldingAlgoStartAnywhere.FoldResolveOrderedRegionsSkipSymmetries;
-import DupRemover.BasicUniqueCheckImproved;
 import SolutionResolver.SolutionResolverInterface;
 import SolutionResolver.StandardResolverUsingMemory;
 import GraphUtils.PivotCellDescription;
 import Model.CuboidToFoldOn;
 import Model.Utils;
 
-public class DFSIntersectFinderRegions {
+public class DFSIntersectFinder2 {
 
 	
 	public static final int NUM_ROTATIONS = 4;
@@ -100,7 +95,11 @@ public class DFSIntersectFinderRegions {
 		
 		//(Set i=1 for non-trial Nx1x1 intersections)
 		for(int i=0; i<startingPointsAndRotationsToCheck.size(); i++) {
-			
+			//if(i != 0 && i != 4 && i != 6 && i != 10 && i != 14) {
+			//	continue;
+			//}
+		//for(int i=0; i<1; i++) {
+		
 			int startIndex2ndCuboid =startingPointsAndRotationsToCheck.get(i).getCellIndex();
 			int startRotation2ndCuboid = startingPointsAndRotationsToCheck.get(i).getRotationRelativeToCuboidMap();
 			
@@ -111,9 +110,12 @@ public class DFSIntersectFinderRegions {
 			
 			int topBottombridgeUsedNx1x1[] = new int[Utils.getTotalArea(cuboidToBuild.getDimensions())];
 			
-			long debugIterations[] = new long[Utils.getTotalArea(cuboidToBuild.getDimensions())]; 
+			long debugIterations[] = new long[Utils.getTotalArea(cuboidToBuild.getDimensions())];
+			
+			HashMap<Integer, Integer> CellIndexToOrderOfDev = new HashMap <Integer, Integer>();
+			CellIndexToOrderOfDev.put(0, 0);
 		
-			doDepthFirstSearch(paperToDevelop, indexCuboidOnPaper, paperUsed, cuboid, numCellsUsedDepth, -1L, skipSymmetries, solutionResolver, cuboidToBringAlongStartRot, indexCuboidOnPaper2ndCuboid, topBottombridgeUsedNx1x1, false, debugIterations);
+			doDepthFirstSearch(paperToDevelop, indexCuboidOnPaper, paperUsed, cuboid, numCellsUsedDepth, -1L, skipSymmetries, solutionResolver, cuboidToBringAlongStartRot, indexCuboidOnPaper2ndCuboid, topBottombridgeUsedNx1x1, false, debugIterations, CellIndexToOrderOfDev, 0, 0);
 			
 			
 			System.out.println("Done with trying to intersect 2nd cuboid that has a start index of " + startIndex2ndCuboid + " and a rotation index of " + startRotation2ndCuboid +".");
@@ -134,10 +136,11 @@ public class DFSIntersectFinderRegions {
 	public static long doDepthFirstSearch(Coord2D paperToDevelop[], int indexCuboidonPaper[][], boolean paperUsed[][], CuboidToFoldOn cuboid, int numCellsUsedDepth,
 			long limitDupSolutions, boolean skipSymmetries, SolutionResolverInterface solutionResolver, CuboidToFoldOn cuboidToBringAlongStartRot, int indexCuboidOnPaper2ndCuboid[][],
 			int topBottombridgeUsedNx1x1[],
-			boolean debugNope, long debugIterations[]) {
+			boolean debugNope, long debugIterations[],
+			HashMap <Integer, Integer> CellIndexToOrderOfDev, int minIndexToUse, int minRotationToUse) {
 
 		if(numCellsUsedDepth == cuboid.getNumCellsToFill()) {
-			
+			//TOOD: uncomment
 			int indexes[][][] = new int[2][][];
 			indexes[0] = indexCuboidonPaper;
 			indexes[1] = indexCuboidOnPaper2ndCuboid;
@@ -151,9 +154,12 @@ public class DFSIntersectFinderRegions {
 				}
 				System.exit(1);
 			}
+			
 			return tmp;
 		}
-		
+
+		//System.out.println(numIterations);
+		//Utils.printFoldWithIndex(indexCuboidonPaper);
 		
 		//Display debug/what's-going-on update
 		numIterations++;
@@ -180,14 +186,11 @@ public class DFSIntersectFinderRegions {
 		debugIterations[numCellsUsedDepth] = numIterations;
 		
 		//DEPTH-FIRST START:
-		for(int i=regions[regionIndex].getMinOrderedCellCouldUsePerRegion(); i<paperToDevelop.length && paperToDevelop[i] != null; i++) {
+		for(int curOrderedIndexToUse=minIndexToUse; curOrderedIndexToUse<numCellsUsedDepth && curOrderedIndexToUse<paperToDevelop.length && paperToDevelop[curOrderedIndexToUse] != null; curOrderedIndexToUse++) {
 			
-			int indexToUse = indexCuboidonPaper[paperToDevelop[i].i][paperToDevelop[i].j];
+			int indexToUse = indexCuboidonPaper[paperToDevelop[curOrderedIndexToUse].i][paperToDevelop[curOrderedIndexToUse].j];
 			
-			if( ! regions[regionIndex].getCellIndexToOrderOfDev().containsKey(indexToUse)) {
-				continue;
-				
-			}/* else if(SymmetryResolver.skipSearchBecauseOfASymmetryArgDontCareAboutRotation
+			/* else if(SymmetryResolver.skipSearchBecauseOfASymmetryArgDontCareAboutRotation
 					(cuboid, paperToDevelop, indexCuboidonPaper, i,indexToUse)
 				&& skipSymmetries) {
 				continue;
@@ -205,7 +208,7 @@ public class DFSIntersectFinderRegions {
 			
 			int curRotation = cuboid.getRotationPaperRelativeToMap(indexToUse);
 			
-			int indexToUse2 = indexCuboidOnPaper2ndCuboid[paperToDevelop[i].i][paperToDevelop[i].j];
+			int indexToUse2 = indexCuboidOnPaper2ndCuboid[paperToDevelop[curOrderedIndexToUse].i][paperToDevelop[curOrderedIndexToUse].j];
 			int curRotationCuboid2 = cuboidToBringAlongStartRot.getRotationPaperRelativeToMap(indexToUse2);
 			
 			//Try to attach a cell onto indexToUse using all 4 rotations:
@@ -218,11 +221,9 @@ public class DFSIntersectFinderRegions {
 					//Don't reuse a used cell:
 					continue;
 					
-				} else if(regions[regionIndex].getCellRegionsToHandleInRevOrder()[neighbours[neighbourArrayIndex].getIndex()] == false) {
-					continue;
-	
-				} else if(regions[regionIndex].getCellIndexToOrderOfDev().get(indexToUse) == regions[regionIndex].getMinOrderedCellCouldUsePerRegion() 
-						&& dirNewCellAdd <  regions[regionIndex].getMinCellRotationOfMinCellToDevPerRegion()) {
+				} else if(CellIndexToOrderOfDev.containsKey(indexToUse) &&
+						CellIndexToOrderOfDev.get(indexToUse) == minIndexToUse
+						&& dirNewCellAdd <  minRotationToUse) {
 					continue;
 				}
 
@@ -236,8 +237,8 @@ public class DFSIntersectFinderRegions {
 				}
 				
 				
-				int new_i = paperToDevelop[i].i + nugdeBasedOnRotation[0][dirNewCellAdd];
-				int new_j = paperToDevelop[i].j + nugdeBasedOnRotation[1][dirNewCellAdd];
+				int new_i = paperToDevelop[curOrderedIndexToUse].i + nugdeBasedOnRotation[0][dirNewCellAdd];
+				int new_j = paperToDevelop[curOrderedIndexToUse].j + nugdeBasedOnRotation[1][dirNewCellAdd];
 
 				int indexNewCell = neighbours[neighbourArrayIndex].getIndex();
 				
@@ -257,13 +258,12 @@ public class DFSIntersectFinderRegions {
 				//	continue;
 				//}
 				
-				boolean cantAddCellBecauseOfOtherPaperNeighbours = false;
-				/*boolean cantAddCellBecauseOfOtherPaperNeighbours = FoldResolveOrderedRegionsSkipSymmetries.cantAddCellBecauseOfOtherPaperNeighbours(paperToDevelop, indexCuboidonPaper,
+				boolean cantAddCellBecauseOfOtherPaperNeighbours = //cantAddCellBecauseOfOtherPaperNeighbours(paperToDevelop, indexCuboidonPaper,
+						ALLOW_HOLES_cantAddCellBecauseOfOtherPaperNeighbours(paperToDevelop, indexCuboidonPaper,
 						paperUsed, cuboid, numCellsUsedDepth,
-						regions, regionIndex, indexToUse,
-						indexNewCell, new_i, new_j, i
+						CellIndexToOrderOfDev, minIndexToUse, minRotationToUse,
+						indexNewCell, new_i, new_j, curOrderedIndexToUse
 					);
-				*/
 				
 				
 				if( ! cantAddCellBecauseOfOtherPaperNeighbours) {
@@ -287,7 +287,6 @@ public class DFSIntersectFinderRegions {
 					indexCuboidOnPaper2ndCuboid[new_i][new_j] = indexNewCell2;
 
 					
-					numCellsUsedDepth += 1;
 					//End setup
 
 					long newLimitDupSolutions = limitDupSolutions;
@@ -295,11 +294,16 @@ public class DFSIntersectFinderRegions {
 						newLimitDupSolutions -= retDuplicateSolutions;
 					}
 					
+					CellIndexToOrderOfDev.put(indexNewCell, numCellsUsedDepth);
+					numCellsUsedDepth += 1;
 					
-					retDuplicateSolutions += doDepthFirstSearch(paperToDevelop, indexCuboidonPaper, paperUsed, cuboid, numCellsUsedDepth, newLimitDupSolutions, skipSymmetries, solutionResolver, cuboidToBringAlongStartRot, indexCuboidOnPaper2ndCuboid, topBottombridgeUsedNx1x1, debugNope, debugIterations);
+					retDuplicateSolutions += doDepthFirstSearch(paperToDevelop, indexCuboidonPaper, paperUsed, cuboid, numCellsUsedDepth, newLimitDupSolutions, skipSymmetries, solutionResolver, cuboidToBringAlongStartRot, indexCuboidOnPaper2ndCuboid, topBottombridgeUsedNx1x1, debugNope, debugIterations, CellIndexToOrderOfDev, curOrderedIndexToUse, dirNewCellAdd);
 
 					//Tear down (undo add of new cell)
 					numCellsUsedDepth -= 1;
+
+					CellIndexToOrderOfDev.remove(indexNewCell);
+					
 					
 
 					
@@ -322,8 +326,102 @@ public class DFSIntersectFinderRegions {
 		return retDuplicateSolutions;
 	}
 	
+	public static final int ONE_EIGHTY_ROTATION = 2;
+	
+	public static boolean cantAddCellBecauseOfOtherPaperNeighbours(Coord2D paperToDevelop[], int indexCuboidonPaper[][],
+			boolean paperUsed[][], CuboidToFoldOn cuboid, int numCellsUsedDepth,
+			HashMap <Integer, Integer> CellIndexToOrderOfDev, int minIndexToUse, int minRotationToUse,
+			int indexNewCell, int new_i, int new_j, int curOrderedIndexToUse
+		) {	
+	boolean cantAddCellBecauseOfOtherPaperNeighbours = false;
+	
+	int neighboursBasedOnRotation[][] = {{new_i-1, new_j}, {new_i, new_j+1},{new_i+1, new_j},{new_i, new_j - 1}};
 
+	
+	for(int rotReq=0; rotReq<neighboursBasedOnRotation.length; rotReq++) {
+		
+		int i1 = neighboursBasedOnRotation[rotReq][0];
+		int j1 = neighboursBasedOnRotation[rotReq][1];
+	
+		if(paperToDevelop[curOrderedIndexToUse].i == i1 && paperToDevelop[curOrderedIndexToUse].j == j1) {
+			continue;
+		}
+		
+		//System.out.println("Paper neighbour:" + i1 + ", " + j1);
+		
+		if(paperUsed[i1][j1]) {
+			//System.out.println("Connected to another paper");
+			
+			int indexOtherCell = indexCuboidonPaper[i1][j1];
+			int rotationOtherCell = cuboid.getRotationPaperRelativeToMap(indexOtherCell);
+
+			if(CellIndexToOrderOfDev.containsKey(indexOtherCell)
+					&& CellIndexToOrderOfDev.get(indexOtherCell) < curOrderedIndexToUse ) {
+				cantAddCellBecauseOfOtherPaperNeighbours = true;
+				break;
+			}
+			
+			//There's a 180 rotation because the neighbour is attaching to the new cell (so it's flipped!)
+			int neighbourIndexNeeded = (rotReq + ONE_EIGHTY_ROTATION - rotationOtherCell+ NUM_ROTATIONS) % NUM_ROTATIONS;
+
+
+			if(cuboid.getNeighbours(indexOtherCell)[neighbourIndexNeeded].getIndex() != indexNewCell) {
+				cantAddCellBecauseOfOtherPaperNeighbours = true;
+				break;
+			}
+		}
+	}
+	return cantAddCellBecauseOfOtherPaperNeighbours;
+}
 	 
+	public static boolean ALLOW_HOLES_cantAddCellBecauseOfOtherPaperNeighbours(Coord2D paperToDevelop[], int indexCuboidonPaper[][],
+			boolean paperUsed[][], CuboidToFoldOn cuboid, int numCellsUsedDepth,
+			HashMap <Integer, Integer> CellIndexToOrderOfDev, int minIndexToUse, int minRotationToUse,
+			int indexNewCell, int new_i, int new_j, int curOrderedIndexToUse
+		) {	
+	boolean cantAddCellBecauseOfOtherPaperNeighbours = false;
+	
+	int neighboursBasedOnRotation[][] = {{new_i-1, new_j}, {new_i, new_j+1},{new_i+1, new_j},{new_i, new_j - 1}};
+
+	
+	for(int rotReq=0; rotReq<neighboursBasedOnRotation.length; rotReq++) {
+		
+		int i1 = neighboursBasedOnRotation[rotReq][0];
+		int j1 = neighboursBasedOnRotation[rotReq][1];
+	
+		if(paperToDevelop[curOrderedIndexToUse].i == i1 && paperToDevelop[curOrderedIndexToUse].j == j1) {
+			continue;
+		}
+		
+		//System.out.println("Paper neighbour:" + i1 + ", " + j1);
+		
+		if(paperUsed[i1][j1]) {
+			//System.out.println("Connected to another paper");
+			
+			int indexOtherCell = indexCuboidonPaper[i1][j1];
+			int rotationOtherCell = cuboid.getRotationPaperRelativeToMap(indexOtherCell);
+			
+			//There's a 180 rotation because the neighbour is attaching to the new cell (so it's flipped!)
+			int neighbourIndexNeeded = (rotReq + ONE_EIGHTY_ROTATION - rotationOtherCell+ NUM_ROTATIONS) % NUM_ROTATIONS;
+
+			if(cuboid.getNeighbours(indexOtherCell)[neighbourIndexNeeded].getIndex() != indexNewCell) {
+				//In this case, there's an implied hole...
+				// I want to see what happens when we allow this...
+				continue;
+				
+			} else if(CellIndexToOrderOfDev.containsKey(indexOtherCell)
+					&& CellIndexToOrderOfDev.get(indexOtherCell) < curOrderedIndexToUse ) {
+				cantAddCellBecauseOfOtherPaperNeighbours = true;
+				break;
+			}
+			
+		
+
+			
+		}
+	}
+	return cantAddCellBecauseOfOtherPaperNeighbours;
+}
 	/*https://www.sciencedirect.com/science/article/pii/S0925772117300160
 	 * 
 	 *  "From the necessary condition, the smallest possible surface area that can fold into two boxes is 22,
@@ -339,7 +437,7 @@ public class DFSIntersectFinderRegions {
 		
 		//solveCuboidIntersections(new CuboidToFoldOn(13, 1, 1), new CuboidToFoldOn(3, 3, 3));
 		
-		solveCuboidIntersections(new CuboidToFoldOn(11, 1, 1), new CuboidToFoldOn(5, 3, 1));
+		//solveCuboidIntersections(new CuboidToFoldOn(11, 1, 1), new CuboidToFoldOn(5, 3, 1));
 		
 		//solveCuboidIntersections(new CuboidToFoldOn(11, 1, 1), new CuboidToFoldOn(7, 2, 1));
 		
@@ -351,11 +449,14 @@ public class DFSIntersectFinderRegions {
 		
 		//solveCuboidIntersections(new CuboidToFoldOn(7, 1, 1), new CuboidToFoldOn(3, 3, 1));
 		////It got 1070 (again) (They got 1080, but I think they were wrong)
+		// I got 1080 when I allow the solution to have an apparent hole in it!
+		// 
 		
-		//solveCuboidIntersections(new CuboidToFoldOn(5, 1, 1), new CuboidToFoldOn(3, 2, 1));
+		solveCuboidIntersections(new CuboidToFoldOn(5, 1, 1), new CuboidToFoldOn(3, 2, 1));
 		//It got 2263!
+		//I got 2290 when I allow the solution to have an apparent hole in it.
 
-		//solveCuboidIntersections(new CuboidToFoldOn(2, 1, 1), new CuboidToFoldOn(1, 2, 1));
+		//solveCuboidIntersections(new CuboidToFoldOn(4, 1, 1), new CuboidToFoldOn(4, 1, 1));
 		
 		//Best 5,1,1: 3 minute 45 seconds (3014430 solutions) (December 27th)
 		
@@ -395,5 +496,20 @@ public class DFSIntersectFinderRegions {
 70	1 × 1 × 17, 1 × 2 × 11, 1 × 3 × 8, 1 × 5 × 5
 88	1 × 2 × 14, 1 × 4 × 8, 2 × 2 × 10, 2 × 4 × 6
 */
+
 	
+	// 3x1x1: 15057
+	// used to be 14978
+	
+	//I see! it's because I had this code commented out:
+	//if(cuboid.getNeighbours(indexOtherCell)[neighbourIndexNeeded].getIndex() != indexNewCell) {
+	//	cantAddCellBecauseOfOtherPaperNeighbours = true;
+	//	break;
+	//}
+	
+	//1x1x1:     11
+	//2x1x1:    723
+	//3x1x1   14978
+	//4x1x1   
+	//Oh no!
 }
