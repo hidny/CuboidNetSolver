@@ -8,6 +8,7 @@ import Coord.CoordWithRotationAndIndex;
 //import Cuboid.SymmetryResolver.SymmetryResolver;
 import SolutionResolver.SolutionResolverInterface;
 import SolutionResolver.StandardResolverUsingMemory;
+import SymmetryResolver.SymmetryResolver;
 import GraphUtils.PivotCellDescription;
 import Model.CuboidToFoldOn;
 import Model.Utils;
@@ -140,12 +141,13 @@ public class DFSIntersectFinder2 {
 			HashMap <Integer, Integer> CellIndexToOrderOfDev, int minIndexToUse, int minRotationToUse) {
 
 		if(numCellsUsedDepth == cuboid.getNumCellsToFill()) {
-			//TOOD: uncomment
+
 			int indexes[][][] = new int[2][][];
 			indexes[0] = indexCuboidonPaper;
 			indexes[1] = indexCuboidOnPaper2ndCuboid;
 			long tmp = solutionResolver.resolveSolution(cuboid, paperToDevelop, indexes, paperUsed);
 
+			/*
 			if(debugNope) {
 				System.out.println("STOP!");
 				System.out.println(numIterations);
@@ -154,6 +156,7 @@ public class DFSIntersectFinder2 {
 				}
 				System.exit(1);
 			}
+			*/
 			
 			return tmp;
 		}
@@ -190,19 +193,19 @@ public class DFSIntersectFinder2 {
 			
 			int indexToUse = indexCuboidonPaper[paperToDevelop[curOrderedIndexToUse].i][paperToDevelop[curOrderedIndexToUse].j];
 			
-			/* else if(SymmetryResolver.skipSearchBecauseOfASymmetryArgDontCareAboutRotation
-					(cuboid, paperToDevelop, indexCuboidonPaper, i,indexToUse)
+			 if(SymmetryResolver.skipSearchBecauseOfASymmetryArgDontCareAboutRotation
+					(cuboid, paperToDevelop, indexCuboidonPaper, curOrderedIndexToUse, indexToUse)
 				&& skipSymmetries) {
 				continue;
 
 				
-			}*/ /*else	if( 2*numCellsUsedDepth < paperToDevelop.length && SymmetryResolver.skipSearchBecauseCuboidCouldProvablyNotBeBuiltThisWay
-					(cuboid, paperToDevelop, indexCuboidonPaper, i,indexToUse, regions[regionIndex], topBottombridgeUsedNx1x1) && skipSymmetries) {
+			} else if( 2*numCellsUsedDepth < paperToDevelop.length && SymmetryResolver.skipSearchBecauseCuboidCouldProvablyNotBeBuiltThisWay
+					(cuboid, paperToDevelop, indexCuboidonPaper, curOrderedIndexToUse, indexToUse, topBottombridgeUsedNx1x1, CellIndexToOrderOfDev) && skipSymmetries) {
 				
 				break;
 				
 				//Maybe put this right after the contains key if condition? (regions[regionIndex].getCellIndexToOrderOfDev().containsKey(indexToUse))
-			}*/
+			}
 
 			CoordWithRotationAndIndex neighbours[] = cuboid.getNeighbours(indexToUse);
 			
@@ -252,11 +255,11 @@ public class DFSIntersectFinder2 {
 				int rotationNeighbourPaperRelativeToMap = (curRotation - neighbours[neighbourArrayIndex].getRot() + NUM_ROTATIONS) % NUM_ROTATIONS;
 				int rotationNeighbourPaperRelativeToMap2 = (curRotationCuboid2 - cuboidToBringAlongStartRot.getNeighbours(indexToUse2)[neighbourIndexCuboid2].getRot() + NUM_ROTATIONS)  % NUM_ROTATIONS;
 				
-				//if(SymmetryResolver.skipSearchBecauseOfASymmetryArg
-				//		(cuboid, paperToDevelop, i, indexCuboidonPaper, dirNewCellAdd, curRotation, paperUsed, indexToUse, indexNewCell)
-				//	&& skipSymmetries == true) {
-				//	continue;
-				//}
+				if(SymmetryResolver.skipSearchBecauseOfASymmetryArg
+						(cuboid, paperToDevelop, curOrderedIndexToUse, indexCuboidonPaper, dirNewCellAdd, curRotation, paperUsed, indexToUse, indexNewCell)
+					&& skipSymmetries == true) {
+					continue;
+				}
 				
 				boolean cantAddCellBecauseOfOtherPaperNeighbours = //cantAddCellBecauseOfOtherPaperNeighbours(paperToDevelop, indexCuboidonPaper,
 						ALLOW_HOLES_cantAddCellBecauseOfOtherPaperNeighbours(paperToDevelop, indexCuboidonPaper,
@@ -444,15 +447,15 @@ public class DFSIntersectFinder2 {
 		//solveCuboidIntersections(new CuboidToFoldOn(9, 1, 1), new CuboidToFoldOn(4, 3, 1));
 		//It got 4469 solutions and it took about 41.5 hours
 		
-		//solveCuboidIntersections(new CuboidToFoldOn(8, 1, 1), new CuboidToFoldOn(5, 2, 1));
+		solveCuboidIntersections(new CuboidToFoldOn(8, 1, 1), new CuboidToFoldOn(5, 2, 1));
 		//It got 35675 again, but this time it only took 3 hours! It took almost 2 days last time!
 		
 		//solveCuboidIntersections(new CuboidToFoldOn(7, 1, 1), new CuboidToFoldOn(3, 3, 1));
 		////It got 1070 (again) (They got 1080, but I think they were wrong)
 		// I got 1080 when I allow the solution to have an apparent hole in it!
-		// 
+		// took 34 minutes
 		
-		solveCuboidIntersections(new CuboidToFoldOn(5, 1, 1), new CuboidToFoldOn(3, 2, 1));
+		//solveCuboidIntersections(new CuboidToFoldOn(5, 1, 1), new CuboidToFoldOn(3, 2, 1));
 		//It got 2263!
 		//I got 2290 when I allow the solution to have an apparent hole in it.
 
