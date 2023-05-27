@@ -13,7 +13,7 @@ public class BasicUniqueCheckImproved {
 	public static int NUM_ROTATIONS = 4;
 	public static int CHECK_SYMMETRIES_ONE_DIM_FACTOR = 2;
 
-	public static int BIG_ENOUGH_NUMBER = 256;
+	public static int MAX_WIDTH_PLUS_ONE = 256;
 	
 	public static HashSet<BigInteger> uniqList = new HashSet<BigInteger>();
 	public static BigInteger debugLastScore = null;
@@ -34,7 +34,7 @@ public class BasicUniqueCheckImproved {
 		long widthShape = lastj - firstj + 1;
 		
 		BigInteger scores[] = new BigInteger[NUM_REFLECTIONS * NUM_ROTATIONS];
-		boolean tooLow[] = new boolean[NUM_REFLECTIONS * NUM_ROTATIONS];
+		boolean tooHigh[] = new boolean[NUM_REFLECTIONS * NUM_ROTATIONS];
 		
 		if(heightShape < widthShape) {
 			scores = new BigInteger[NUM_REFLECTIONS * NUM_ROTATIONS / CHECK_SYMMETRIES_ONE_DIM_FACTOR];
@@ -42,8 +42,8 @@ public class BasicUniqueCheckImproved {
 
 			for(int i=0; i<scores.length; i++) {
 				//3 * 256^2 fixes a possible hash collision
-				// I made it 3 instead of 1 because in future, I want placement of first and second 1 to mean something
-				scores[i] = new BigInteger((3 * BIG_ENOUGH_NUMBER * BIG_ENOUGH_NUMBER + widthShape * BIG_ENOUGH_NUMBER + heightShape) + "");
+				// I made it 3 instead of 1 because in future, I want placement of first and second binary 1 to mean something
+				scores[i] = new BigInteger((3 * MAX_WIDTH_PLUS_ONE * MAX_WIDTH_PLUS_ONE + heightShape * MAX_WIDTH_PLUS_ONE + widthShape) + "");
 
 			}
 			
@@ -57,35 +57,35 @@ public class BasicUniqueCheckImproved {
 					for(int j=firstj, jrev = lastj; j<=lastj; j++, jrev--) {
 						
 						for(int k=0; k<scores.length; k++) {
-							if(tooLow[k]) {
+							if(tooHigh[k]) {
 								continue;
 							}
 							scores[k] = scores[k].multiply(TWO);
 						}
 						
-						if(!tooLow[0] && array[i][j]) {
+						if(!tooHigh[0] && array[i][j]) {
 							scores[0] = scores[0].add(BigInteger.ONE);
 						}
 						
-						if(!tooLow[1] && array[i][jrev]) {
+						if(!tooHigh[1] && array[i][jrev]) {
 							scores[1] = scores[1].add(BigInteger.ONE);
 						}
 						
-						if(!tooLow[2] && array[irev][j]) {
+						if(!tooHigh[2] && array[irev][j]) {
 							scores[2] = scores[2].add(BigInteger.ONE);
 						}
 						
-						if(!tooLow[3] && array[irev][jrev]) {
+						if(!tooHigh[3] && array[irev][jrev]) {
 							scores[3] = scores[3].add(BigInteger.ONE);
 						}
 		
 						if(! onlyOneContender  ) {
 		
-							tooLow = refreshNumContenders(scores, tooLow);
+							tooHigh = refreshNumContenders(scores, tooHigh);
 							
 							int numContender = 0;
 							for(int k=0; k<scores.length; k++) {
-								if(! tooLow[k]) {
+								if(! tooHigh[k]) {
 									numContender++;
 								}
 							}
@@ -103,8 +103,9 @@ public class BasicUniqueCheckImproved {
 
 			for(int i=0; i<scores.length; i++) {
 				//3 * 256^2 fixes a possible hash collision
-				// I made it 3 instead of 1 because in future, I want placement of first and second 1 to mean something
-				scores[i] = new BigInteger((3 * BIG_ENOUGH_NUMBER * BIG_ENOUGH_NUMBER + heightShape * BIG_ENOUGH_NUMBER + widthShape) + "");
+				// I made it 3 instead of 1 because in future, I want placement of first and second binary 1 to mean something
+				scores[i] = new BigInteger((3 * MAX_WIDTH_PLUS_ONE * MAX_WIDTH_PLUS_ONE + widthShape * MAX_WIDTH_PLUS_ONE + heightShape) + "");
+
 
 			}
 			
@@ -115,35 +116,35 @@ public class BasicUniqueCheckImproved {
 				for(int i2=firsti, i2rev=lasti; i2<=lasti; i2++, i2rev--) {
 					
 					for(int k=0; k<scores.length; k++) {
-						if(tooLow[k]) {
+						if(tooHigh[k]) {
 							continue;
 						}
 						scores[k] = scores[k].multiply(TWO);
 					}
 					
-					if(!tooLow[0] && array[i2][j2]) {
+					if(!tooHigh[0] && array[i2][j2]) {
 						scores[0] = scores[0].add(BigInteger.ONE);
 					}
 					
-					if(!tooLow[1] && array[i2][j2rev]) {
+					if(!tooHigh[1] && array[i2][j2rev]) {
 						scores[1] = scores[1].add(BigInteger.ONE);
 					}
 					
-					if(!tooLow[2] && array[i2rev][j2]) {
+					if(!tooHigh[2] && array[i2rev][j2]) {
 						scores[2] = scores[2].add(BigInteger.ONE);
 					}
 					
-					if(!tooLow[3] && array[i2rev][j2rev]) {
+					if(!tooHigh[3] && array[i2rev][j2rev]) {
 						scores[3] = scores[3].add(BigInteger.ONE);
 					}
 	
 					if(! onlyOneContender  ) {
 	
-						tooLow = refreshNumContenders(scores, tooLow);
+						tooHigh = refreshNumContenders(scores, tooHigh);
 						
 						int numContender = 0;
 						for(int k=0; k<scores.length; k++) {
-							if(! tooLow[k]) {
+							if(! tooHigh[k]) {
 								numContender++;
 							}
 						}
@@ -163,7 +164,7 @@ public class BasicUniqueCheckImproved {
 			for(int i=0; i<scores.length; i++) {
 				//3 * 256^2 fixes a possible hash collision
 				// I made it 3 instead of 1 because in future, I want placement of first and second 1 to mean something
-				scores[i] = new BigInteger((3 * BIG_ENOUGH_NUMBER * BIG_ENOUGH_NUMBER + widthShape * BIG_ENOUGH_NUMBER + heightShape) + "");
+				scores[i] = new BigInteger((3 * MAX_WIDTH_PLUS_ONE * MAX_WIDTH_PLUS_ONE + heightShape * MAX_WIDTH_PLUS_ONE + widthShape) + "");
 
 			}
 
@@ -173,7 +174,7 @@ public class BasicUniqueCheckImproved {
 				for(int j=firstj, jrev = lastj; j<=lastj; j++, jrev--) {
 					
 					for(int k=0; k<scores.length; k++) {
-						if(tooLow[k]) {
+						if(tooHigh[k]) {
 							continue;
 						}
 						scores[k] = scores[k].multiply(TWO);
@@ -186,46 +187,46 @@ public class BasicUniqueCheckImproved {
 					int i2rev = lasti - (tmp % (lasti - firsti + 1));
 					int j2rev = lastj - (tmp / (lasti - firsti + 1));
 	
-					if(!tooLow[0] && array[i][j]) {
+					if(!tooHigh[0] && array[i][j]) {
 						scores[0] = scores[0].add(BigInteger.ONE);
 					}
 					
-					if(!tooLow[1] && array[i][jrev]) {
+					if(!tooHigh[1] && array[i][jrev]) {
 						scores[1] = scores[1].add(BigInteger.ONE);
 					}
 					
-					if(!tooLow[2] && array[irev][j]) {
+					if(!tooHigh[2] && array[irev][j]) {
 						scores[2] = scores[2].add(BigInteger.ONE);
 					}
 					
-					if(!tooLow[3] && array[irev][jrev]) {
+					if(!tooHigh[3] && array[irev][jrev]) {
 						scores[3] = scores[3].add(BigInteger.ONE);
 					}
 	
 					
-					if(!tooLow[4] && array[i2][j2]) {
+					if(!tooHigh[4] && array[i2][j2]) {
 						scores[4] = scores[4].add(BigInteger.ONE);
 					}
 					
-					if(!tooLow[5] && array[i2][j2rev]) {
+					if(!tooHigh[5] && array[i2][j2rev]) {
 						scores[5] = scores[5].add(BigInteger.ONE);
 					}
 					
-					if(!tooLow[6] && array[i2rev][j2]) {
+					if(!tooHigh[6] && array[i2rev][j2]) {
 						scores[6] = scores[6].add(BigInteger.ONE);
 					}
 					
-					if(!tooLow[7] && array[i2rev][j2rev]) {
+					if(!tooHigh[7] && array[i2rev][j2rev]) {
 						scores[7] = scores[7].add(BigInteger.ONE);
 					}
 	
 					if(! onlyOneContender  ) {
 	
-						tooLow = refreshNumContenders(scores, tooLow);
+						tooHigh = refreshNumContenders(scores, tooHigh);
 						
 						int numContender = 0;
 						for(int k=0; k<scores.length; k++) {
-							if(! tooLow[k]) {
+							if(! tooHigh[k]) {
 								numContender++;
 							}
 						}
@@ -241,11 +242,11 @@ public class BasicUniqueCheckImproved {
 		}
 		
 		//Deal with symmetries by getting max scores from the possible symmetries:
-		BigInteger max = BigInteger.ZERO;
+		BigInteger min = BigInteger.ZERO;
 		
 		for(int i=0; i<scores.length; i++) {
-			if(! tooLow[i]) {
-				max = scores[i];
+			if(! tooHigh[i]) {
+				min = scores[i];
 				break;
 			}
 		}
@@ -254,62 +255,44 @@ public class BasicUniqueCheckImproved {
 		//sanityCheck(array, max);
 		//End Sanity check
 		
-		if(! uniqList.contains(max)) {
-			uniqList.add(max);
+		if(! uniqList.contains(min)) {
+			uniqList.add(min);
 			
-			debugLastScore = max;
+			debugLastScore = min;
 			
 			//System.out.println("Max number: " + max);
 			
 			return true;
 		} else {
 			
-			debugLastScore = max;
+			debugLastScore = min;
 			return false;
 		}
 	}
 	
-	public static boolean[] refreshNumContenders(BigInteger scores[], boolean tooLow[]) {
+	public static boolean[] refreshNumContenders(BigInteger scores[], boolean tooHigh[]) {
 		for(int k=0; k<scores.length; k++) {
-			if(tooLow[k]) {
+			if(tooHigh[k]) {
 				continue;
 			}
 			for(int m=k+1; m<scores.length; m++) {
-				if(tooLow[m]) {
+				if(tooHigh[m]) {
 					continue;
 				}
 				
-				if(scores[k].compareTo(scores[m]) < 0) {
+				if(scores[k].compareTo(scores[m]) > 0) {
 					
-					tooLow[k] = true;
+					tooHigh[k] = true;
 					
 					break;
-				} else if(scores[k].compareTo(scores[m]) > 0) {
-					tooLow[m] = true;
+				} else if(scores[k].compareTo(scores[m]) < 0) {
+					tooHigh[m] = true;
 					
 				}
 			}
 		}
 		
-		return tooLow;
+		return tooHigh;
 	}
 	
-	/*
-	public static void sanityCheck(boolean array[][], BigInteger max) {
-		
-		boolean basicCheckResultUniq = BasicUniqueCheck.isUnique(array);
-		//System.out.println(max);
-		
-		if(basicCheckResultUniq && uniqList.contains(max)) {
-			System.out.println("Orig Basic unique check says this is a new solution but Improved says it isn't");
-			System.out.println("HERE");
-			System.exit(1);
-		} else if(! basicCheckResultUniq && ! uniqList.contains(max)) {
-
-			System.out.println("Orig Basic unique check same this is a dup but Improved says this is new");
-			System.out.println("HERE 2");
-			System.exit(1);
-		}
-		
-	}*/
 }

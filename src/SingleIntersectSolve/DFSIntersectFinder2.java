@@ -36,6 +36,7 @@ public class DFSIntersectFinder2 {
 		// Set the solution resolver to different things depending on the size of the cuboid:
 		solutionResolver = new StandardResolverUsingMemory();
 		
+		
 		solveCuboidIntersections(cuboidToBuild, cuboidToBringAlong, skipSymmetries, solutionResolver);
 	}
 
@@ -261,8 +262,8 @@ public class DFSIntersectFinder2 {
 					continue;
 				}
 				
-				boolean cantAddCellBecauseOfOtherPaperNeighbours = //cantAddCellBecauseOfOtherPaperNeighbours(paperToDevelop, indexCuboidonPaper,
-						ALLOW_HOLES_cantAddCellBecauseOfOtherPaperNeighbours(paperToDevelop, indexCuboidonPaper,
+				boolean cantAddCellBecauseOfOtherPaperNeighbours = cantAddCellBecauseOfOtherPaperNeighbours(paperToDevelop, indexCuboidonPaper,
+						//ALLOW_HOLES_cantAddCellBecauseOfOtherPaperNeighbours(paperToDevelop, indexCuboidonPaper,
 						paperUsed, cuboid, numCellsUsedDepth,
 						CellIndexToOrderOfDev, minIndexToUse, minRotationToUse,
 						indexNewCell, new_i, new_j, curOrderedIndexToUse
@@ -447,22 +448,25 @@ public class DFSIntersectFinder2 {
 		//solveCuboidIntersections(new CuboidToFoldOn(9, 1, 1), new CuboidToFoldOn(4, 3, 1));
 		//It got 4469 solutions and it took about 41.5 hours
 		
-		solveCuboidIntersections(new CuboidToFoldOn(8, 1, 1), new CuboidToFoldOn(5, 2, 1));
+		//solveCuboidIntersections(new CuboidToFoldOn(8, 1, 1), new CuboidToFoldOn(5, 2, 1));
 		//It got 35675 again, but this time it only took 3 hours! It took almost 2 days last time!
+		//With apparent holes: 35697
+
 		
 		//solveCuboidIntersections(new CuboidToFoldOn(7, 1, 1), new CuboidToFoldOn(3, 3, 1));
 		////It got 1070 (again) (They got 1080, but I think they were wrong)
 		// I got 1080 when I allow the solution to have an apparent hole in it!
 		// took 34 minutes
 		
-		//solveCuboidIntersections(new CuboidToFoldOn(5, 1, 1), new CuboidToFoldOn(3, 2, 1));
+		solveCuboidIntersections(new CuboidToFoldOn(5, 1, 1), new CuboidToFoldOn(3, 2, 1));
 		//It got 2263!
 		//I got 2290 when I allow the solution to have an apparent hole in it.
 
 		//solveCuboidIntersections(new CuboidToFoldOn(4, 1, 1), new CuboidToFoldOn(4, 1, 1));
 		
 		//Best 5,1,1: 3 minute 45 seconds (3014430 solutions) (December 27th)
-		
+		//solveCuboidIntersections(new CuboidToFoldOn(5, 1, 1), new CuboidToFoldOn(5, 1, 1));
+		//Got 3061249 solutions while allowing apparent holes.
 		
 		//Find non-trivial cuboid intersections:
 		//solveCuboidIntersections(new CuboidToFoldOn(9, 1, 1), new CuboidToFoldOn(9, 1, 1));
