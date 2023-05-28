@@ -181,7 +181,8 @@ Is there a net that folds to 4 cuboids?
 
 Can we make an animation out of the solutions? I think that might be fun.
 
-How does the # of Nx1x1 solutions grow as n-> inf. I'm pretty sure it's exponential (TODO: have mathematical justification section), but what's the base of the exponential? 
+How does the # of Nx1x1 solutions grow as n-> inf. I'm pretty sure it's exponential (TODO: add explanation have mathematical justification section), but what's the base of the exponential?
+(I think that we could use matrices to get closer to the solution, but I didn't work on this too hard) 
 
 
 ----
