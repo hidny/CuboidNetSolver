@@ -7,6 +7,7 @@ import Coord.Coord2D;
 import Coord.CoordWithRotationAndIndex;
 //import Cuboid.SymmetryResolver.SymmetryResolver;
 import SolutionResolver.SolutionResolverInterface;
+import SolutionResolver.StandardResolverForSmallIntersectSolutions;
 import SolutionResolver.StandardResolverUsingMemory;
 import SymmetryResolver.SymmetryResolver;
 import GraphUtils.PivotCellDescription;
@@ -34,7 +35,12 @@ public class DFSIntersectFinder2 {
 		}
 		
 		// Set the solution resolver to different things depending on the size of the cuboid:
-		solutionResolver = new StandardResolverUsingMemory();
+		
+		if(Utils.cuboidDimensionsMatch(cuboidToBuild, cuboidToBringAlong)) {
+			solutionResolver = new StandardResolverUsingMemory();
+		} else {
+			solutionResolver = new StandardResolverForSmallIntersectSolutions();
+		}
 		
 		
 		solveCuboidIntersections(cuboidToBuild, cuboidToBringAlong, skipSymmetries, solutionResolver);
@@ -42,6 +48,7 @@ public class DFSIntersectFinder2 {
 
 	public static void solveCuboidIntersections(CuboidToFoldOn cuboidToBuild, CuboidToFoldOn cuboidToBringAlong, boolean skipSymmetries, SolutionResolverInterface solutionResolver) {
 		
+		System.out.println("Current UTC timestamp in milliseconds: " + System.currentTimeMillis());
 		
 		//cube.set start location 0 and rotation 0
 		
@@ -168,7 +175,8 @@ public class DFSIntersectFinder2 {
 		//Display debug/what's-going-on update
 		numIterations++;
 		
-		if(numIterations % 10000000L == 0) {
+		//if(numIterations % 10000000L == 0) {
+		if(numIterations % 100000000L == 0) {
 			
 			System.out.println("Num iterations: " + numIterations);
 			Utils.printFold(paperUsed);
@@ -441,7 +449,7 @@ public class DFSIntersectFinder2 {
 		
 		//solveCuboidIntersections(new CuboidToFoldOn(13, 1, 1), new CuboidToFoldOn(3, 3, 3));
 		
-		//solveCuboidIntersections(new CuboidToFoldOn(11, 1, 1), new CuboidToFoldOn(5, 3, 1));
+		solveCuboidIntersections(new CuboidToFoldOn(11, 1, 1), new CuboidToFoldOn(5, 3, 1));
 		
 		//solveCuboidIntersections(new CuboidToFoldOn(11, 1, 1), new CuboidToFoldOn(7, 2, 1));
 		
@@ -458,7 +466,7 @@ public class DFSIntersectFinder2 {
 		// I got 1080 when I allow the solution to have an apparent hole in it!
 		// took 34 minutes
 		
-		solveCuboidIntersections(new CuboidToFoldOn(5, 1, 1), new CuboidToFoldOn(3, 2, 1));
+		//solveCuboidIntersections(new CuboidToFoldOn(5, 1, 1), new CuboidToFoldOn(3, 2, 1));
 		//It got 2263!
 		//I got 2290 when I allow the solution to have an apparent hole in it.
 

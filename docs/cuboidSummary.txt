@@ -1,0 +1,216 @@
+
+
+---------------------------------------------
+
+I'll eventually cover the following 4 topics: (I'll cover it later...)
+
+Just the Results
+
+Algo and tricks used. 
+
+
+Mathematical justifications/"proof"
+
+
+Unrelated Cuboid Questions I'd like to share
+
+----------------------------
+
+
+Algo and tricks used. 
+
+DESC:
+About the ordering algo
+
+
+It's a DFS search where you build the net out cell by cell (or sqare by sqare). The key is that the order in which the net is built has to match the order in which a BFS would find the cells.
+This simple trick reduces the number of duplicates you find to a maximum of 8 symmetries. (8 symmetries = 4 rotational symmerties by 2 reflective symmetries).
+You could get rid of the symmetries in other ways, and do other optimizations, but they are just icing on the cake.)
+
+About the memory needed: (not much)
+
+If you want, you could record the solutions in a hashtable, but if the number of solutions are too big, there's an alternative. (See: Algo and tricks used: "Would I have found this solution ealier?")
+
+
+
+Why this problem is easy to multitask on multiple computers?
+- Different sections
+- Functions that answers questions: "Would I have found this solution ealier?"
+
+(TODO: should show code that does the work (or pseudo-code))
+
+
+
+-------------------------------------
+
+
+
+Mathematical justifications/"proof"
+
+---
+TODO: prove that the DFS with limited branching works...
+
+
+While proving, suggest that we don't need the specific BFS algo I used... we could try DFS or some other algo... but I don't think this will amount to much...
+It's possible that we can change the algo and couple it with some other property of this problem to get a speed boost, but I don't see it.
+
+
+TODO: reproduce proof that the number of solutions is exponential (It's already in the notebook)
+
+
+TODO: Explain why the # of Nx1x1 solutions grows exponentially as n-> inf. (It's written in my notebook...)
+lower bound: 16*7^n / 8
+upper bound: c* 256^n
+
+
+
+-------------------------
+
+Just the Results:
+
+Num solutions Nx1x1 :
+N:    1,   2,     3,      4,       5,        6,         7
+sol: 11, 723, 14978, 228547, 3014430, 36175381, 407023305
+
+Num solutions to intersections:
+
+cuboid 1  cuboid 2    num solutions   num solution with invible cuts
+
+5x1x1      3x2x1         2263                    2290
+7x1x1      3x3x1         1070                    1080
+8x1x1      5x2x1        35675                   35697
+9x1x1      4x3x1         4469                      ??              
+11x1x1     5x3x1      4233426                      ??                
+11x1x1     7x2x1           ??                      ??                 
+
+Unknown solutions to intersections, but within the realm of feasibility:
+
+11x1x1 and another one
+13x1x1 and another one
+14x1x1 and another one
+15x1x1 and another one
+
+
+TODO: Explain "num solution with invisible cuts"
+First draft:
+Basically, these are solutions where the net has invisible cuts between some of the cells/squares
+For the nets that fold into 2 cuboids, I only checked in the case where the invisible cuts are in the same place for each fold. There's probably more solutions if you allow the invisible cuts to be in different places for each fold, but those solutions are ugly, and they're probably hard to find.
+Feel free to try and find them though. I have an image of an invisible cut solution in the image folder of this repo, and the output folder contains a file that has the 10 invisible cut solutions of the 7x1x1 and 3x3x1 solutions.
+
+
+(TODO: All solutions have an encoding. Here's a link that describes how to read the encoding: link)
+
+
+I will only shared the encodings for the 11x1x1 and 5x3x1 solutions because I want to save space. (There's over 4M solutions and the compressed version is already about 100 MB+ )
+(or maybe I'll have another encoding...)
+
+TODO: Here's a python program that converts the encodings into ASCII images that are human-readable:
+(TODO)
+
+
+How I reproduced previous results:
+
+I found 2263 solutions for the intersections between 5x1x1 and 3x2x1 and that matched what was found in the link http://www.jaist.ac.jp/~uehara/etc/origami/nets/index-e.html .
+
+The papers said that there are 1080 solutions for the intersections between 7x1x1 and 3x3x1, but I only found 1070. Paper mentioning 1080 solutions: (2015 - "Common Developments of Three Incongruent Boxes of Area 30" by Dawei Xu, Takashi Horiyama, Toshihiro Shirakawa, and Ryuhei Uehara). 
+It might be because someone made a mistake, but I believe the more likely cause is that they counted the 10 solutions where the net had an invisible cut.
+I believe this because I found exactly 1080 solutions when I accepted nets with invisible cuts. The only way I can prove that this is what's going on is if I have access to their 1080 solutions, but I couldn't find it, so this is just a guess.
+
+Nets with invisible cuts goes against the rules in the link for 2263 (http://www.jaist.ac.jp/~uehara/etc/origami/nets/index-e.html .), but that rule wasn't declared for any paper mentioning 1080 solutions.
+Because the invisible cuts were not counted in one place and probably counted in the other, I decided to not pick a method and measure both counts. Unfortunately, I didn't allow invible cuts when I checked for 11x1x1 and 5x3x1 solutions, and I'm not going to check it because that took almost 2 months for my laptop to check.
+
+
+Here are the 10 solutions with invisible cuts:
+(See output/theTenSuspicious7x1x1Solutions.txt)
+
+-----
+
+Rough estimate of the time it takes to search with the current algo:
+
+Checking 11x1x1 and 5x3x1 on 1 core: 4 months?
+Checking 11x1x1 and 7x2x1 on 1 core: 4 months?
+
+Checking 13x1x1 and 3x3x3 on 1 core: 10 years or less? (25X more than 11x1x1...)
+
+checking 14x1x1 and 5x4x1 on 1 core: 100+ years?
+
+checking 15x1x1 and 5x3x2 on 1 core: 1000+ years?
+
+
+These times may seem way too long, but if we use thousands of cores, I believe that we might even be able to check the 15x1x1 and  5x3x2 intersectioos if we're patient enough...
+
+--
+
+
+
+Other questions I have about cuboid developments:
+
+
+Is there a way to search faster?
+
+
+I noticed that non-trivial self-intersections of Nx1x1 cuboids is a thing that happens, but I didn't look any further than that.
+
+Terrible definition of non-trivial self-intersection: Where a net folds into a shape in multiple ways, and those different ways aren't easily explained by some obvious symmetry.
+
+Here's the number of self-intersections for N=0, 1, 2...:
+		//1: 0 (They are all trivial...)
+		//2: 72
+		//3: 47
+		//4: 204
+		//5: 189
+		//6: 372
+		//7: 217
+		//8: 1114
+		//9: 495
+
+What's going on? Is there a way to predict the numbers in this series? Do the even terms always increase as n increases? What about the odd ones? Do these solutions share some obvious properties? (I felt like they did when I saw a few solutions, but I couldn't articulate it to myself)
+
+
+What about self intersections of Nx2x1?
+
+
+
+
+One small redeeming thing about the invisible cuts I searched for is that the net has the same invisible cuts for each shape. But I'm curious about what happens if we allow for nets that fold different shapes with different invisible cuts.
+How many solutions like that are there? How would we even search for it? (I'm not sure people will be satisfied with this type of net, but I would like to know)
+
+
+Is there a net that folds to 4 cuboids?
+
+
+Can we make an animation out of the solutions? I think that might be fun.
+
+How does the # of Nx1x1 solutions grow as n-> inf. I'm pretty sure it's exponential (TODO: have mathematical justification section), but what's the base of the exponential? 
+
+
+----
+When intersecting 11x1x1 and 5x3x1, I noticed that the vast majority of solutions have the bottom of the 11x1x1 cuboid intersecting with cell index #3. Why is that? Does this type of thing happen with other cuboid shapes? Is there a way to predict when this happens and/or use this to help with our searches?
+
+If you want, see pics/The5x3x1Cuboid.jpg for a picture of cell index #3.
+	
+Map of 5x3x1 with the cell indexes:
+          0   1   2                         
+
+  3       8   9  10      23      28  29  30 
+  4      11  12  13      24      31  32  33 
+  5      14  15  16      25      34  35  36 
+  6      17  18  19      26      37  38  39 
+  7      20  21  22      27      40  41  42 
+
+         43  44  45          
+         
+ (It's the cell #3 at top left.)
+ 
+ (I consider cell 7, 23, and 27 as pretty much the same as cell 3 because of the symmetries in the cuboid)
+ 
+
+about 3M+ solutions (or maybe even 4M+) out of about 4233426 solutions have the bottom intersecting with cell 3.
+I have no idea why it happened like that...
+
+---
+
+Why are there more 8x1x1 intersection solutions than the # 9x1x1 solutions (35675 vs 4469)? Is there some way of knowing this would happen ahead of time?
+
+
+

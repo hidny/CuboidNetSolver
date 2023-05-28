@@ -49,10 +49,7 @@ public class BasicUniqueCheckImproved {
 			
 			boolean onlyOneContender = false;
 			
-
-			//measure the longer dimention first,
-			// and if both are the same, that's a different case.
-			
+				//Outer loop will be the shorter dimension because I said so:
 				for(int i=firsti, irev = lasti; i<=lasti; i++, irev--) {
 					for(int j=firstj, jrev = lastj; j<=lastj; j++, jrev--) {
 						

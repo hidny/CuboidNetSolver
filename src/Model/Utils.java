@@ -277,4 +277,11 @@ public class Utils {
 			}
 			return false;
 		}
+		
+		public static boolean cuboidDimensionsMatch(CuboidToFoldOn cuboid1, CuboidToFoldOn cuboid2) {
+
+			return cuboid1.getDimensions()[0] == cuboid2.getDimensions()[0]
+					&& cuboid1.getDimensions()[1] == cuboid2.getDimensions()[1]
+							&& cuboid1.getDimensions()[2] == cuboid2.getDimensions()[2];
+		}
 }
