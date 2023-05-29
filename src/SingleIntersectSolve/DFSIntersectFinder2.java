@@ -37,7 +37,8 @@ public class DFSIntersectFinder2 {
 		// Set the solution resolver to different things depending on the size of the cuboid:
 		
 		if(Utils.cuboidDimensionsMatch(cuboidToBuild, cuboidToBringAlong)) {
-			solutionResolver = new StandardResolverUsingMemory();
+			//solutionResolver = new StandardResolverUsingMemory();
+			solutionResolver = new StandardResolverForSmallIntersectSolutions();
 		} else {
 			solutionResolver = new StandardResolverForSmallIntersectSolutions();
 		}
@@ -102,8 +103,8 @@ public class DFSIntersectFinder2 {
 		
 		System.out.println("Num starting points and rotations to check: " + startingPointsAndRotationsToCheck.size());
 		
-		//(Set i=1 for non-trial Nx1x1 intersections)
-		for(int i=0; i<startingPointsAndRotationsToCheck.size(); i++) {
+		//(Set i=1 for non-trial Nx1x1 self-intersections)
+		for(int i=1; i<startingPointsAndRotationsToCheck.size(); i++) {
 			//if(i != 0 && i != 4 && i != 6 && i != 10 && i != 14) {
 			//	continue;
 			//}
@@ -449,7 +450,7 @@ public class DFSIntersectFinder2 {
 		
 		//solveCuboidIntersections(new CuboidToFoldOn(13, 1, 1), new CuboidToFoldOn(3, 3, 3));
 		
-		solveCuboidIntersections(new CuboidToFoldOn(11, 1, 1), new CuboidToFoldOn(5, 3, 1));
+		//solveCuboidIntersections(new CuboidToFoldOn(11, 1, 1), new CuboidToFoldOn(5, 3, 1));
 		
 		//solveCuboidIntersections(new CuboidToFoldOn(11, 1, 1), new CuboidToFoldOn(7, 2, 1));
 		
@@ -477,7 +478,7 @@ public class DFSIntersectFinder2 {
 		//Got 3061249 solutions while allowing apparent holes.
 		
 		//Find non-trivial cuboid intersections:
-		//solveCuboidIntersections(new CuboidToFoldOn(9, 1, 1), new CuboidToFoldOn(9, 1, 1));
+		solveCuboidIntersections(new CuboidToFoldOn(8, 1, 1), new CuboidToFoldOn(8, 1, 1));
 		//Nx1x1: suprise intersections: (Not on OEIS :( )
 		// I don't know to predict the entries. I was honestly hoping this would tend towards 0.
 		//1: 0

@@ -1,0 +1,2303 @@
+Fold Resolver Ordered Regions intersection skip symmetries Nx1x1:
+Map:
+          0                 
+
+  1       3       5       7 
+  2       4       6       8 
+
+          9                 
+
+          8                 
+          7                 
+
+Printed flattened cuboid with bonus square at bottom...
+This is the map I will use to encode neighbours and get somewhere... hopefully.
+Neighbours for 0:
+7 with 180 rotation
+5 with 90 clockwise
+3
+1 with 90 counter
+
+Neighbours for 1:
+0 with 90 clockwise
+3
+2
+7
+
+Neighbours for 2:
+1
+4
+9 with 90 counter
+8
+
+Neighbours for 3:
+0
+5
+4
+1
+
+Neighbours for 4:
+3
+6
+9
+2
+
+Neighbours for 5:
+0 with 90 counter
+7
+6
+3
+
+Neighbours for 6:
+5
+8
+9 with 90 clockwise
+4
+
+Neighbours for 7:
+0 with 180 rotation
+1
+8
+5
+
+Neighbours for 8:
+7
+2
+9 with 180 rotation
+6
+
+Neighbours for 9:
+4
+6 with 90 counter
+8 with 180 rotation
+2 with 90 clockwise
+
+Map:
+          0                 
+
+  1       3       5       7 
+  2       4       6       8 
+
+          9                 
+
+          8                 
+          7                 
+
+Printed flattened cuboid with bonus square at bottom...
+This is the map I will use to encode neighbours and get somewhere... hopefully.
+Neighbours for 0:
+7 with 180 rotation
+5 with 90 clockwise
+3
+1 with 90 counter
+
+Neighbours for 1:
+0 with 90 clockwise
+3
+2
+7
+
+Neighbours for 2:
+1
+4
+9 with 90 counter
+8
+
+Neighbours for 3:
+0
+5
+4
+1
+
+Neighbours for 4:
+3
+6
+9
+2
+
+Neighbours for 5:
+0 with 90 counter
+7
+6
+3
+
+Neighbours for 6:
+5
+8
+9 with 90 clockwise
+4
+
+Neighbours for 7:
+0 with 180 rotation
+1
+8
+5
+
+Neighbours for 8:
+7
+2
+9 with 180 rotation
+6
+
+Neighbours for 9:
+4
+6 with 90 counter
+8 with 180 rotation
+2 with 90 clockwise
+
+Current UTC timestamp in milliseconds: 1685370038666
+Get arrays created:
+Cell index 0:
+0, 0, 0, 0, 
+0, 0, 0, 0, 
+0, 0, 0, 0, 
+0, 0, 0, 0, 
+
+
+Cell index 1:
+0, 0, 1, 0, 
+0, 1, 0, 0, 
+1, 0, 0, 0, 
+0, 0, 0, 1, 
+
+
+Cell index 2:
+1, 0, 0, 0, 
+0, 0, 0, 1, 
+0, 0, 1, 0, 
+0, 1, 0, 0, 
+
+
+Cell index 3:
+0, 0, 1, 0, 
+0, 1, 0, 0, 
+1, 0, 0, 0, 
+0, 0, 0, 1, 
+
+
+Cell index 4:
+1, 0, 0, 0, 
+0, 0, 0, 1, 
+0, 0, 1, 0, 
+0, 1, 0, 0, 
+
+
+Cell index 5:
+0, 0, 1, 0, 
+0, 1, 0, 0, 
+1, 0, 0, 0, 
+0, 0, 0, 1, 
+
+
+Cell index 6:
+1, 0, 0, 0, 
+0, 0, 0, 1, 
+0, 0, 1, 0, 
+0, 1, 0, 0, 
+
+
+Cell index 7:
+0, 0, 1, 0, 
+0, 1, 0, 0, 
+1, 0, 0, 0, 
+0, 0, 0, 1, 
+
+
+Cell index 8:
+1, 0, 0, 0, 
+0, 0, 0, 1, 
+0, 0, 1, 0, 
+0, 1, 0, 0, 
+
+
+Cell index 9:
+0, 0, 0, 0, 
+0, 0, 0, 0, 
+0, 0, 0, 0, 
+0, 0, 0, 0, 
+
+
+Num unique pivot locations: 5
+Total area multiplied by 4 rotations: 40
+
+Unique rotation lists:
+Cell and rotation: 0 and 0
+0, 0, 0, 0, 
+Cell and rotation: 1 and 0
+0, 0, 1, 0, 
+Cell and rotation: 1 and 1
+0, 1, 0, 0, 
+Cell and rotation: 1 and 2
+1, 0, 0, 0, 
+Cell and rotation: 1 and 3
+0, 0, 0, 1, 
+Num starting points and rotations to check: 5
+0 (num unique: 0)
+----
+Unique solution found:
+.#.|
+.#.|
+.#.|
+###|
+.#.|
+###|
+
+Shape 1:
+|.|9|.|
+|.|8|.|
+|.|7|.|
+|1|0|5|
+|.|3|.|
+|2|4|6|
+
+Shape 2:
+|.|6|.|
+|.|5|.|
+|.|0|.|
+|7|1|3|
+|.|2|.|
+|8|9|4|
+
+Solution code: 51742531525
+Num unique solutions found: 1
+1 (num unique: 1)
+----
+Unique solution found:
+##.|
+.#.|
+.#.|
+###|
+.#.|
+.##|
+
+Shape 1:
+|2|9|.|
+|.|8|.|
+|.|7|.|
+|1|0|5|
+|.|3|.|
+|.|4|6|
+
+Shape 2:
+|8|6|.|
+|.|5|.|
+|.|0|.|
+|7|1|3|
+|.|2|.|
+|.|9|4|
+
+Solution code: 51742531556
+Num unique solutions found: 2
+2 (num unique: 2)
+3 (num unique: 2)
+----
+Unique solution found:
+###|
+.#.|
+.#.|
+###|
+.#.|
+.#.|
+
+Shape 1:
+|2|9|6|
+|.|8|.|
+|.|7|.|
+|1|0|5|
+|.|3|.|
+|.|4|.|
+
+Shape 2:
+|8|6|4|
+|.|5|.|
+|.|0|.|
+|7|1|3|
+|.|2|.|
+|.|9|.|
+
+Solution code: 51742547913
+Num unique solutions found: 3
+4 (num unique: 3)
+----
+Unique solution found:
+.#.|
+###|
+.#.|
+.#.|
+###|
+.#.|
+
+Shape 1:
+|.|4|.|
+|2|9|6|
+|.|8|.|
+|.|7|.|
+|1|0|5|
+|.|3|.|
+
+Shape 2:
+|.|9|.|
+|8|6|4|
+|.|5|.|
+|.|0|.|
+|7|1|3|
+|.|2|.|
+
+Solution code: 51742584786
+Num unique solutions found: 4
+5 (num unique: 4)
+----
+Unique solution found:
+##.|
+.##|
+.#.|
+.#.|
+###|
+.#.|
+
+Shape 1:
+|2|4|.|
+|.|9|6|
+|.|8|.|
+|.|7|.|
+|1|0|5|
+|.|3|.|
+
+Shape 2:
+|8|9|.|
+|.|6|4|
+|.|5|.|
+|.|0|.|
+|7|1|3|
+|.|2|.|
+
+Solution code: 51742580690
+Num unique solutions found: 5
+6 (num unique: 5)
+7 (num unique: 5)
+----
+Unique solution found:
+###|
+.#.|
+.#.|
+.#.|
+###|
+.#.|
+
+Shape 1:
+|2|4|6|
+|.|9|.|
+|.|8|.|
+|.|7|.|
+|1|0|5|
+|.|3|.|
+
+Shape 2:
+|8|9|4|
+|.|6|.|
+|.|5|.|
+|.|0|.|
+|7|1|3|
+|.|2|.|
+
+Solution code: 51742580689
+Num unique solutions found: 6
+8 (num unique: 6)
+----
+Unique solution found:
+..#|
+###|
+.#.|
+.#.|
+###|
+.#.|
+
+Shape 1:
+|.|.|4|
+|2|9|6|
+|.|8|.|
+|.|7|.|
+|1|0|5|
+|.|3|.|
+
+Shape 2:
+|.|.|9|
+|8|6|4|
+|.|5|.|
+|.|0|.|
+|7|1|3|
+|.|2|.|
+
+Solution code: 51742582770
+Num unique solutions found: 7
+9 (num unique: 7)
+10 (num unique: 7)
+----
+Unique solution found:
+..#|
+..#|
+.##|
+.#.|
+.#.|
+###|
+.#.|
+
+Shape 1:
+|.|.|2|
+|.|.|4|
+|.|9|6|
+|.|8|.|
+|.|7|.|
+|1|0|5|
+|.|3|.|
+
+Shape 2:
+|.|.|8|
+|.|.|9|
+|.|6|4|
+|.|5|.|
+|.|0|.|
+|7|1|3|
+|.|2|.|
+
+Solution code: 413942190066
+Num unique solutions found: 8
+11 (num unique: 8)
+12 (num unique: 8)
+----
+Unique solution found:
+.#.|
+.#.|
+##.|
+.##|
+.#.|
+###|
+
+Shape 1:
+|.|9|.|
+|.|8|.|
+|1|7|.|
+|.|0|5|
+|.|3|.|
+|2|4|6|
+
+Shape 2:
+|.|6|.|
+|.|5|.|
+|7|0|.|
+|.|1|3|
+|.|2|.|
+|8|9|4|
+
+Solution code: 51742531529
+Num unique solutions found: 9
+13 (num unique: 9)
+----
+Unique solution found:
+##.|
+.#.|
+##.|
+.##|
+.#.|
+.##|
+
+Shape 1:
+|2|9|.|
+|.|8|.|
+|1|7|.|
+|.|0|5|
+|.|3|.|
+|.|4|6|
+
+Shape 2:
+|8|6|.|
+|.|5|.|
+|7|0|.|
+|.|1|3|
+|.|2|.|
+|.|9|4|
+
+Solution code: 51742531560
+Num unique solutions found: 10
+14 (num unique: 10)
+----
+Unique solution found:
+.##|
+.#.|
+##.|
+.##|
+.#.|
+##.|
+
+Shape 1:
+|.|9|6|
+|.|8|.|
+|1|7|.|
+|.|0|5|
+|.|3|.|
+|2|4|.|
+
+Shape 2:
+|.|6|4|
+|.|5|.|
+|7|0|.|
+|.|1|3|
+|.|2|.|
+|8|9|.|
+
+Solution code: 51742547940
+Num unique solutions found: 11
+15 (num unique: 11)
+16 (num unique: 11)
+----
+Unique solution found:
+##.|
+.##|
+.#.|
+##.|
+.##|
+.#.|
+
+Shape 1:
+|2|4|.|
+|.|9|6|
+|.|8|.|
+|1|7|.|
+|.|0|5|
+|.|3|.|
+
+Shape 2:
+|8|9|.|
+|.|6|4|
+|.|5|.|
+|7|0|.|
+|.|1|3|
+|.|2|.|
+
+Solution code: 51742547922
+Num unique solutions found: 12
+17 (num unique: 12)
+----
+Unique solution found:
+.##|
+##.|
+.#.|
+##.|
+.##|
+.#.|
+
+Shape 1:
+|.|4|6|
+|2|9|.|
+|.|8|.|
+|1|7|.|
+|.|0|5|
+|.|3|.|
+
+Shape 2:
+|.|9|4|
+|8|6|.|
+|.|5|.|
+|7|0|.|
+|.|1|3|
+|.|2|.|
+
+Solution code: 51742552017
+Num unique solutions found: 13
+18 (num unique: 13)
+----
+Unique solution found:
+###|
+.#.|
+.#.|
+##.|
+.##|
+.#.|
+
+Shape 1:
+|2|4|6|
+|.|9|.|
+|.|8|.|
+|1|7|.|
+|.|0|5|
+|.|3|.|
+
+Shape 2:
+|8|9|4|
+|.|6|.|
+|.|5|.|
+|7|0|.|
+|.|1|3|
+|.|2|.|
+
+Solution code: 51742547921
+Num unique solutions found: 14
+19 (num unique: 14)
+----
+Unique solution found:
+..#|
+###|
+.#.|
+##.|
+.##|
+.#.|
+
+Shape 1:
+|.|.|4|
+|2|9|6|
+|.|8|.|
+|1|7|.|
+|.|0|5|
+|.|3|.|
+
+Shape 2:
+|.|.|9|
+|8|6|4|
+|.|5|.|
+|7|0|.|
+|.|1|3|
+|.|2|.|
+
+Solution code: 51742551955
+Num unique solutions found: 15
+20 (num unique: 15)
+----
+Unique solution found:
+#..|
+###|
+.#.|
+##.|
+.##|
+.#.|
+
+Shape 1:
+|4|.|.|
+|2|9|6|
+|.|8|.|
+|1|7|.|
+|.|0|5|
+|.|3|.|
+
+Shape 2:
+|9|.|.|
+|8|6|4|
+|.|5|.|
+|7|0|.|
+|.|1|3|
+|.|2|.|
+
+Solution code: 51742556050
+Num unique solutions found: 16
+21 (num unique: 16)
+----
+Unique solution found:
+..#|
+..#|
+.##|
+.#.|
+##.|
+.##|
+.#.|
+
+Shape 1:
+|.|.|2|
+|.|.|4|
+|.|9|6|
+|.|8|.|
+|1|7|.|
+|.|0|5|
+|.|3|.|
+
+Shape 2:
+|.|.|8|
+|.|.|9|
+|.|6|4|
+|.|5|.|
+|7|0|.|
+|.|1|3|
+|.|2|.|
+
+Solution code: 413942222834
+Num unique solutions found: 17
+22 (num unique: 17)
+----
+Unique solution found:
+#..|
+#..|
+##.|
+.#.|
+##.|
+.##|
+.#.|
+
+Shape 1:
+|6|.|.|
+|4|.|.|
+|2|9|.|
+|.|8|.|
+|1|7|.|
+|.|0|5|
+|.|3|.|
+
+Shape 2:
+|4|.|.|
+|9|.|.|
+|8|6|.|
+|.|5|.|
+|7|0|.|
+|.|1|3|
+|.|2|.|
+
+Solution code: 413942190068
+Num unique solutions found: 18
+23 (num unique: 18)
+----
+Unique solution found:
+.#.|
+##.|
+.#.|
+.##|
+##.|
+.##|
+
+Shape 1:
+|.|9|.|
+|2|8|.|
+|.|7|.|
+|.|0|5|
+|1|3|.|
+|.|4|6|
+
+Shape 2:
+|.|6|.|
+|7|5|.|
+|.|0|.|
+|.|1|3|
+|8|2|.|
+|.|9|4|
+
+Solution code: 51742531538
+Num unique solutions found: 19
+24 (num unique: 19)
+25 (num unique: 19)
+26 (num unique: 19)
+----
+Unique solution found:
+.##|
+.#.|
+##.|
+.#.|
+.##|
+##.|
+
+Shape 1:
+|.|4|6|
+|.|9|.|
+|2|8|.|
+|.|7|.|
+|.|0|5|
+|1|3|.|
+
+Shape 2:
+|.|9|4|
+|.|6|.|
+|7|5|.|
+|.|0|.|
+|.|1|3|
+|8|2|.|
+
+Solution code: 51742547938
+Num unique solutions found: 20
+27 (num unique: 20)
+----
+Unique solution found:
+..#|
+.##|
+##.|
+.#.|
+.##|
+##.|
+
+Shape 1:
+|.|.|4|
+|.|9|6|
+|2|8|.|
+|.|7|.|
+|.|0|5|
+|1|3|.|
+
+Shape 2:
+|.|.|9|
+|.|6|4|
+|7|5|.|
+|.|0|.|
+|.|1|3|
+|8|2|.|
+
+Solution code: 51742545906
+Num unique solutions found: 21
+28 (num unique: 21)
+29 (num unique: 21)
+----
+Unique solution found:
+..#.|
+..##|
+.##.|
+.#..|
+##..|
+.##.|
+
+Shape 1:
+|.|.|2|.|
+|.|.|4|3|
+|.|9|6|.|
+|.|8|.|.|
+|1|7|.|.|
+|.|0|5|.|
+
+Shape 2:
+|.|.|8|.|
+|.|.|9|2|
+|.|6|4|.|
+|.|5|.|.|
+|7|0|.|.|
+|.|1|3|.|
+
+Solution code: 3315816005200
+Num unique solutions found: 22
+30 (num unique: 22)
+----
+Unique solution found:
+.#..|
+##..|
+.##.|
+..#.|
+.##.|
+..##|
+
+Shape 1:
+|.|6|.|.|
+|3|4|.|.|
+|.|2|9|.|
+|.|.|8|.|
+|.|1|7|.|
+|.|.|0|5|
+
+Shape 2:
+|.|4|.|.|
+|2|9|.|.|
+|.|8|6|.|
+|.|.|5|.|
+|.|7|0|.|
+|.|.|1|3|
+
+Solution code: 3315815743120
+Num unique solutions found: 23
+31 (num unique: 23)
+32 (num unique: 23)
+----
+Unique solution found:
+...#|
+..##|
+.##.|
+##..|
+.#..|
+.##.|
+
+Shape 1:
+|.|.|.|1|
+|.|.|4|3|
+|.|9|6|.|
+|2|8|.|.|
+|.|7|.|.|
+|.|0|5|.|
+
+Shape 2:
+|.|.|.|8|
+|.|.|9|2|
+|.|6|4|.|
+|7|5|.|.|
+|.|0|.|.|
+|.|1|3|.|
+
+Solution code: 3315816361736
+Num unique solutions found: 24
+33 (num unique: 24)
+----
+Unique solution found:
+.#...|
+.#...|
+###..|
+.###.|
+...##|
+
+Shape 1:
+|.|8|.|.|.|
+|.|9|.|.|.|
+|6|4|2|.|.|
+|.|3|1|7|.|
+|.|.|.|0|5|
+
+Shape 2:
+|.|2|.|.|.|
+|.|4|.|.|.|
+|9|6|5|.|.|
+|.|8|7|0|.|
+|.|.|.|1|3|
+
+Solution code: 6640188365764
+Num unique solutions found: 25
+34 (num unique: 25)
+----
+Unique solution found:
+..#...|
+####..|
+..###.|
+....##|
+
+Shape 1:
+|.|.|9|.|.|.|
+|8|6|4|2|.|.|
+|.|.|3|1|7|.|
+|.|.|.|.|0|5|
+
+Shape 2:
+|.|.|4|.|.|.|
+|2|9|6|5|.|.|
+|.|.|8|7|0|.|
+|.|.|.|.|1|3|
+
+Solution code: 3315816263432
+Num unique solutions found: 26
+35 (num unique: 26)
+----
+Unique solution found:
+##...|
+.#...|
+.##..|
+.###.|
+...##|
+
+Shape 1:
+|6|8|.|.|.|
+|.|9|.|.|.|
+|.|4|2|.|.|
+|.|3|1|7|.|
+|.|.|.|0|5|
+
+Shape 2:
+|9|2|.|.|.|
+|.|4|.|.|.|
+|.|6|5|.|.|
+|.|8|7|0|.|
+|.|.|.|1|3|
+
+Solution code: 6640188365776
+Num unique solutions found: 27
+36 (num unique: 27)
+----
+Unique solution found:
+#....|
+##...|
+.##..|
+.###.|
+...##|
+
+Shape 1:
+|8|.|.|.|.|
+|6|9|.|.|.|
+|.|4|2|.|.|
+|.|3|1|7|.|
+|.|.|.|0|5|
+
+Shape 2:
+|2|.|.|.|.|
+|9|4|.|.|.|
+|.|6|5|.|.|
+|.|8|7|0|.|
+|.|.|.|1|3|
+
+Solution code: 6640188365272
+Num unique solutions found: 28
+37 (num unique: 28)
+----
+Unique solution found:
+.#....|
+####..|
+..###.|
+....##|
+
+Shape 1:
+|.|9|.|.|.|.|
+|8|6|4|2|.|.|
+|.|.|3|1|7|.|
+|.|.|.|.|0|5|
+
+Shape 2:
+|.|4|.|.|.|.|
+|2|9|6|5|.|.|
+|.|.|8|7|0|.|
+|.|.|.|.|1|3|
+
+Solution code: 3315816003376
+Num unique solutions found: 29
+38 (num unique: 29)
+----
+Unique solution found:
+##....|
+.###..|
+..###.|
+....##|
+
+Shape 1:
+|8|9|.|.|.|.|
+|.|6|4|2|.|.|
+|.|.|3|1|7|.|
+|.|.|.|.|0|5|
+
+Shape 2:
+|2|4|.|.|.|.|
+|.|9|6|5|.|.|
+|.|.|8|7|0|.|
+|.|.|.|.|1|3|
+
+Solution code: 3315816261424
+Num unique solutions found: 30
+39 (num unique: 30)
+----
+Unique solution found:
+#.....|
+####..|
+..###.|
+....##|
+
+Shape 1:
+|9|.|.|.|.|.|
+|8|6|4|2|.|.|
+|.|.|3|1|7|.|
+|.|.|.|.|0|5|
+
+Shape 2:
+|4|.|.|.|.|.|
+|2|9|6|5|.|.|
+|.|.|8|7|0|.|
+|.|.|.|.|1|3|
+
+Solution code: 3315815741232
+Num unique solutions found: 31
+40 (num unique: 31)
+41 (num unique: 31)
+42 (num unique: 31)
+43 (num unique: 31)
+44 (num unique: 31)
+----
+Unique solution found:
+..#|
+..#|
+.##|
+.#.|
+###|
+.#.|
+.#.|
+
+Shape 1:
+|.|.|2|
+|.|.|4|
+|.|9|6|
+|.|8|.|
+|1|7|5|
+|.|0|.|
+|.|3|.|
+
+Shape 2:
+|.|.|8|
+|.|.|9|
+|.|6|4|
+|.|5|.|
+|7|0|3|
+|.|1|.|
+|.|2|.|
+
+Solution code: 413942222836
+Num unique solutions found: 32
+45 (num unique: 32)
+46 (num unique: 32)
+47 (num unique: 32)
+48 (num unique: 32)
+49 (num unique: 32)
+----
+Unique solution found:
+..#|
+.##|
+##.|
+.##|
+.#.|
+##.|
+
+Shape 1:
+|.|.|4|
+|.|9|6|
+|2|8|.|
+|.|7|5|
+|.|0|.|
+|1|3|.|
+
+Shape 2:
+|.|.|9|
+|.|6|4|
+|7|5|.|
+|.|0|3|
+|.|1|.|
+|8|2|.|
+
+Solution code: 51742545908
+Num unique solutions found: 33
+50 (num unique: 33)
+51 (num unique: 33)
+52 (num unique: 33)
+53 (num unique: 33)
+54 (num unique: 33)
+55 (num unique: 33)
+56 (num unique: 33)
+----
+Unique solution found:
+...#..|
+..####|
+####..|
+.#....|
+
+Shape 1:
+|.|.|.|9|.|.|
+|.|.|6|4|2|8|
+|1|7|5|3|.|.|
+|.|0|.|.|.|.|
+
+Shape 2:
+|.|.|.|8|.|.|
+|.|.|5|6|9|2|
+|7|0|3|4|.|.|
+|.|1|.|.|.|.|
+
+Solution code: 3315816005384
+Num unique solutions found: 34
+57 (num unique: 34)
+----
+Unique solution found:
+....#.|
+..####|
+####..|
+.#....|
+
+Shape 1:
+|.|.|.|.|9|.|
+|.|.|6|4|2|8|
+|1|7|5|3|.|.|
+|.|0|.|.|.|.|
+
+Shape 2:
+|.|.|.|.|8|.|
+|.|.|5|6|9|2|
+|7|0|3|4|.|.|
+|.|1|.|.|.|.|
+
+Solution code: 3315816005392
+Num unique solutions found: 35
+58 (num unique: 35)
+----
+Unique solution found:
+.....#|
+..####|
+####..|
+.#....|
+
+Shape 1:
+|.|.|.|.|.|9|
+|.|.|6|4|2|8|
+|1|7|5|3|.|.|
+|.|0|.|.|.|.|
+
+Shape 2:
+|.|.|.|.|.|8|
+|.|.|5|6|9|2|
+|7|0|3|4|.|.|
+|.|1|.|.|.|.|
+
+Solution code: 3315815743248
+Num unique solutions found: 36
+Done with trying to intersect 2nd cuboid that has a start index of 1 and a rotation index of 0.
+Current UTC timestamp in milliseconds: 1685370038716
+59 (num unique: 36)
+60 (num unique: 36)
+----
+Unique solution found:
+..#..|
+####.|
+..##.|
+...##|
+...#.|
+
+Shape 1:
+|.|.|9|.|.|
+|6|4|2|8|.|
+|.|.|1|7|.|
+|.|.|.|0|5|
+|.|.|.|3|.|
+
+Shape 2:
+|.|.|4|.|.|
+|2|9|6|5|.|
+|.|.|8|7|.|
+|.|.|.|1|0|
+|.|.|.|3|.|
+
+Solution code: 6640189382600
+Num unique solutions found: 37
+61 (num unique: 37)
+62 (num unique: 37)
+63 (num unique: 37)
+64 (num unique: 37)
+----
+Unique solution found:
+.#...|
+####.|
+..##.|
+...##|
+...#.|
+
+Shape 1:
+|.|9|.|.|.|
+|6|4|2|8|.|
+|.|.|1|7|.|
+|.|.|.|0|5|
+|.|.|.|3|.|
+
+Shape 2:
+|.|4|.|.|.|
+|2|9|6|5|.|
+|.|.|8|7|.|
+|.|.|.|1|0|
+|.|.|.|3|.|
+
+Solution code: 6640189414344
+Num unique solutions found: 38
+65 (num unique: 38)
+----
+Unique solution found:
+##...|
+.###.|
+..##.|
+...##|
+...#.|
+
+Shape 1:
+|6|9|.|.|.|
+|.|4|2|8|.|
+|.|.|1|7|.|
+|.|.|.|0|5|
+|.|.|.|3|.|
+
+Shape 2:
+|2|4|.|.|.|
+|.|9|6|5|.|
+|.|.|8|7|.|
+|.|.|.|1|0|
+|.|.|.|3|.|
+
+Solution code: 6640188365768
+Num unique solutions found: 39
+66 (num unique: 39)
+----
+Unique solution found:
+#....|
+####.|
+..##.|
+...##|
+...#.|
+
+Shape 1:
+|9|.|.|.|.|
+|6|4|2|8|.|
+|.|.|1|7|.|
+|.|.|.|0|5|
+|.|.|.|3|.|
+
+Shape 2:
+|4|.|.|.|.|
+|2|9|6|5|.|
+|.|.|8|7|.|
+|.|.|.|1|0|
+|.|.|.|3|.|
+
+Solution code: 6640188764936
+Num unique solutions found: 40
+67 (num unique: 40)
+68 (num unique: 40)
+----
+Unique solution found:
+....#|
+#..##|
+####.|
+#..#.|
+
+Shape 1:
+|.|.|.|.|1|
+|7|.|.|8|2|
+|0|5|6|9|.|
+|3|.|.|4|.|
+
+Shape 2:
+|.|.|.|.|2|
+|7|.|.|8|9|
+|1|0|5|6|.|
+|3|.|.|4|.|
+
+Solution code: 207237468114
+Num unique solutions found: 41
+69 (num unique: 41)
+70 (num unique: 41)
+----
+Unique solution found:
+....#.|
+#..###|
+####..|
+#.....|
+
+Shape 1:
+|.|.|.|.|1|.|
+|7|.|.|8|2|4|
+|0|5|6|9|.|.|
+|3|.|.|.|.|.|
+
+Shape 2:
+|.|.|.|.|2|.|
+|7|.|.|8|9|4|
+|1|0|5|6|.|.|
+|3|.|.|.|.|.|
+
+Solution code: 3315815743056
+Num unique solutions found: 42
+71 (num unique: 42)
+72 (num unique: 42)
+73 (num unique: 42)
+74 (num unique: 42)
+75 (num unique: 42)
+76 (num unique: 42)
+77 (num unique: 42)
+78 (num unique: 42)
+79 (num unique: 42)
+80 (num unique: 42)
+81 (num unique: 42)
+82 (num unique: 42)
+----
+Unique solution found:
+..#.|
+..##|
+.##.|
+.#..|
+##..|
+#...|
+#...|
+
+Shape 1:
+|.|.|8|.|
+|.|.|2|1|
+|.|9|4|.|
+|.|6|.|.|
+|7|5|.|.|
+|0|.|.|.|
+|3|.|.|.|
+
+Shape 2:
+|.|.|8|.|
+|.|.|9|2|
+|.|6|4|.|
+|.|5|.|.|
+|7|0|.|.|
+|1|.|.|.|
+|3|.|.|.|
+
+Solution code: 53053319401072
+Num unique solutions found: 43
+83 (num unique: 43)
+----
+Unique solution found:
+.#.|
+##.|
+.##|
+..#|
+.##|
+.#.|
+.#.|
+
+Shape 1:
+|.|4|.|
+|1|2|.|
+|.|8|9|
+|.|.|6|
+|.|7|5|
+|.|0|.|
+|.|3|.|
+
+Shape 2:
+|.|4|.|
+|2|9|.|
+|.|8|6|
+|.|.|5|
+|.|7|0|
+|.|1|.|
+|.|3|.|
+
+Solution code: 413942201244
+Num unique solutions found: 44
+84 (num unique: 44)
+----
+Unique solution found:
+...#..|
+..####|
+####..|
+#.....|
+
+Shape 1:
+|.|.|.|9|.|.|
+|.|.|4|2|8|6|
+|7|5|3|1|.|.|
+|0|.|.|.|.|.|
+
+Shape 2:
+|.|.|.|8|.|.|
+|.|.|5|6|9|2|
+|7|0|3|4|.|.|
+|1|.|.|.|.|.|
+
+Solution code: 3315815743240
+Num unique solutions found: 45
+85 (num unique: 45)
+86 (num unique: 45)
+----
+Unique solution found:
+.....#|
+..####|
+####..|
+#.....|
+
+Shape 1:
+|.|.|.|.|.|9|
+|.|.|4|2|8|6|
+|7|5|3|1|.|.|
+|0|.|.|.|.|.|
+
+Shape 2:
+|.|.|.|.|.|8|
+|.|.|5|6|9|2|
+|7|0|3|4|.|.|
+|1|.|.|.|.|.|
+
+Solution code: 3315815743264
+Num unique solutions found: 46
+Done with trying to intersect 2nd cuboid that has a start index of 1 and a rotation index of 1.
+Current UTC timestamp in milliseconds: 1685370038732
+87 (num unique: 46)
+----
+Unique solution found:
+.#.|
+###|
+.#.|
+###|
+.#.|
+.#.|
+
+Shape 1:
+|.|9|.|
+|2|8|6|
+|.|7|.|
+|1|0|5|
+|.|3|.|
+|.|4|.|
+
+Shape 2:
+|.|6|.|
+|4|9|8|
+|.|2|.|
+|3|1|7|
+|.|0|.|
+|.|5|.|
+
+Solution code: 51742552010
+Num unique solutions found: 47
+88 (num unique: 47)
+----
+Unique solution found:
+##.|
+.##|
+.#.|
+###|
+.#.|
+.#.|
+
+Shape 1:
+|2|9|.|
+|.|8|6|
+|.|7|.|
+|1|0|5|
+|.|3|.|
+|.|4|.|
+
+Shape 2:
+|4|6|.|
+|.|9|8|
+|.|2|.|
+|3|1|7|
+|.|0|.|
+|.|5|.|
+
+Solution code: 51742547914
+Num unique solutions found: 48
+89 (num unique: 48)
+90 (num unique: 48)
+91 (num unique: 48)
+----
+Unique solution found:
+..#|
+###|
+.#.|
+###|
+.#.|
+.#.|
+
+Shape 1:
+|.|.|9|
+|2|8|6|
+|.|7|.|
+|1|0|5|
+|.|3|.|
+|.|4|.|
+
+Shape 2:
+|.|.|6|
+|4|9|8|
+|.|2|.|
+|3|1|7|
+|.|0|.|
+|.|5|.|
+
+Solution code: 51742551947
+Num unique solutions found: 49
+92 (num unique: 49)
+93 (num unique: 49)
+94 (num unique: 49)
+----
+Unique solution found:
+.#.|
+##.|
+.##|
+.#.|
+###|
+.#.|
+
+Shape 1:
+|.|4|.|
+|2|9|.|
+|.|8|6|
+|.|7|.|
+|1|0|5|
+|.|3|.|
+
+Shape 2:
+|.|5|.|
+|4|6|.|
+|.|9|8|
+|.|2|.|
+|3|1|7|
+|.|0|.|
+
+Solution code: 51742552018
+Num unique solutions found: 50
+95 (num unique: 50)
+96 (num unique: 50)
+97 (num unique: 50)
+----
+Unique solution found:
+..##|
+###.|
+.#..|
+###.|
+.#..|
+
+Shape 1:
+|.|.|9|4|
+|2|8|6|.|
+|.|7|.|.|
+|1|0|5|.|
+|.|3|.|.|
+
+Shape 2:
+|.|.|6|5|
+|4|9|8|.|
+|.|2|.|.|
+|3|1|7|.|
+|.|0|.|.|
+
+Solution code: 207237459914
+Num unique solutions found: 51
+98 (num unique: 51)
+----
+Unique solution found:
+..#.|
+..##|
+.##.|
+.#..|
+###.|
+.#..|
+
+Shape 1:
+|.|.|2|.|
+|.|.|9|4|
+|.|8|6|.|
+|.|7|.|.|
+|1|0|5|.|
+|.|3|.|.|
+
+Shape 2:
+|.|.|4|.|
+|.|.|6|5|
+|.|9|8|.|
+|.|2|.|.|
+|3|1|7|.|
+|.|0|.|.|
+
+Solution code: 3315816005264
+Num unique solutions found: 52
+99 (num unique: 52)
+----
+Unique solution found:
+.#.|
+.##|
+##.|
+.##|
+.#.|
+##.|
+
+Shape 1:
+|.|9|.|
+|.|8|6|
+|1|7|.|
+|.|0|5|
+|.|3|.|
+|2|4|.|
+
+Shape 2:
+|.|6|.|
+|.|9|8|
+|4|2|.|
+|.|1|7|
+|.|0|.|
+|3|5|.|
+
+Solution code: 51742547924
+Num unique solutions found: 53
+100 (num unique: 53)
+101 (num unique: 53)
+102 (num unique: 53)
+103 (num unique: 53)
+104 (num unique: 53)
+----
+Unique solution found:
+...#|
+..##|
+.##.|
+##..|
+.##.|
+.#..|
+
+Shape 1:
+|.|.|.|2|
+|.|.|9|4|
+|.|8|6|.|
+|1|7|.|.|
+|.|0|5|.|
+|.|3|.|.|
+
+Shape 2:
+|.|.|.|3|
+|.|.|6|5|
+|.|9|8|.|
+|4|2|.|.|
+|.|1|7|.|
+|.|0|.|.|
+
+Solution code: 3315816296200
+Num unique solutions found: 54
+105 (num unique: 54)
+106 (num unique: 54)
+107 (num unique: 54)
+108 (num unique: 54)
+109 (num unique: 54)
+110 (num unique: 54)
+111 (num unique: 54)
+112 (num unique: 54)
+113 (num unique: 54)
+114 (num unique: 54)
+115 (num unique: 54)
+116 (num unique: 54)
+----
+Unique solution found:
+..##|
+###.|
+.#..|
+.##.|
+##..|
+
+Shape 1:
+|.|.|9|4|
+|2|8|6|.|
+|.|7|.|.|
+|.|0|5|.|
+|1|3|.|.|
+
+Shape 2:
+|.|.|6|5|
+|4|9|8|.|
+|.|2|.|.|
+|.|1|7|.|
+|3|0|.|.|
+
+Solution code: 207237459922
+Num unique solutions found: 55
+117 (num unique: 55)
+----
+Unique solution found:
+##..|
+.###|
+..#.|
+..##|
+.##.|
+
+Shape 1:
+|4|9|.|.|
+|.|2|8|6|
+|.|.|7|.|
+|.|.|0|5|
+|.|1|3|.|
+
+Shape 2:
+|5|6|.|.|
+|.|4|9|8|
+|.|.|2|.|
+|.|.|1|7|
+|.|3|0|.|
+
+Solution code: 207237468106
+Num unique solutions found: 56
+118 (num unique: 56)
+119 (num unique: 56)
+120 (num unique: 56)
+121 (num unique: 56)
+122 (num unique: 56)
+123 (num unique: 56)
+----
+Unique solution found:
+..#.|
+.##.|
+##..|
+.##.|
+..##|
+...#|
+
+Shape 1:
+|.|.|9|.|
+|.|8|6|.|
+|1|7|.|.|
+|.|0|5|.|
+|.|.|3|4|
+|.|.|.|2|
+
+Shape 2:
+|.|.|6|.|
+|.|9|8|.|
+|4|2|.|.|
+|.|1|7|.|
+|.|.|0|5|
+|.|.|.|3|
+
+Solution code: 3315816425224
+Num unique solutions found: 57
+124 (num unique: 57)
+125 (num unique: 57)
+126 (num unique: 57)
+----
+Unique solution found:
+...#.|
+..###|
+.##..|
+##...|
+.##..|
+
+Shape 1:
+|.|.|.|2|.|
+|.|.|9|4|3|
+|.|8|6|.|.|
+|1|7|.|.|.|
+|.|0|5|.|.|
+
+Shape 2:
+|.|.|.|3|.|
+|.|.|6|5|0|
+|.|9|8|.|.|
+|4|2|.|.|.|
+|.|1|7|.|.|
+
+Solution code: 6640189430664
+Num unique solutions found: 58
+127 (num unique: 58)
+128 (num unique: 58)
+129 (num unique: 58)
+130 (num unique: 58)
+131 (num unique: 58)
+----
+Unique solution found:
+..#.|
+###.|
+.#..|
+.##.|
+..##|
+..#.|
+
+Shape 1:
+|.|.|9|.|
+|2|8|6|.|
+|.|7|.|.|
+|.|0|5|.|
+|.|.|3|4|
+|.|.|1|.|
+
+Shape 2:
+|.|.|6|.|
+|4|9|8|.|
+|.|2|.|.|
+|.|1|7|.|
+|.|.|0|5|
+|.|.|3|.|
+
+Solution code: 3315816001232
+Num unique solutions found: 59
+132 (num unique: 59)
+----
+Unique solution found:
+#...|
+###.|
+.#..|
+.##.|
+..##|
+..#.|
+
+Shape 1:
+|9|.|.|.|
+|2|8|6|.|
+|.|7|.|.|
+|.|0|5|.|
+|.|.|3|4|
+|.|.|1|.|
+
+Shape 2:
+|6|.|.|.|
+|4|9|8|.|
+|.|2|.|.|
+|.|1|7|.|
+|.|.|0|5|
+|.|.|3|.|
+
+Solution code: 3315816036144
+Num unique solutions found: 60
+133 (num unique: 60)
+----
+Unique solution found:
+..##|
+###.|
+.#..|
+.##.|
+..#.|
+..#.|
+
+Shape 1:
+|.|.|9|4|
+|2|8|6|.|
+|.|7|.|.|
+|.|0|5|.|
+|.|.|3|.|
+|.|.|1|.|
+
+Shape 2:
+|.|.|6|5|
+|4|9|8|.|
+|.|2|.|.|
+|.|1|7|.|
+|.|.|0|.|
+|.|.|3|.|
+
+Solution code: 3315815920514
+Num unique solutions found: 61
+134 (num unique: 61)
+----
+Unique solution found:
+##..|
+.###|
+..#.|
+..##|
+...#|
+...#|
+
+Shape 1:
+|4|9|.|.|
+|.|2|8|6|
+|.|.|7|.|
+|.|.|0|5|
+|.|.|.|3|
+|.|.|.|1|
+
+Shape 2:
+|5|6|.|.|
+|.|4|9|8|
+|.|.|2|.|
+|.|.|1|7|
+|.|.|.|0|
+|.|.|.|3|
+
+Solution code: 3315815691194
+Num unique solutions found: 62
+135 (num unique: 62)
+136 (num unique: 62)
+137 (num unique: 62)
+138 (num unique: 62)
+----
+Unique solution found:
+....#|
+..###|
+###..|
+.#...|
+.##..|
+
+Shape 1:
+|.|.|.|.|1|
+|.|.|9|4|3|
+|2|8|6|.|.|
+|.|7|.|.|.|
+|.|0|5|.|.|
+
+Shape 2:
+|.|.|.|.|3|
+|.|.|6|5|0|
+|4|9|8|.|.|
+|.|2|.|.|.|
+|.|1|7|.|.|
+
+Solution code: 6640188518668
+Num unique solutions found: 63
+139 (num unique: 63)
+----
+Unique solution found:
+###..|
+#.###|
+...#.|
+...##|
+
+Shape 1:
+|3|4|9|.|.|
+|1|.|2|8|6|
+|.|.|.|7|.|
+|.|.|.|0|5|
+
+Shape 2:
+|0|5|6|.|.|
+|3|.|4|9|8|
+|.|.|.|2|.|
+|.|.|.|1|7|
+
+Solution code: 207237516028
+Num unique solutions found: 64
+140 (num unique: 64)
+141 (num unique: 64)
+142 (num unique: 64)
+143 (num unique: 64)
+144 (num unique: 64)
+145 (num unique: 64)
+146 (num unique: 64)
+147 (num unique: 64)
+148 (num unique: 64)
+149 (num unique: 64)
+150 (num unique: 64)
+151 (num unique: 64)
+152 (num unique: 64)
+153 (num unique: 64)
+154 (num unique: 64)
+155 (num unique: 64)
+156 (num unique: 64)
+Done with trying to intersect 2nd cuboid that has a start index of 1 and a rotation index of 2.
+Current UTC timestamp in milliseconds: 1685370038768
+157 (num unique: 64)
+158 (num unique: 64)
+159 (num unique: 64)
+----
+Unique solution found:
+#...|
+#...|
+##.#|
+.###|
+.#.#|
+
+Shape 1:
+|9|.|.|.|
+|2|.|.|.|
+|1|7|.|8|
+|.|0|5|6|
+|.|3|.|4|
+
+Shape 2:
+|6|.|.|.|
+|5|.|.|.|
+|0|3|.|4|
+|.|1|2|9|
+|.|7|.|8|
+
+Solution code: 207237646588
+Num unique solutions found: 65
+160 (num unique: 65)
+----
+Unique solution found:
+#....|
+##.##|
+.###.|
+.#.#.|
+
+Shape 1:
+|2|.|.|.|.|
+|1|7|.|8|9|
+|.|0|5|6|.|
+|.|3|.|4|.|
+
+Shape 2:
+|5|.|.|.|.|
+|0|3|.|4|6|
+|.|1|2|9|.|
+|.|7|.|8|.|
+
+Solution code: 207237475786
+Num unique solutions found: 66
+161 (num unique: 66)
+----
+Unique solution found:
+#....|
+##.#.|
+.###.|
+.#.##|
+
+Shape 1:
+|2|.|.|.|.|
+|1|7|.|8|.|
+|.|0|5|6|.|
+|.|3|.|4|9|
+
+Shape 2:
+|5|.|.|.|.|
+|0|3|.|4|.|
+|.|1|2|9|.|
+|.|7|.|8|6|
+
+Solution code: 207237459418
+Num unique solutions found: 67
+162 (num unique: 67)
+163 (num unique: 67)
+164 (num unique: 67)
+165 (num unique: 67)
+166 (num unique: 67)
+167 (num unique: 67)
+168 (num unique: 67)
+----
+Unique solution found:
+###..|
+.#...|
+.##..|
+..###|
+..#..|
+
+Shape 1:
+|4|9|8|.|.|
+|.|2|.|.|.|
+|.|1|7|.|.|
+|.|.|0|5|6|
+|.|.|3|.|.|
+
+Shape 2:
+|8|6|4|.|.|
+|.|5|.|.|.|
+|.|0|3|.|.|
+|.|.|1|2|9|
+|.|.|7|.|.|
+
+Solution code: 6640188519688
+Num unique solutions found: 68
+169 (num unique: 68)
+170 (num unique: 68)
+171 (num unique: 68)
+172 (num unique: 68)
+173 (num unique: 68)
+174 (num unique: 68)
+175 (num unique: 68)
+176 (num unique: 68)
+177 (num unique: 68)
+178 (num unique: 68)
+179 (num unique: 68)
+180 (num unique: 68)
+181 (num unique: 68)
+182 (num unique: 68)
+183 (num unique: 68)
+184 (num unique: 68)
+185 (num unique: 68)
+186 (num unique: 68)
+187 (num unique: 68)
+188 (num unique: 68)
+189 (num unique: 68)
+190 (num unique: 68)
+191 (num unique: 68)
+192 (num unique: 68)
+193 (num unique: 68)
+194 (num unique: 68)
+195 (num unique: 68)
+196 (num unique: 68)
+197 (num unique: 68)
+198 (num unique: 68)
+199 (num unique: 68)
+200 (num unique: 68)
+201 (num unique: 68)
+202 (num unique: 68)
+203 (num unique: 68)
+204 (num unique: 68)
+205 (num unique: 68)
+206 (num unique: 68)
+207 (num unique: 68)
+208 (num unique: 68)
+209 (num unique: 68)
+210 (num unique: 68)
+211 (num unique: 68)
+212 (num unique: 68)
+213 (num unique: 68)
+214 (num unique: 68)
+215 (num unique: 68)
+----
+Unique solution found:
+..#.|
+..#.|
+.###|
+###.|
+.#..|
+.#..|
+
+Shape 1:
+|.|.|2|.|
+|.|.|9|.|
+|.|8|6|4|
+|1|7|5|.|
+|.|0|.|.|
+|.|3|.|.|
+
+Shape 2:
+|.|.|2|.|
+|.|.|8|.|
+|.|5|6|9|
+|0|3|4|.|
+|.|1|.|.|
+|.|7|.|.|
+
+Solution code: 3315816529672
+Num unique solutions found: 69
+216 (num unique: 69)
+----
+Unique solution found:
+..#..|
+.####|
+###..|
+.#...|
+.#...|
+
+Shape 1:
+|.|.|9|.|.|
+|.|8|6|4|2|
+|1|7|5|.|.|
+|.|0|.|.|.|
+|.|3|.|.|.|
+
+Shape 2:
+|.|.|8|.|.|
+|.|5|6|9|2|
+|0|3|4|.|.|
+|.|1|.|.|.|
+|.|7|.|.|.|
+
+Solution code: 6640189382596
+Num unique solutions found: 70
+217 (num unique: 70)
+218 (num unique: 70)
+219 (num unique: 70)
+220 (num unique: 70)
+221 (num unique: 70)
+----
+Unique solution found:
+....#|
+.####|
+###..|
+.#...|
+.#...|
+
+Shape 1:
+|.|.|.|.|9|
+|.|8|6|4|2|
+|1|7|5|.|.|
+|.|0|.|.|.|
+|.|3|.|.|.|
+
+Shape 2:
+|.|.|.|.|8|
+|.|5|6|9|2|
+|0|3|4|.|.|
+|.|1|.|.|.|
+|.|7|.|.|.|
+
+Solution code: 6640188780808
+Num unique solutions found: 71
+222 (num unique: 71)
+223 (num unique: 71)
+224 (num unique: 71)
+225 (num unique: 71)
+226 (num unique: 71)
+227 (num unique: 71)
+228 (num unique: 71)
+----
+Unique solution found:
+....#|
+.####|
+.##..|
+.#...|
+##...|
+
+Shape 1:
+|.|.|.|.|9|
+|.|8|6|4|2|
+|.|7|5|.|.|
+|.|0|.|.|.|
+|1|3|.|.|.|
+
+Shape 2:
+|.|.|.|.|8|
+|.|5|6|9|2|
+|.|3|4|.|.|
+|.|1|.|.|.|
+|0|7|.|.|.|
+
+Solution code: 6640188764440
+Num unique solutions found: 72
+229 (num unique: 72)
+230 (num unique: 72)
+231 (num unique: 72)
+Done with trying to intersect 2nd cuboid that has a start index of 1 and a rotation index of 3.
+Current UTC timestamp in milliseconds: 1685370038822
+Final number of unique solutions: 72
+Current UTC timestamp in milliseconds: 1685370038822
