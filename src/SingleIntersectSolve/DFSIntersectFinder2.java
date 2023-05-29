@@ -479,7 +479,7 @@ public class DFSIntersectFinder2 {
 		//Find non-trivial cuboid intersections:
 		//solveCuboidIntersections(new CuboidToFoldOn(9, 1, 1), new CuboidToFoldOn(9, 1, 1));
 		//Nx1x1: suprise intersections: (Not on OEIS :( )
-		// I guess that the odds number are different from even?
+		// I don't know to predict the entries. I was honestly hoping this would tend towards 0.
 		//1: 0
 		//2: 72
 		//3: 47
@@ -493,17 +493,8 @@ public class DFSIntersectFinder2 {
 		
 		System.out.println("Current UTC timestamp in milliseconds: " + System.currentTimeMillis());
 		
-		
-		/* 5x1x1 on December 8th:
-			Final number of unique solutions: 3014430
-		//I hope it's right...
-		//It took 6.5 hours.
-		// Try to get it under 1 hour.
-		 */
-		
 	}
-	/*//TODO:
-46	1 × 1 × 11, 1 × 2 × 7, 1 × 3 × 5
+	/*
 54	1 × 1 × 13, 1 × 3 × 6, 3 × 3 × 3
 58	1 × 1 × 14, 1 × 2 × 9, 1 × 4 × 5
 62	1 × 1 × 15, 1 × 3 × 7, 2 × 3 × 5
@@ -513,18 +504,4 @@ public class DFSIntersectFinder2 {
 */
 
 	
-	// 3x1x1: 15057
-	// used to be 14978
-	
-	//I see! it's because I had this code commented out:
-	//if(cuboid.getNeighbours(indexOtherCell)[neighbourIndexNeeded].getIndex() != indexNewCell) {
-	//	cantAddCellBecauseOfOtherPaperNeighbours = true;
-	//	break;
-	//}
-	
-	//1x1x1:     11
-	//2x1x1:    723
-	//3x1x1   14978
-	//4x1x1   
-	//Oh no!
 }
