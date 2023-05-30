@@ -2,71 +2,53 @@
 
 ---------------------------------------------
 
-I'll eventually cover the following 4 topics: (I'll cover it later...)
+I'll eventually cover the following 5 sections: (This is still a work-in-progress)
+
+
+Algo and tricks used. 
+
+Mathematical justifications/"proof"
 
 Just the Results
 
-Algo and tricks used. 
-
-
-Mathematical justifications/"proof"
-
+Rough estimate of the time it takes to search with the current algo: (Assuming no optimization is found)
 
 Unrelated Cuboid Questions I'd like to share
 
-----------------------------
+---------------------------------------------
 
+Section 1: Algo and tricks used.
 
-Algo and tricks used. 
+The idea behind the main algorithm:
 
-DESC:
-About the ordering algo
+Basically, it's an algorithm where you build the net out cell by cell (or square by square), and the key is that the order in which the net is built has to match the order in which a breadth-first search algo would find the cells during a search.
+We're allowed to do this because it's safe to assume that the breadth-first search algo will able to explore the net if it was there (As wikipedia says, breadth-first search is complete for finite graphs).
+This simple trick reduces the number of duplicates you find to a maximum of 8 symmetries* (8 symmetries = 4 rotational symmerties by 2 reflective symmetries).
+You could get rid of the symmetries in other ways, and do other optimizations, but those are details that are just icing on the cake.
 
+I created a ms-paint drawing that hopefully shows that the net can only be built 1 way. It's pretty crude though. Feel free to ask questions if you don't get it.
+See: pics/exampleTransformation.png
 
-It's a DFS search where you build the net out cell by cell (or sqare by sqare). The key is that the order in which the net is built has to match the order in which a BFS would find the cells.
-This simple trick reduces the number of duplicates you find to a maximum of 8 symmetries. (8 symmetries = 4 rotational symmerties by 2 reflective symmetries).
-You could get rid of the symmetries in other ways, and do other optimizations, but they are just icing on the cake.)
+*: Technically, if you're looking for a net that fits two cuboid shapes, the max number of duplicates is more like 8 times the total Area, but it's still relatively small, and, in practice, that number is probably way above average.
 
-About the memory needed: (not much)
+Another nice thing about the algo is that if memory is an issue, it's possible to not record the solutions and just have a function that determines if a given solution 
+isn't a duplicate one by checking if the solution would have appeared earlier (or doing something similar)
 
-If you want, you could record the solutions in a hashtable, but if the number of solutions are too big, there's an alternative. (See: Algo and tricks used: "Would I have found this solution ealier?")
+--------------------
 
+Section 2: Mathematical justifications/"proof" (TODO)
 
-
-Why this problem is easy to multitask on multiple computers?
+TODO: Why this problem is easy to multitask on multiple computers?
 - Different sections
-- Functions that answers questions: "Would I have found this solution ealier?"
+- Functions that answers question: "Would I have found this solution ealier?"
 
-(TODO: should show code that does the work (or pseudo-code))
-
-
-
--------------------------------------
+(TODO: should show code that does the work (or pseudo-code from the messier repo))
 
 
 
-Mathematical justifications/"proof"
+---------------------------------------------
 
----
-TODO: prove that the DFS with limited branching works...
-
-
-While proving, suggest that we don't need the specific BFS algo I used... we could try DFS or some other algo... but I don't think this will amount to much...
-It's possible that we can change the algo and couple it with some other property of this problem to get a speed boost, but I don't see it.
-
-
-TODO: reproduce proof that the number of solutions is exponential (It's already in the notebook)
-
-
-TODO: Explain why the # of Nx1x1 solutions grows exponentially as n-> inf. (It's written in my notebook...)
-lower bound: 16*7^n / 8
-upper bound: c* 256^n
-
-
-
--------------------------
-
-Just the Results:
+Section 3: Just the Results
 
 Num solutions Nx1x1 :
 N:    1,   2,     3,      4,       5,        6,         7
@@ -74,38 +56,20 @@ sol: 11, 723, 14978, 228547, 3014430, 36175381, 407023305
 
 Num solutions to intersections:
 
-cuboid 1  cuboid 2    num solutions   num solution with invible cuts
+cuboid 1  other cuboid(s)    num solutions   num solution with invible cuts
 
-5x1x1      3x2x1         2263                    2290
-7x1x1      3x3x1         1070                    1080
-8x1x1      5x2x1        35675                   35697
-9x1x1      4x3x1         4469                      ??              
-11x1x1     5x3x1      4233426                      ??                
-11x1x1     7x2x1           ??                      ??                 
+5x1x1           3x2x1              2263                    2290
+7x1x1           3x3x1              1070                    1080
+8x1x1           5x2x1             35675                   35697
+9x1x1           4x3x1              4469                      ??              
+11x1x1          5x3x1           4233426                      ??                
+11x1x1          7x2x1                ??                      ??                 
+11x1x1 (5x3x1 and 7x2x1)              0                      ??
 
 Unknown solutions to intersections, but within the realm of feasibility:
-
-11x1x1 and another one
 13x1x1 and another one
 14x1x1 and another one
 15x1x1 and another one
-
-
-TODO: Explain "num solution with invisible cuts"
-First draft:
-Basically, these are solutions where the net has invisible cuts between some of the cells/squares
-For the nets that fold into 2 cuboids, I only checked in the case where the invisible cuts are in the same place for each fold. There's probably more solutions if you allow the invisible cuts to be in different places for each fold, but those solutions are ugly, and they're probably hard to find.
-Feel free to try and find them though. I have an image of an invisible cut solution in the image folder of this repo, and the output folder contains a file that has the 10 invisible cut solutions of the 7x1x1 and 3x3x1 solutions.
-
-
-(TODO: All solutions have an encoding. Here's a link that describes how to read the encoding: link)
-
-
-I will only shared the encodings for the 11x1x1 and 5x3x1 solutions because I want to save space. (There's over 4M solutions and the compressed version is already about 100 MB+ )
-(or maybe I'll have another encoding...)
-
-TODO: Here's a python program that converts the encodings into ASCII images that are human-readable:
-(TODO)
 
 
 How I reproduced previous results:
@@ -116,16 +80,24 @@ The papers said that there are 1080 solutions for the intersections between 7x1x
 It might be because someone made a mistake, but I believe the more likely cause is that they counted the 10 solutions where the net had an invisible cut.
 I believe this because I found exactly 1080 solutions when I accepted nets with invisible cuts. The only way I can prove that this is what's going on is if I have access to their 1080 solutions, but I couldn't find it, so this is just a guess.
 
-Nets with invisible cuts goes against the rules in the link for 2263 (http://www.jaist.ac.jp/~uehara/etc/origami/nets/index-e.html .), but that rule wasn't declared for any paper mentioning 1080 solutions.
-Because the invisible cuts were not counted in one place and probably counted in the other, I decided to not pick a method and measure both counts. Unfortunately, I didn't allow invible cuts when I checked for 11x1x1 and 5x3x1 solutions, and I'm not going to check it because that took almost 2 months for my laptop to check.
 
-
-Here are the 10 solutions with invisible cuts:
+By the way, here are the 10 solutions with invisible cuts:
 (See output/theTenSuspicious7x1x1Solutions.txt)
 
------
+Nets with invisible cuts go against the rules in the link for 2263 (http://www.jaist.ac.jp/~uehara/etc/origami/nets/index-e.html .), but that rule wasn't declared for any paper mentioning 1080 solutions.
+Because the invisible cuts were not counted in one place and probably counted in the other, I decided to not pick a method and measure both counts. Unfortunately, I didn't allow invible cuts when I checked for 11x1x1 and 5x3x1 solutions, and I'm not going to check it because that took almost 2 months for my laptop to check.
 
-Rough estimate of the time it takes to search with the current algo:
+Explanation of "num solution with invisible cuts":
+
+Basically, these are solutions where the net has invisible cuts between some of the cells/squares
+For the nets that fold into 2 cuboids, I only checked in the case where the invisible cuts are in the same place for each fold. There's probably more solutions if you allow the invisible cuts to be in different places for each fold, but those solutions are ugly, and they're probably hard to find.
+Feel free to try and find them though. I have an image of an invisible cut solution in the image folder of this repo, and the output folder contains a file that has the 10 invisible cut solutions of the 7x1x1 and 3x3x1 solutions.
+
+---------------------------------------------
+
+Section 4:
+
+Rough estimate of the time it takes to search with the current algo: (Assuming no optimization is found)
 
 Checking 11x1x1 and 5x3x1 on 1 core: 4 months?
 Checking 11x1x1 and 7x2x1 on 1 core: 4 months?
@@ -139,19 +111,27 @@ checking 15x1x1 and 5x3x2 on 1 core: 1000+ years?
 
 These times may seem way too long, but if we use thousands of cores, I believe that we might even be able to check the 15x1x1 and  5x3x2 intersectioos if we're patient enough...
 
---
+
+---------------------------------------------
 
 
-
-Other questions I have about cuboid developments:
-
-
-Is there a way to search faster?
+Section 5: Other questions I have about cuboid developments
 
 
-I noticed that non-trivial self-intersections of Nx1x1 cuboids is a thing that happens, but I didn't look any further than that.
+1) Is there a way to search faster? I bet I missed a bunch of optimizations...
 
-Terrible definition of non-trivial self-intersection: Where a net folds into a shape in multiple ways, and those different ways aren't easily explained by some obvious symmetry.
+
+---
+
+2) Can the number of non-trivial self-intersections of Nx1x1 cuboids be explained, or can the nets be predicted?
+
+I noticed that non-trivial self-intersections of Nx1x1 cuboids is a thing that happens, but I didn't look any further than that, so for all I know, this could be an easy problem.
+
+Definition of non-trivial self-intersection:
+Where a net folds into a shape in multiple ways, and those different ways aren't easily explained by some obvious symmetry.
+
+See: pics/exampleOfANonTrivialSelfIntersection.png for an example of what I'm talking about.
+See: the "self-intersection-side-problem" folder for the output of N=2 to 7
 
 Here's the number of self-intersections for N=0, 1, 2...:
 		//1: 0 (They are all trivial...)
@@ -164,29 +144,68 @@ Here's the number of self-intersections for N=0, 1, 2...:
 		//8: 1114
 		//9: 495
 
+		
 What's going on? Is there a way to predict the numbers in this series? Do the even terms always increase as n increases? What about the odd ones? Do these solutions share some obvious properties? (I felt like they did when I saw a few solutions, but I couldn't articulate it to myself)
 
 
-What about self intersections of Nx2x1?
+2b) What about self intersections of Nx2x1?
+
+---
+
+3) Multiple cuts:
+One small redeeming thing about the invisible cuts I searched for is that the net has the same invisible cuts for each shape, but I'm curious about what happens if we allow for nets that fold different shapes with different invisible cuts.
+How many solutions like that are there? How would we even search for it? (I'm pretty sure people will not be satisfied with this type of net, but I would like to know)
+
+--
+
+4) Is there a net that folds to 4 cuboids?
+
+--
+
+5) Can we make an animation out of the solutions? I think that might be fun.
+I might look into doing this somehow...
+
+How does the # of Nx1x1 solutions grow as n-> inf. I'm pretty sure it's exponential 
+But what's the base of the exponential?
+(I think that we could use matrices to get closer to the solution, but I didn't work on this too hard)
+
+
+Mathematical justification for why this sequence grows exponentially as n->infinite:
+
+Lower bound is c * 7^n:
+
+If we only consider Nx1x1 nets where the cells of every level are attached to each other, going from Nx1x1 to (N+1)x1x1 will
+multiply the number of solutions by 7 because there are 7 ways to put a row of 4 cells on top of another.
+(see pics/cuboidStackingForLowerBoundSolutionsNx1x1.png for an image of what I'm talking about)
+
+Therefore the number of solution ignoring symmetry will be k * 7^n for some constant k.
+
+If we remove the symmetric solutions, in the worst case, we will be left with only 1/8th of the solutions (because there are a max of 8 possible symmetries).
+Therefore the number of solutions with symmetry will be at least k/8 * 7^n = c * 7^n for some constant n.
+
+Because a subset of the number of nets that fold into an Nx1x1 cuboid is c*7^n, the number of nets that fold into an Nx1x1 cuboid is at least c*7^n.
+
+[]
+
+Upper bound: c * 256^n
+
+If we go from Nx1x1 to (N+1)x1x1, a valid net for (N+1)x1x1 dimensions will be a subset of a graph that has 8 more edges in it compared to a net for a cuboid with Nx1x1 dimensions..
+
+Therefore, if we naively assume all combinations of the 8 new edges being used and not used leads to a new net,
+we only get 2^8 ( or 256) times more answers.
+
+Therefore, the upper bound is c*256^n.
+
+[]
+ 
+This "proof" assumes that a graph of a net will only produce a single net, which is something that seems true, but I can't really prove.
+It might not be true if the net overlaps with itself, but in the case that it doesn't 
 
 
 
+--
 
-One small redeeming thing about the invisible cuts I searched for is that the net has the same invisible cuts for each shape. But I'm curious about what happens if we allow for nets that fold different shapes with different invisible cuts.
-How many solutions like that are there? How would we even search for it? (I'm not sure people will be satisfied with this type of net, but I would like to know)
-
-
-Is there a net that folds to 4 cuboids?
-
-
-Can we make an animation out of the solutions? I think that might be fun.
-
-How does the # of Nx1x1 solutions grow as n-> inf. I'm pretty sure it's exponential (TODO: add explanation have mathematical justification section), but what's the base of the exponential?
-(I think that we could use matrices to get closer to the solution, but I didn't work on this too hard) 
-
-
-----
-When intersecting 11x1x1 and 5x3x1, I noticed that the vast majority of solutions have the bottom of the 11x1x1 cuboid intersecting with cell index #3. Why is that? Does this type of thing happen with other cuboid shapes? Is there a way to predict when this happens and/or use this to help with our searches?
+6) When intersecting 11x1x1 and 5x3x1, I noticed that the vast majority of solutions have the bottom of the 11x1x1 cuboid intersecting with cell index #3. Why is that? Does this type of thing happen with other cuboid shapes? Is there a way to predict when this happens and/or use this to help with our searches?
 
 If you want, see pics/The5x3x1Cuboid.jpg for a picture of cell index #3.
 	
@@ -206,12 +225,15 @@ Map of 5x3x1 with the cell indexes:
  (I consider cell 7, 23, and 27 as pretty much the same as cell 3 because of the symmetries in the cuboid)
  
 
-about 3M+ solutions (or maybe even 4M+) out of about 4233426 solutions have the bottom intersecting with cell 3.
-I have no idea why it happened like that...
+about 4M+ solutions out of 4233426 solutions have the cell in the net that is the bottom of the Nx1x1 shape be the same cell as cell #3 of the 5x3x1 solution.
+Before running the code, I didn't expect any kind of skew, let alone a huge one like this one.
+I'm hoping that it could be explained.
 
 ---
 
-Why are there more 8x1x1 intersection solutions than the # 9x1x1 solutions (35675 vs 4469)? Is there some way of knowing this would happen ahead of time?
+7) Why are there more nets that fold into the 8x1x1 and 5x2x1 cuboids compared to the number of nets that fold into the 9x1x1 and 4x3x1 cuboids (35675 vs 4469)?
+Before running the code, I would have guessed the number of nets would be strictly increasing, but no.
+Is there some way of knowing this would happen ahead of time?
 
 
 
