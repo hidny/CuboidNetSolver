@@ -7,6 +7,8 @@ It's a binary encoding of this form:
 (width * height 0s and 1s that represent if the cell in the grid is used.
 
 
+- Note that the encoding in weirdMathStuff has the width go first... I switched it at the last minute.
+
 Example from the output folder:
 Unique solution found:
 ###.|
@@ -27,7 +29,7 @@ solution code in binary: (from wolframalpha)
 11000001000000101100111000001111011000111100011011110000011100
 
 
-formatted binary:
+Dividing the binary into the different pieces:
 11 (first 2 1s are always there)
 
 00000100 (height is 4)
