@@ -1,5 +1,6 @@
 
 
+
 # Summary of the Cuboid Repo
 
 This repo is a simplified version of the code I used to get all the nets that fold the 11x1x1 and 5x3x2 cuboids. Though it's slower than the more complicated and optimized code in the weirdmathstuff repo, this repo is fast enough to find all of the 8x1x1 and 5x2x1 cuboid within 2 days (the optimized version only takes 4 hours).
@@ -211,4 +212,34 @@ The 2-3 ways the in-between rows can be?
 
 # A more detailed explanation of the recursive algo and the 'secret sauce'
 
-TODO
+Before explaining the approach, I'm going to highlight the problem the naive approach has, so I could highlight the necessity of the 'secret sauce' approach.
+
+I don't think my attempt at just explaining the 'secret sauce' in the patreonPostSummaryWithMoreDetails.txt file will make sense unless you understand the problem it solves.
+
+# Idea 1
+
+The first naive approach to have a function recursively add a cell one-by-one at every legal location above/below or right/left of a cell that's already in the net.
+This will work, but the problem is that it will waste a lot of time finding the same solution over and over again.
+This starts to be a problem for even a small cuboid like the 4x1x1 cuboid.
+
+# Idea 2
+
+The second approach is to record all the configurations that were already seen, so that you could avoid rechecking the same positions over and over again.
+Based on what I read in the previous papers, they solved the 5x1x1 and 3x2x1 cuboid using this approach and for the 7x1x1 cuboid and 3x3x1 cuboid, they had to stop using this approach at some point because it took too much memory, and moved on to another approach at depth  22.
+"This simple idea works up to 22 for two boxes of size 1x1x5 and 1x3x5 in [1] (...) However, for the surface area 30, it does not work even on a supercomputer (CRAY XC30) due to memory overflow when i = 22"
+."
+(2015 - "Common Developments of Three Incongruent Boxes of Area 30" by Dawei Xu, Takashi Horiyama, Toshihiro Shirakawa, and Ryuhei Uehara) They might have had a bunch of clever tricks to deal with the memory issues they had (most of which I don't think I understand :( ), but they still had to deal with hold a bunch of memory at the same time.
+
+# Idea 3 (the secret-sauce)
+Believe it or not, there's an improvement that can be made that doesn't involve recording the configurations.
+The trick is to add an artificial constraint on how to add cells to the cuboid while just barely searching all possibilities. With a bit of experimentation, I found that if I artificially force the order in which I add cells to match the order/path in which a deterministic breadth-first search algorithm would explore the net from the bottom cell, the algorithm will have three nice properties:
+1. The algo will search every possible net because a breadth-first search algorithm is more than capable of searching any finite net.
+2. At every step of the recursive function, the number of options will be constrained by the last cell added, severely reducing its branching factor.
+3. Because the breadth-first search algorithm is deterministic, if we ignore symmetry for a minute, every net and partial net will have only 1 way the breadth-first search algo wil explore it, so without bothering to record previously checked paths, we will visit every possible net once. If we don't ignore symmetry, every net could be visited up to 8 times, which is still not too bad.
+
+I don't think it's possible to over-estimate how important idea #3 is. I think it's a greater improvement than all the other optimizations I created combined.
+
+At this point, I hope the idea in pics/exampleTransformation.png is starting to make sense.
+
+ 
+

@@ -97,22 +97,6 @@ public class CuboidToFoldOn {
 	public boolean isCellIndexUsed(int cellIndex) {
 		return cellsUsed[cellIndex];
 	}
-
-	public static int indexPaperAbove(int cellIndex) {
-		return -1;
-	}
-
-	public static int indexPaperRight(int cellIndex) {
-		return -1;
-	}
-
-	public static int indexPaperBelow(int cellIndex) {
-		return -1;
-	}
-
-	public static int indexPaperLeft(int cellIndex) {
-		return -1;
-	}
 	
 	public void resetState() {
 		for(int i=0; i<cellsUsed.length; i++) {
