@@ -1,0 +1,214 @@
+
+
+# Summary of the Cuboid Repo
+
+This repo is a simplified version of the code I used to get all the nets that fold the 11x1x1 and 5x3x2 cuboids. Though it's slower than the more complicated and optimized code in the weirdmathstuff repo, this repo is fast enough to find all of the 8x1x1 and 5x2x1 cuboid within 2 days (the optimized version only takes 4 hours).
+
+I think I'll explain the simplified code, and then explain all the optimizations later.
+ 
+## How the main program works
+ 
+The "main" program to run is DFSIntersectFinder2.java  .
+
+The main program runs a function that is centered around finding nets for an Nx1x1 cuboid by starting from the bottom cell of the Nx1x1 cuboid.
+As it solves for the Nx1x1 cuboid, it also makes sure that it can also fill in another cuboid, so it can find nets that fold into both cuboids. 
+If you want to only solve the Nx1x1 cuboid, just make sure the other cuboid is the same Nx1x1 cuboid.
+(I don't feel like having a new file optimized to cover that case. I want to keep it simple)
+
+I've left a few valid cuboid settings for you to try in the main function.  Feel free to uncomment the one you want and run it:
+(Note that the Nx1x1 cuboid is always the first one.)
+### Main function in question:
+```
+public static void main(String args[]) {
+		System.out.println("Fold Resolver Ordered Regions intersection skip symmetries Nx1x1:");
+
+		
+		//solveCuboidIntersections(new CuboidToFoldOn(5, 1, 1), new CuboidToFoldOn(3, 2, 1));
+		
+		//solveCuboidIntersections(new CuboidToFoldOn(7, 1, 1), new CuboidToFoldOn(3, 3, 1));
+		
+		//solveCuboidIntersections(new CuboidToFoldOn(8, 1, 1), new CuboidToFoldOn(5, 2, 1));
+		//It got 35675 solutions
+		//With apparent holes, I got 35697 solutions
+		
+		//solveCuboidIntersections(new CuboidToFoldOn(9, 1, 1), new CuboidToFoldOn(4, 3, 1));
+		//It got 4469 solutions and it took about 41.5 hours (for the optimized code)
+		
+		//solveCuboidIntersections(new CuboidToFoldOn(11, 1, 1), new CuboidToFoldOn(5, 3, 1));
+		//This took about 2 months with 3/4 cores running constantly.
+
+		//solveCuboidIntersections(new CuboidToFoldOn(11, 1, 1), new CuboidToFoldOn(7, 2, 1));
+		//I haven't tried this, but I imagine it being slower than the previous one.
+		
+		solveCuboidIntersections(new CuboidToFoldOn(13, 1, 1), new CuboidToFoldOn(3, 3, 3));
+		// This one is too slow. I either need to find an amazing optimation, or just throw more compute power at it.
+}
+```
+## The first loop
+The first loop in the solveCuboidIntersections function involves going through every possible way the bottom of the Nx1x1 could be matched/attached with a cell in the other cuboid. For example, we have 22 possible places to put the bottom of the 5x1x1 cuboid in the 3x2x1 cuboid. 22 is worst case because it's equal to the area of the 3x2x1 cuboid (and the 5x1x1 cuboid). The way I consider the match/attachment configuration unique is by making sure a list of 4 numbers is unique:
+1) the number of cells above the other cuboid and on the same face.
+1) the number of cells right of the other cuboid and on the same face.
+1) the number of cells below the other cuboid and on the same face.
+1) the number of cells left of the other cuboid and on the same face.
+
+Here's a map of the 3x2x1 cuboid followed by a list of the ways to attach the bottom of the Nx1x1 cuboid. I hope that looking a this will give you an idea of what's going on (This is from the output folder):
+```
+          0   1                     
+
+  2       5   6      11      14  15 
+  3       7   8      12      16  17 
+  4       9  10      13      18  19 
+
+         20  21                     
+
+         19  18                     
+         17  16                     
+         15  14                     
+
+Unique rotation lists:
+Cell and rotation: 0 and 0
+0, 1, 0, 0, 
+Cell and rotation: 0 and 1
+1, 0, 0, 0, 
+Cell and rotation: 0 and 2
+0, 0, 0, 1, 
+Cell and rotation: 0 and 3
+0, 0, 1, 0, 
+Cell and rotation: 2 and 0
+0, 0, 2, 0, 
+Cell and rotation: 2 and 1
+0, 2, 0, 0, 
+Cell and rotation: 2 and 2
+2, 0, 0, 0, 
+Cell and rotation: 2 and 3
+0, 0, 0, 2, 
+Cell and rotation: 3 and 0
+1, 0, 1, 0, 
+Cell and rotation: 3 and 1
+0, 1, 0, 1, 
+Cell and rotation: 5 and 0
+0, 1, 2, 0, 
+Cell and rotation: 5 and 1
+1, 2, 0, 0, 
+Cell and rotation: 5 and 2
+2, 0, 0, 1, 
+Cell and rotation: 5 and 3
+0, 0, 1, 2, 
+Cell and rotation: 6 and 0
+0, 0, 2, 1, 
+Cell and rotation: 6 and 1
+0, 2, 1, 0, 
+Cell and rotation: 6 and 2
+2, 1, 0, 0, 
+Cell and rotation: 6 and 3
+1, 0, 0, 2, 
+Cell and rotation: 7 and 0
+1, 1, 1, 0, 
+Cell and rotation: 7 and 1
+1, 1, 0, 1, 
+Cell and rotation: 7 and 2
+1, 0, 1, 1, 
+Cell and rotation: 7 and 3
+0, 1, 1, 1, 
+Num starting points and rotations to check: 22
+```
+Note that when it comes to the 3x3x3 cuboid, there's only 9 unique ways to attach the bottom of the 13x1x1 cuboid because it's a cube with lots of symmetries. So that's good...
+The code for this logic is in PivotCellDescription.java.
+
+
+
+# Depth 1 of the algo details:
+Once inside the first loop, we enter into an algorithm that recursively adds 1 cell/square to the net at a time by attaching it sideways or above/below a cuboid that's already there. In order to avoid finding the same solution several times, but with different symmetries, I went out of my way to force the first depth to only have 5 configurations and added hard-coded rules for where the top cell is allowed to be. The details of the rules live in SymmetryResolver.java. If these rules weren't there, it would still work, but I think it would be 5-10 times slower because of all the redundant work the algorithm would do without the rules. I'll explain in more detail in each section. The reason I'm bothering to explain this is because I think this background info will go help explain a lot of what the output looks like.
+
+## General rules
+1. Top cell attaches to just as many cells as bottom cell or less
+2. We need to get to top cell by going either above or to the right of bottom cell
+3. Index 0 is the bottom and index (Area - 1) is the top. In the case of the examples, it's 13.
+## The 5 phases
+### The cross phase
+In this phase, the bottom cell has the max of 4 cell neighbours attached to it. Also, the path to the top cell goes through the cell above the bottom cell, and the top cell should not be left of bottom cell.
+#### Example:
+```
+|..|..|..|12|..|
+|..|..|..|13|..|
+|..|..| 9| 6| 3|
+|..|11| 8| 5| 2|
+|..|10|..|..|..|
+| 1| 0| 7|..|..|
+|..| 4|..|..|..|
+```
+
+### The 'T' phase
+In this phase, the bottom cell has 3 neighbours, and the cell to the left of it is blank. The path to the top cell could be through the cell above the bottom cell or the cell to the right of the bottom cell, but the top cell must not be lower than the bottom cell.
+
+#### Examples:
+```
+| 3| 6|..|..|
+|..|13| 9|..|
+|..|12|..|..|
+|..|11|..|..|
+|..|10|..|..|
+|..| 0| 7| 8|
+| 1| 4|..|..|
+| 2| 5|..|..|
+
+|..|..|..|..| 3|13| 9|
+| 1|10|..|11|12|..|..|
+|..| 0| 7| 8|..|..|..|
+|..| 4|..| 5| 6|..|..|
+|..|..|..| 2|..|..|..|
+```
+
+### The 'L' phase
+In this phase, the bottom cell has 2 neighbours, and those neighbours are above and to the right of the bottom cell, and the path to the top cell goes through the cell above the bottom cell.
+
+#### Example:
+```
+|..|13|..|..|..|..|..|..|
+| 6| 3|12| 9|..|..|..|..|
+|..|..|11| 8| 5| 2|..|..|
+|..|..|..|..| 4| 1|10|..|
+|..|..|..|..|..|..| 0| 7|
+```
+### The pipe phase
+In this phase, the bottom cell has 2 neighbours, and those neighbours are above and below the bottom cell. The path to the top cell goes through the cell above the bottom cell, and the top cell should not be left of bottom cell. (The rules are similar to the cross phase)
+
+#### Example:
+```
+|..|12| 3|..|..|
+|..|..|13|..|..|
+|..|..| 9| 6|..|
+|..|11| 8| 5| 2|
+| 1|10| 7|..|..|
+|..| 0|..|..|..|
+|..| 4|..|..|..|
+```
+
+### The simple phase
+In this phase, the bottom cell only 1 neighbour, and  the bottom cell. Also, the top cell should not be left of bottom cell. (The rules are similar to the cross phase)
+This phase is by far the fastest for the algorithm to go through and easiest to look at. The top cell is on the top, the bottom cell is on the bottom and there's 4 cells in each row in between. Also, the 4 cells of each row must have a different position mod 4. I also <b>think</b> there's only 2 ways for an in-between row to be configured, which makes me <b>think</b> this phase is liable to be optimized with an even better algorithm. (I haven't worked on this yet., so that's why I'm not 100% sure..)
+
+#### Examples:
+````
+|..|..|..|..|..|..|..|..|13|..|
+|..|..|..|..|..|..|12| 9| 6| 3|
+|..|..|..| 8| 5| 2|11|..|..|..|
+| 4| 1|10| 7|..|..|..|..|..|..|
+|..|..| 0|..|..|..|..|..|..|..|
+
+|..|..|13|..|..|..|..|
+|..|..|12| 9| 6| 3|..|
+| 5|..|..| 8|..| 2|11|
+| 4| 1|10| 7|..|..|..|
+|..|..| 0|..|..|..|..|
+```
+The 2-3 ways the in-between rows can be?
+```
+1. | 5|..|..| 8|..| 2|11|
+2. | 5| 2|..| 8|..|..|11| (This is just a reflection of the row above, so that's why I didn't really count it)
+3. |..|..|12| 9| 6| 3|..|
+```
+
+# A more detailed explanation of the recursive algo and the 'secret sauce'
+
+TODO

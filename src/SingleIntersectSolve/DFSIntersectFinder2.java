@@ -103,8 +103,8 @@ public class DFSIntersectFinder2 {
 		
 		System.out.println("Num starting points and rotations to check: " + startingPointsAndRotationsToCheck.size());
 		
-		//(Set i=1 for non-trial Nx1x1 self-intersections)
-		for(int i=1; i<startingPointsAndRotationsToCheck.size(); i++) {
+		//(Set i=1 for non-trial Nx1x1 self-intersections (This is just a side-problem))
+		for(int i=0; i<startingPointsAndRotationsToCheck.size(); i++) {
 			//if(i != 0 && i != 4 && i != 6 && i != 10 && i != 14) {
 			//	continue;
 			//}
@@ -478,7 +478,7 @@ public class DFSIntersectFinder2 {
 		//Got 3061249 solutions while allowing apparent holes.
 		
 		//Find non-trivial cuboid intersections:
-		solveCuboidIntersections(new CuboidToFoldOn(8, 1, 1), new CuboidToFoldOn(8, 1, 1));
+		//solveCuboidIntersections(new CuboidToFoldOn(8, 1, 1), new CuboidToFoldOn(8, 1, 1));
 		//Nx1x1: suprise intersections: (Not on OEIS :( )
 		// I don't know to predict the entries. I was honestly hoping this would tend towards 0.
 		//1: 0
@@ -491,6 +491,7 @@ public class DFSIntersectFinder2 {
 		//8: 1114
 		//9: 495
 
+		solveCuboidIntersections(new CuboidToFoldOn(3, 1, 1), new CuboidToFoldOn(3, 1, 1));
 		
 		System.out.println("Current UTC timestamp in milliseconds: " + System.currentTimeMillis());
 		
