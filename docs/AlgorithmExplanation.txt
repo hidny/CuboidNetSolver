@@ -225,10 +225,10 @@ This starts to be a problem for even a small cuboid like the 4x1x1 cuboid.
 # Idea 2
 
 The second approach is to record all the configurations that were already seen, so that you could avoid rechecking the same positions over and over again.
-Based on what I read in the previous papers, they solved the 5x1x1 and 3x2x1 cuboid using this approach and for the 7x1x1 cuboid and 3x3x1 cuboid, they had to stop using this approach at some point because it took too much memory, and moved on to another approach at depth  22.
+Based on what I read in the previous papers, they solved the 5x1x1 and 3x2x1 cuboid using this approach and for the 7x1x1 cuboid and 3x3x1 cuboid, they had to stop using this approach at some point because it took too much memory. They has to switch to another approach before getting to depth 22 out of 30.
 "This simple idea works up to 22 for two boxes of size 1x1x5 and 1x3x5 in [1] (...) However, for the surface area 30, it does not work even on a supercomputer (CRAY XC30) due to memory overflow when i = 22"
 ."
-(2015 - "Common Developments of Three Incongruent Boxes of Area 30" by Dawei Xu, Takashi Horiyama, Toshihiro Shirakawa, and Ryuhei Uehara) They might have had a bunch of clever tricks to deal with the memory issues they had (most of which I don't think I understand :( ), but they still had to deal with hold a bunch of memory at the same time.
+(2015 - "Common Developments of Three Incongruent Boxes of Area 30" by Dawei Xu, Takashi Horiyama, Toshihiro Shirakawa, and Ryuhei Uehara) They might have had a bunch of clever tricks to deal with the memory issues they had (most of which I don't think I understand :( ), but they still had to deal with holding a bunch of memory at the same time.
 
 # Idea 3 (the secret-sauce)
 Believe it or not, there's an improvement that can be made that doesn't involve recording the configurations.
