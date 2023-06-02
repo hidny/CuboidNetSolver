@@ -1,7 +1,7 @@
 
 ## Model Package Explained
 
-This code mainly defines a virtual model of the cuboid. The one I went with was to basically tell the program that the cuboid is a 2D map that look like this:
+This code mainly defines a virtual model of the cuboid. The one I went with was to basically tell the program that the cuboid is a flat 2D map that look like this:
 ```
 Map
           0   1                     
