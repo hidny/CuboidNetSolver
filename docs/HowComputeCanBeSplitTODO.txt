@@ -7,4 +7,4 @@ Main points:
 * Might try to remove variance between compute tasks by making a lot of compute pieces, shuffling them and giving 100-1000 pieces per task
 * How to run
 * Still a rough draft, but it works
-* Maybe a could submit it to a website that distributes compute? I still have to look into it.
+* Maybe a could submit it to a website that distributes compute? I still have to look into it. (Maybe primegrid.com ?)

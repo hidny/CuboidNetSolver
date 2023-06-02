@@ -16,7 +16,9 @@ Map
 ```
 I then said that from any cell, you can go up, right, left, or down. The only thing that could happen is that you move to another cell and possibly rotation your orientation on the map. For moving right when you're on cell #7 leads you to being on cell #8, but moving right when you're on cell #1 leads you to being on cell #11 and rotated 90 degrees clockwise. Another example is going up from cell #14 leads to being on cell #1 and rotation 180 degrees.
 
-I carefully crafted the rules for what happens when you move out of bounds in such a way that it's like you're on a cuboid and I still log the results of those rules at the start of every run. The log shows what happens when you go up from the cell, right of the cell, below the cell, and left of the cell. I probably should have deleted these logs a long time ago, but whatever.
+I carefully crafted the rules for what happens when you move out of bounds in such a way that it's like you're on a cuboid and I still log the results of those rules at the start of every run. The logs show what happens when you go up from the cell, right of the cell, below the cell, and left of the cell. I probably should have deleted these logs a long time ago, but whatever.
+
+The model package also has the CuboidToFoldOn.java class which holds the current state of the cuboid. (i.e. which cells are used and how the used cells are rotated relative to the flat map described above)
 
 ### Example of the record of the cell state transition
 ```
