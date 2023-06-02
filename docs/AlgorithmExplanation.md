@@ -14,7 +14,7 @@ If you want to only solve the Nx1x1 cuboid, just make sure the other cuboid is t
 (I don't feel like having a new file optimized to cover that case. I want to keep this repository simple)
 
 I've left a few valid cuboid settings for you to try in the main function. Feel free to uncomment the one you want and run it:
-(Note that the Nx1x1 cuboid should always be the first one.)
+(Note that the Nx1x1 cuboid should always be the first argument.)
 ### Main function in question:
 ```
 public static void main(String args[]) {
@@ -43,11 +43,11 @@ public static void main(String args[]) {
 }
 ```
 ## The first loop
-The first loop in the solveCuboidIntersections function involves going through every possible way the bottom of the Nx1x1 could be matched/attached with a cell in the other cuboid. For example, we have 22 possible places to put the bottom of the 5x1x1 cuboid in the 3x2x1 cuboid. 22 is worst case because it's equal to the area of the 3x2x1 cuboid (and the 5x1x1 cuboid). The way I consider the match/attachment configuration unique is by making sure a list of 4 numbers is unique:
-1) the number of cells above the other cuboid and on the same face.
-1) the number of cells right of the other cuboid and on the same face.
-1) the number of cells below the other cuboid and on the same face.
-1) the number of cells left of the other cuboid and on the same face.
+The first loop in the solveCuboidIntersections function involves going through every possible way the bottom of the Nx1x1 could be matched/attached with a cell in the other cuboid. For example, we have 22 possible places to put the bottom of the 5x1x1 cuboid in the 3x2x1 cuboid. 22 is the worst case because it's equal to the area of the 3x2x1 cuboid (and the 5x1x1 cuboid). The way I consider the match/attachment configuration unique is by making sure a list of 4 numbers is unique:
+1) The number of cells above the other cuboid and on the same face.
+1) The number of cells right of the other cuboid and on the same face.
+1) The number of cells below the other cuboid and on the same face.
+1) The number of cells left of the other cuboid and on the same face.
 
 Here's a map of the 3x2x1 cuboid followed by a list of the ways to attach the bottom of the Nx1x1 cuboid. I hope that looking a this will give you an idea of what's going on (This is from the output folder):
 ```

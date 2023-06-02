@@ -1,13 +1,15 @@
 
+
 ## Solution Encodings
 
 How to read the solution encoding in this Cuboid repo: (the one in weirdMathStuff repo is slightly different)
 It's a binary encoding of this form:
+```
 (start bits)
 (8 bits for height)
 (8 bits for width)
 (width * height 0s and 1s that represent if the cell in the grid is used.
-
+```
 
 - Note that the encoding in weirdMathStuff has the width go first... I switched it at the last minute.
 
@@ -34,6 +36,7 @@ solution code in binary: (from wolframalpha)
 
 
 Dividing the binary into the different pieces:
+```
 11 (first 2 1s are always there)
 
 00000100 (height is 4)
@@ -43,7 +46,7 @@ Dividing the binary into the different pieces:
 11101100011
 11000110111
 10000011100
-
+```
 Convert the ones to cells and the zeros to blank to get the answer:
 Final answer:
 ```
