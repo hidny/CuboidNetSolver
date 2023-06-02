@@ -33,12 +33,13 @@ Basically, it's an algorithm where you build the net out cell by cell (or square
 We're allowed to do this because it's safe to assume that the breadth-first search algo will able to explore the net if it was there (As wikipedia says, breadth-first search is complete for finite graphs).
 This simple trick reduces the number of duplicates you find to a maximum of 8 symmetries* (8 symmetries = 4 rotational symmerties by 2 reflective symmetries).
 You could get rid of the symmetries in other ways, and do other optimizations, but those are details that are just icing on the cake.
+(See bottom of AlgorithmExplanation.md for a slightly more detailed explanation)
 
 I created a ms-paint drawing that hopefully shows that the net can only be built 1 way. It's pretty crude though. Feel free to ask questions if you don't get it.
 See pics/exampleTransformation.png
 
 Another nice thing about the algo is that if memory is an issue, it's possible to not record the solutions and just have a function that determines if a given solution 
-isn't a duplicate one by checking if the solution would have appeared earlier (or doing something similar)
+isn't a duplicate one by checking if the solution would have appeared earlier (or doing something similar).
 
 I'll probably keep working on this project later. (Both on the explanation of what I found, and my attempt to find a small net that folds into 3 cuboids) 
 

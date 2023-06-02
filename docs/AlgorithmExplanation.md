@@ -1,6 +1,3 @@
-
-
-
 # Summary of the Cuboid Repo
 
 This repo is a simplified version of the code I used to get all the nets that fold the 11x1x1 and 5x3x2 cuboids. Though it's slower than the more complicated and optimized code in the weirdmathstuff repo, this repo is fast enough to find all of the 8x1x1 and 5x2x1 cuboid within 2 days (the optimized version only takes 4 hours).
@@ -9,15 +6,15 @@ I think I'll explain the simplified code, and then explain all the optimizations
  
 ## How the main program works
  
-The "main" program to run is DFSIntersectFinder2.java  .
+The main program to run is DFSIntersectFinder2.java  .
 
 The main program runs a function that is centered around finding nets for an Nx1x1 cuboid by starting from the bottom cell of the Nx1x1 cuboid.
 As it solves for the Nx1x1 cuboid, it also makes sure that it can also fill in another cuboid, so it can find nets that fold into both cuboids. 
 If you want to only solve the Nx1x1 cuboid, just make sure the other cuboid is the same Nx1x1 cuboid.
-(I don't feel like having a new file optimized to cover that case. I want to keep it simple)
+(I don't feel like having a new file optimized to cover that case. I want to keep this repository simple)
 
-I've left a few valid cuboid settings for you to try in the main function.  Feel free to uncomment the one you want and run it:
-(Note that the Nx1x1 cuboid is always the first one.)
+I've left a few valid cuboid settings for you to try in the main function. Feel free to uncomment the one you want and run it:
+(Note that the Nx1x1 cuboid should always be the first one.)
 ### Main function in question:
 ```
 public static void main(String args[]) {
@@ -119,7 +116,7 @@ The code for this logic is in PivotCellDescription.java.
 
 
 # Depth 1 of the algo details:
-Once inside the first loop, we enter into an algorithm that recursively adds 1 cell/square to the net at a time by attaching it sideways or above/below a cuboid that's already there. In order to avoid finding the same solution several times, but with different symmetries, I went out of my way to force the first depth to only have 5 configurations and added hard-coded rules for where the top cell is allowed to be. The details of the rules live in SymmetryResolver.java. If these rules weren't there, it would still work, but I think it would be 5-10 times slower because of all the redundant work the algorithm would do without the rules. I'll explain in more detail in each section. The reason I'm bothering to explain this is because I think this background info will go help explain a lot of what the output looks like.
+Once inside the first loop, we enter into an algorithm that recursively adds 1 cell/square to the net at a time by attaching it sideways or above/below a cell/square that's already there. In order to avoid finding the same solution several times, but with different symmetries, I went out of my way to force the first depth to only have 5 configurations and added hard-coded rules for where the top cell is allowed to be. The details of the rules live in SymmetryResolver.java. If these rules weren't there, it would still work, but I think it would be 5-10 times slower because of all the redundant work the algorithm would do without the rules. I'll explain in more detail in each section. The reason I'm bothering to explain this is because I think this background info will go help explain a lot of what the output looks like.
 
 ## General rules
 1. Top cell attaches to just as many cells as bottom cell or less
@@ -228,18 +225,19 @@ The second approach is to record all the configurations that were already seen, 
 Based on what I read in the previous papers, they solved the 5x1x1 and 3x2x1 cuboid using this approach and for the 7x1x1 cuboid and 3x3x1 cuboid, they had to stop using this approach at some point because it took too much memory. They has to switch to another approach before getting to depth 22 out of 30.
 "This simple idea works up to 22 for two boxes of size 1x1x5 and 1x3x5 in [1] (...) However, for the surface area 30, it does not work even on a supercomputer (CRAY XC30) due to memory overflow when i = 22"
 ."
-(2015 - "Common Developments of Three Incongruent Boxes of Area 30" by Dawei Xu, Takashi Horiyama, Toshihiro Shirakawa, and Ryuhei Uehara) They might have had a bunch of clever tricks to deal with the memory issues they had (most of which I don't think I understand :( ), but they still had to deal with holding a bunch of memory at the same time.
+(2015 - "Common Developments of Three Incongruent Boxes of Area 30" by Dawei Xu, Takashi Horiyama, Toshihiro Shirakawa, and Ryuhei Uehara) They might have had a bunch of clever tricks to deal with the memory issues they had, but they still had to deal with holding a bunch of memory at the same time.
 
 # Idea 3 (the secret-sauce)
-Believe it or not, there's an improvement that can be made that doesn't involve recording the configurations.
+Believe it or not, there's an improvement that can be made that doesn't involve recording the previous configurations.
 The trick is to add an artificial constraint on how to add cells to the cuboid while just barely searching all possibilities. With a bit of experimentation, I found that if I artificially force the order in which I add cells to match the order/path in which a deterministic breadth-first search algorithm would explore the net from the bottom cell, the algorithm will have three nice properties:
 1. The algo will search every possible net because a breadth-first search algorithm is more than capable of searching any finite net.
 2. At every step of the recursive function, the number of options will be constrained by the last cell added, severely reducing its branching factor.
-3. Because the breadth-first search algorithm is deterministic, if we ignore symmetry for a minute, every net and partial net will have only 1 way the breadth-first search algo wil explore it, so without bothering to record previously checked paths, we will visit every possible net once. If we don't ignore symmetry, every net could be visited up to 8 times, which is still not too bad.
+3. Because the breadth-first search algorithm is deterministic, if we ignore symmetry for a minute, every net and partial net will have only 1 way the breadth-first search algo wil explore it, so without bothering to record previously checked paths, we will visit every possible net once. If we don't ignore symmetry, every net could be visited up to 8* times, which is still not too bad.
 
 I don't think it's possible to over-estimate how important idea #3 is. I think it's a greater improvement than all the other optimizations I created combined.
 
 At this point, I hope the idea in pics/exampleTransformation.png is starting to make sense.
 
+*: Technically, if you're looking for a net that fits two cuboid shapes, the max number of duplicates is more like 8 times the number of iterations of the first loop, but it's still relatively small, and, in practice, that number is probably way above average.
  
 
