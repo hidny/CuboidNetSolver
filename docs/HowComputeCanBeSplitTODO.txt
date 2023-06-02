@@ -8,3 +8,10 @@ Main points:
 * How to run
 * Still a rough draft, but it works
 * Maybe a could submit it to a website that distributes compute? I still have to look into it. (Maybe primegrid.com ?)
+
+Maybe just buy compute...
+
+For example:
+https://calculator.aws/#/addService/ec2-enhancement?refid=ap_card
+
+I don't know where I can get the best deal though...
