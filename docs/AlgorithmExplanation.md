@@ -184,7 +184,8 @@ In this phase, the bottom cell has 2 neighbours, and those neighbours are above 
 
 ### The simple phase
 In this phase, the bottom cell only has 1 neighbour, and  the bottom cell. Also, the top cell should not be left of the bottom cell. (The rules are similar to the cross phase)
-This phase is by far the fastest for the algorithm to go through and easiest to look at. The top cell is on the top, the bottom cell is on the bottom and there's 4 cells in each row in between. Also, the 4 cells of each row must have a different position mod 4. I also <b>think</b> there's only 2 ways for an in-between row to be configured, which makes me <b>think</b> this phase is liable to be optimized with an even better algorithm. (I haven't worked on this yet., so that's why I'm not 100% sure..)
+This phase is by far the fastest for the algorithm to go through and easiest to look at. The top cell is on the top, the bottom cell is on the bottom, and there's 4 cells in each row in between. Also, the 4 cells of each row must have a different position mod 4. I also <b>think</b> there's only 4 ways for an in-between row to be configured, which makes me <b>think</b> this phase is liable to be optimized with an even better algorithm.
+(I haven't worked on this yet, so that's why I'm not 100% sure...) Proving that there is only 4 ways to do it should be simple enough, but I haven't done it yet. :(
 
 #### Examples:
 ````
@@ -200,11 +201,13 @@ This phase is by far the fastest for the algorithm to go through and easiest to 
 | 4| 1|10| 7|..|..|..|
 |..|..| 0|..|..|..|..|
 ```
-The 2-3 ways the in-between rows can be?
+
+The 4 ways the in-between rows can be:
 ```
-1. | 5|..|..| 8|..| 2|11|
-2. | 5| 2|..| 8|..|..|11| (This is just a reflection of the row above, so that's why I didn't really count it)
-3. |..|..|12| 9| 6| 3|..|
+{1, 1, 1, 1, 0, 0, 0}, or
+{1, 1, 0, 1, 0, 0, 1}, or
+{1, 0, 1, 1, 0, 1, 0}, or
+{1, 0, 0, 1, 0, 1, 1}
 ```
 
 # A more detailed explanation of the recursive algo and the 'secret sauce'
