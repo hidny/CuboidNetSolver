@@ -1,10 +1,13 @@
 package SingleIntersectSolve;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import Coord.Coord2D;
 import Coord.CoordWithRotationAndIndex;
+import DupRemover.BasicUniqueCheckImproved;
 //import Cuboid.SymmetryResolver.SymmetryResolver;
 import SolutionResolver.SolutionResolverInterface;
 import SolutionResolver.StandardResolverForSmallIntersectSolutions;
@@ -104,7 +107,7 @@ public class DFSIntersectFinder2 {
 		System.out.println("Num starting points and rotations to check: " + startingPointsAndRotationsToCheck.size());
 		
 		//(Set i=1 for non-trial Nx1x1 self-intersections (This is just a side-problem))
-		for(int i=0; i<startingPointsAndRotationsToCheck.size(); i++) {
+		for(int i=0; i<1; i++) {
 			//if(i != 0 && i != 4 && i != 6 && i != 10 && i != 14) {
 			//	continue;
 			//}
@@ -491,10 +494,41 @@ public class DFSIntersectFinder2 {
 		//8: 1114
 		//9: 495
 
-		solveCuboidIntersections(new CuboidToFoldOn(3, 1, 1), new CuboidToFoldOn(3, 1, 1));
+		solveCuboidIntersections(new CuboidToFoldOn(7, 1, 1), new CuboidToFoldOn(7, 1, 1));
 		
 		System.out.println("Current UTC timestamp in milliseconds: " + System.currentTimeMillis());
 		
+		//debugPrintSolutions();
+		
+	}
+	
+	public static void debugPrintSolutions() {
+		Iterator<BigInteger> it = BasicUniqueCheckImproved.uniqList.iterator();
+		
+		BigInteger array[] = new BigInteger[BasicUniqueCheckImproved.uniqList.size()];
+		
+		for(int i=0; i<array.length; i++) {
+			array[i] = it.next();
+		}
+		
+		for(int i=0; i<array.length; i++) {
+			
+			for(int j=i+1; j<array.length; j++) {
+				
+				if(array[i].compareTo(array[j]) > 0) {
+					BigInteger tmp = array[i];
+					array[i] = array[j];
+					array[j] = tmp;
+					
+				}
+				
+			}
+		}
+		
+		System.out.println("---");
+		for(int i=0; i<array.length; i++) {
+			System.out.println(array[i]);
+		}
 	}
 	/*
 54	1 × 1 × 13, 1 × 3 × 6, 3 × 3 × 3

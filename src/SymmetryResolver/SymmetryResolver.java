@@ -38,6 +38,9 @@ public class SymmetryResolver {
 		}
 		//End Hack to enforce order where bottom of cuboid has just as many or more than top of cuboid.
 		
+		if(getNumUsedNeighbourCellonPaper(indexCuboidonPaper, paperToDevelop[0]) > 1) {
+			return true;
+		}
 		return false;
 		
 	}
