@@ -104,6 +104,7 @@ public class DFSIntersectFinder2 {
 		System.out.println("Num starting points and rotations to check: " + startingPointsAndRotationsToCheck.size());
 		
 		//(Set i=1 for non-trial Nx1x1 self-intersections (This is just a side-problem))
+		//for(int i=1; i<startingPointsAndRotationsToCheck.size(); i++) {
 		for(int i=0; i<startingPointsAndRotationsToCheck.size(); i++) {
 			//if(i != 0 && i != 4 && i != 6 && i != 10 && i != 14) {
 			//	continue;
@@ -491,7 +492,24 @@ public class DFSIntersectFinder2 {
 		//8: 1114
 		//9: 495
 
-		solveCuboidIntersections(new CuboidToFoldOn(3, 1, 1), new CuboidToFoldOn(3, 1, 1));
+		//solveCuboidIntersections(new CuboidToFoldOn(3, 1, 1), new CuboidToFoldOn(3, 1, 1));
+		
+		// 10,892,643 distinct solutions for 2x2x2:
+		//solveCuboidIntersections(new CuboidToFoldOn(2, 2, 2), new CuboidToFoldOn(2, 2, 2));
+
+		// 94,391 distince solutions for 2x2x1 (Don't allow invisible cuts)
+		solveCuboidIntersections(new CuboidToFoldOn(2, 2, 1), new CuboidToFoldOn(2, 2, 1));
+
+		// (June 28th, 2023)
+		// I only recently learned the 2 cuboids below have the same area, but It's a big one and the code
+		// isn't optimized for it... A paper says that there is 1458 ways to do it.
+		// or 1458 + 133 + 2 = 1593 ways?
+		// I'm also not sure if they counted solutions with invisible cuts or not. I'll check this eventually.
+		
+		//Paper: Search for developments of a box having multiple ways of folding by SAT solver
+		//Riona Tadaki and Kazuyuki Amano
+		//solveCuboidIntersections(new CuboidToFoldOn(1, 2, 6), new CuboidToFoldOn(2, 2, 4));
+		
 		
 		System.out.println("Current UTC timestamp in milliseconds: " + System.currentTimeMillis());
 		
