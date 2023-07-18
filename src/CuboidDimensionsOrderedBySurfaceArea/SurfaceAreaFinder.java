@@ -10,9 +10,9 @@ public class SurfaceAreaFinder {
 		
 		ArrayList <cuboidDimensionComparable>list = new ArrayList <cuboidDimensionComparable>();
 		
-		for(int a=1; a<30; a++) {
-			for(int b=a; b<30; b++) {
-				for(int c=b; c<30; c++) {
+		for(int a=1; a<50; a++) {
+			for(int b=a; b<50; b++) {
+				for(int c=b; c<50; c++) {
 					
 					int surfaceArea = 2 * (a*b + a*c + b*c);
 					
@@ -42,6 +42,10 @@ public class SurfaceAreaFinder {
 		}
 		
 		for(int i=0; i<list.size(); i++) {
+			
+			if(list.get(i).getArea() > 200) {
+				break;
+			}
 			System.out.println(list.get(i));
 			
 			if(i + 1 < list.size() && list.get(i+1).getArea() > list.get(i).getArea()) {
@@ -150,5 +154,66 @@ public class SurfaceAreaFinder {
 20 x 1 x 1: 82
 
 (...)
+
+5 x 5 x 2: 90
+6 x 3 x 3: 90
+22 x 1 x 1: 90
+
+5 x 4 x 3: 94
+7 x 5 x 1: 94
+11 x 3 x 1: 94
+15 x 2 x 1: 94
+23 x 1 x 1: 94
+
+7 x 3 x 3: 102
+9 x 3 x 2: 102
+12 x 3 x 1: 102
+25 x 1 x 1: 102
+
+8 x 5 x 1: 106
+17 x 2 x 1: 106
+26 x 1 x 1: 106
+
+5 x 5 x 3: 110
+7 x 6 x 1: 110
+13 x 3 x 1: 110
+27 x 1 x 1: 110
+
+7 x 5 x 2: 118
+9 x 5 x 1: 118
+11 x 4 x 1: 118
+14 x 3 x 1: 118
+19 x 2 x 1: 118
+29 x 1 x 1: 118
+
+7 x 4 x 3: 122
+11 x 3 x 2: 122
+30 x 1 x 1: 122
+
+6 x 5 x 3: 126
+7 x 7 x 1: 126
+9 x 3 x 3: 126
+15 x 3 x 1: 126
+31 x 1 x 1: 126
+
+
+5 x 5 x 4: 130
+10 x 5 x 1: 130
+21 x 2 x 1: 130
+32 x 1 x 1: 130
+
+9 x 6 x 1: 138
+10 x 3 x 3: 138
+13 x 4 x 1: 138
+34 x 1 x 1: 138
+
+7 x 5 x 3: 142
+8 x 7 x 1: 142
+11 x 5 x 1: 142
+13 x 3 x 2: 142
+17 x 3 x 1: 142
+23 x 2 x 1: 142
+35 x 1 x 1: 142
+
 	 */
 }

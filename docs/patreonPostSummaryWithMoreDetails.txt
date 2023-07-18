@@ -1,21 +1,20 @@
-
 Update on the cuboid problem:
 
 It's been about 6 months since the cuboid video came out and I spent around 2-3 months working on trying to find a small net that folds into 3 cuboids. Though I didn't succeed in finding a solution,
-I want to share learned/discovered because I think what I found is interesting, and also because I would like others build off of what I learned and take it further. (I'm pretty busy right now)
+I want to share what I have learned/discovered because I think what I found is interesting, and also because I would like others to build off of what I learned and take it further. (I'm pretty busy right now)
 
 
 Here's are the main points:
 
-Despite what Matt Parker said and what Ryuhei Uehara wrote, completing a search for a net that folds the 11x1x1, 5x3x1, and 7x2x1 is feasible.
+Despite what Matt Parker said and what Ryuhei Uehara wrote, completing a search for a net that folds 11x1x1, 5x3x1, and 7x2x1 is feasible.
 
 Unfortunately, my program found no solutions for a net that folds into the 11x1x1, 5x3x1, and 7x2x1 cuboids... :(
 
-I was able to independantly verify that there's 2263 nets that fold into the 5x1x1 and 3x2x1 cuboid, and 1080 nets that fold into the 7x1x1 and 3x3x1 (Though I had to assume that they included 10 "solutions" where the net had an invisible cut.)
+I was able to independently verify that there's 2263 nets that fold into the 5x1x1 and 3x2x1 cuboid, and 1080 nets that fold into the 7x1x1 and 3x3x1 (Though I had to assume that they included 10 "solutions" where the net had an invisible cut.)
 
-After almost 2 months of running my program on my 9 year old laptop, my program says that there are 4,233,426 different nets that fold into both a 11x1x1 and a 5x3x1 cuboid and none fold into the 7x2x1 cuboid. (If you wish to see tham, I might be able to list them all in compressed fashion later) 
+After almost 2 months of running my program on my 9 year old laptop, my program says that there are 4,233,426 different nets that fold into both a 11x1x1 and a 5x3x1 cuboid and none fold into the 7x2x1 cuboid. (If you wish to see tham, I might be able to list them all in compressed fashion later)
 
-With more compute resources, we could search for slightly bigger nets than the 11x1x1 and 5x3x1 one. (I think we could at least check 13x1x1 and 3x3x3)
+With more compute resources, we could search for slightly bigger nets than the 11x1x1 and 5x3x1 ones. (I think we could at least check 13x1x1 and 3x3x3)
 
 This problem doesn't need a big memory footprint, and it could be easily split into as many pieces as there are servers available to work on this problem.
 
@@ -30,18 +29,18 @@ I personally think the coolest thing is the ordering constraint of the search al
 So here's the idea behind this search algo:
 
 Basically, it's an algorithm where you build the net out cell by cell (or square by square), and the key is that the order in which the net is built has to match the order in which a breadth-first search algo would find the cells during a search.
-We're allowed to do this because it's safe to assume that the breadth-first search algo will able to explore the net if it was there (As wikipedia says, breadth-first search is complete for finite graphs).
-This simple trick reduces the number of duplicates you find to a maximum of 8 symmetries* (8 symmetries = 4 rotational symmerties by 2 reflective symmetries).
+We're allowed to do this because it's safe to assume that the breadth-first search algo will be able to explore the net if it was there (As wikipedia says, breadth-first search is complete for finite graphs).
+This simple trick reduces the number of duplicates you find to a maximum of 8 symmetries* (8 symmetries = 4 rotational symmetries by 2 reflective symmetries).
 You could get rid of the symmetries in other ways, and do other optimizations, but those are details that are just icing on the cake.
 (See bottom of AlgorithmExplanation.md for a slightly more detailed explanation)
 
 I created a ms-paint drawing that hopefully shows that the net can only be built 1 way. It's pretty crude though. Feel free to ask questions if you don't get it.
 See pics/exampleTransformation.png
 
-Another nice thing about the algo is that if memory is an issue, it's possible to not record the solutions and just have a function that determines if a given solution 
+Another nice thing about the algo is that if memory is an issue, it's possible to not record the solutions and just have a function that determines if a given solution
 isn't a duplicate one by checking if the solution would have appeared earlier (or doing something similar).
 
-I'll probably keep working on this project later. (Both on the explanation of what I found, and my attempt to find a small net that folds into 3 cuboids) 
+I'll probably keep working on this project later. (Both on the explanation of what I found, and my attempt to find a small net that folds into 3 cuboids)
 
 If you want more info, feel free to look at my github link, but be warned that it's messy...
 https://github.com/hidny/CuboidNetSolver

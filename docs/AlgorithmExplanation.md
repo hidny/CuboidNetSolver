@@ -1,6 +1,6 @@
 # Summary of the Cuboid Repo
 
-This repo is a simplified version of the code I used to get all the nets that fold the 11x1x1 and 5x3x2 cuboids. Though it's slower than the more complicated and optimized code in the weirdmathstuff repo, this repo is fast enough to find all of the 8x1x1 and 5x2x1 cuboid within 2 days (the optimized version only takes 4 hours).
+This repo is a simplified version of the code I used to get all the nets that fold the 11x1x1 and 5x3x2 cuboids. Though it's slower than the more complicated and optimized code in the weirdmathstuff repo, this repo is fast enough to find all of the 8x1x1 and 5x2x1 nets within 2 days (the optimized version only takes 4 hours).
 
 I think I'll explain the simplified code, and then explain all the optimizations later.
  
@@ -185,7 +185,7 @@ In this phase, the bottom cell has 2 neighbours, and those neighbours are above 
 ### The simple phase
 In this phase, the bottom cell only has 1 neighbour, and  the bottom cell. Also, the top cell should not be left of the bottom cell. (The rules are similar to the cross phase)
 This phase is by far the fastest for the algorithm to go through and easiest to look at. The top cell is on the top, the bottom cell is on the bottom, and there's 4 cells in each row in between. Also, the 4 cells of each row must have a different position mod 4. I also <b>think</b> there's only 4 ways for an in-between row to be configured, which makes me <b>think</b> this phase is liable to be optimized with an even better algorithm.
-(I haven't worked on this yet, so that's why I'm not 100% sure...) Proving that there is only 4 ways to do it should be simple enough, but I haven't done it yet. :(
+(I haven't worked on this yet, so that's why I'm not 100% sure...) Proving that there are only 4 ways to do it should be simple enough, but I haven't done it yet. :(
 
 #### Examples:
 ````

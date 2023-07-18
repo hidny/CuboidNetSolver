@@ -17,14 +17,13 @@ https://calculator.aws/#/addService/ec2-enhancement?refid=ap_card
 I don't know where I can get the best deal though...
 
 Update:
-I was able to write a JAR file that distributes the net_search really easily. All you need to particate is a CPU with 1 GB of ram
+I was able to write a JAR file that distributes the net_search really easily. All you need to participate is a CPU with 1 GB of ram
 and a few MBs of disk space.
 
-I looked at google cloud's offerings, and found out that I could use I could claim a $300 free trial. Once past the free trial,
+I looked at google cloud's offerings, and found out that I could claim a $300 free trial. Once past the free trial,
 they charge 4 cents USD an hour per CPU, or over 1 dollar a day per CPU.
-Currently, checking the 13x1x1 solutions takes around 500 CPU days, so once the free trial is used, I'll have to use spend around $200 out of pocket.
+Currently, checking the 13x1x1 solutions takes around 500 CPU days, so once the free trial is used, I'll have to spend around $200 out of pocket.
 
-I don't think I'll be able to justify speeding real money on this project though.
+I don't think I'll be able to justify spending real money on this project though.
 link:
 https://cloud.google.com/compute/all-pricing#premiumimages
-
