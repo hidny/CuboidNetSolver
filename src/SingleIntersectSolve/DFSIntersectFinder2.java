@@ -449,7 +449,7 @@ public class DFSIntersectFinder2 {
 		System.out.println("Fold Resolver Ordered Regions intersection skip symmetries Nx1x1:");
 
 		
-		//solveCuboidIntersections(new CuboidToFoldOn(13, 1, 1), new CuboidToFoldOn(3, 3, 3));
+		solveCuboidIntersections(new CuboidToFoldOn(13, 1, 1), new CuboidToFoldOn(3, 3, 3));
 		
 		//solveCuboidIntersections(new CuboidToFoldOn(11, 1, 1), new CuboidToFoldOn(5, 3, 1));
 		
@@ -497,8 +497,8 @@ public class DFSIntersectFinder2 {
 		// 10,892,643 distinct solutions for 2x2x2:
 		//solveCuboidIntersections(new CuboidToFoldOn(2, 2, 2), new CuboidToFoldOn(2, 2, 2));
 
-		// 94,391 distince solutions for 2x2x1 (Don't allow invisible cuts)
-		solveCuboidIntersections(new CuboidToFoldOn(2, 2, 1), new CuboidToFoldOn(2, 2, 1));
+		// 94,391 distinct solutions for 2x2x1 (Don't allow invisible cuts)
+		//solveCuboidIntersections(new CuboidToFoldOn(2, 2, 1), new CuboidToFoldOn(2, 2, 1));
 
 		// (June 28th, 2023)
 		// I only recently learned the 2 cuboids below have the same area, but It's a big one and the code
