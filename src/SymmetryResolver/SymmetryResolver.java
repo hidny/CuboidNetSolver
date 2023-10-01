@@ -298,9 +298,9 @@ public class SymmetryResolver {
 		if(cellIndexToUse == 0) {
 			
 			//TODO: tmp skip 4 and 3 AND 2 step:
-			//if(getNumUsedNeighbourCellonPaper(indexCuboidonPaper,paperToDevelop[0]) >= 1 ) {
-			//	return true;
-			//}
+			if(getNumUsedNeighbourCellonPaper(indexCuboidonPaper,paperToDevelop[0]) >= 1 ) {
+				return true;
+			}
 			//END TODO
 			
 			if(getNumUsedNeighbourCellonPaper(indexCuboidonPaper,paperToDevelop[0]) < 3 && rotationToAddCellOnPaper == 3) {
@@ -341,7 +341,7 @@ public class SymmetryResolver {
 								&& paperUsed[paperToDevelop[0].i + 1][paperToDevelop[0].j]
 								&& paperUsed[paperToDevelop[0].i - 1][paperToDevelop[0].j]))
 					) {
-				//If bottom has 1 or 4 neighbours, or 2 neighbours that are above and below, make top right left of bottom on paper (or directly above)
+				//If bottom has 1 or 4 neighbours, or 2 neighbours that are above and below, make top cell right of bottom on paper (or directly above)
 				
 				//i.e.: Only go up and to the right in the 1 bottom and 1 top case.
 				return true;

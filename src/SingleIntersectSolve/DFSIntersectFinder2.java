@@ -105,11 +105,11 @@ public class DFSIntersectFinder2 {
 		
 		//(Set i=1 for non-trial Nx1x1 self-intersections (This is just a side-problem))
 		//for(int i=1; i<startingPointsAndRotationsToCheck.size(); i++) {
-		for(int i=0; i<startingPointsAndRotationsToCheck.size(); i++) {
+		//for(int i=0; i<startingPointsAndRotationsToCheck.size(); i++) {
 			//if(i != 0 && i != 4 && i != 6 && i != 10 && i != 14) {
 			//	continue;
 			//}
-		//for(int i=0; i<1; i++) {
+		for(int i=0; i<1; i++) {
 		
 			int startIndex2ndCuboid =startingPointsAndRotationsToCheck.get(i).getCellIndex();
 			int startRotation2ndCuboid = startingPointsAndRotationsToCheck.get(i).getRotationRelativeToCuboidMap();
@@ -448,8 +448,9 @@ public class DFSIntersectFinder2 {
 	public static void main(String args[]) {
 		System.out.println("Fold Resolver Ordered Regions intersection skip symmetries Nx1x1:");
 
-		
-		solveCuboidIntersections(new CuboidToFoldOn(13, 1, 1), new CuboidToFoldOn(3, 3, 3));
+		solveCuboidIntersections(new CuboidToFoldOn(6, 1, 1), new CuboidToFoldOn(6, 1, 1));
+
+		//solveCuboidIntersections(new CuboidToFoldOn(13, 1, 1), new CuboidToFoldOn(3, 3, 3));
 		
 		//solveCuboidIntersections(new CuboidToFoldOn(11, 1, 1), new CuboidToFoldOn(5, 3, 1));
 		
