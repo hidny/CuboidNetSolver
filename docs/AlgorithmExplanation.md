@@ -33,13 +33,14 @@ public static void main(String args[]) {
 		//It got 4469 solutions and it took about 41.5 hours (for the optimized code)
 		
 		//solveCuboidIntersections(new CuboidToFoldOn(11, 1, 1), new CuboidToFoldOn(5, 3, 1));
-		//This took about 2 months with 3/4 cores running constantly.
+		//This took about 2 months with 3-4 cores running constantly.
 
 		//solveCuboidIntersections(new CuboidToFoldOn(11, 1, 1), new CuboidToFoldOn(7, 2, 1));
 		//I haven't tried this, but I imagine it being slower than the previous one.
 		
 		solveCuboidIntersections(new CuboidToFoldOn(13, 1, 1), new CuboidToFoldOn(3, 3, 3));
-		// This one is too slow. I either need to find an amazing optimation, or just throw more compute power at it.
+		// This one is too slow. I either need to find an amazing optimization, or just throw more compute power at it.
+		//(Update: it will now take around 5 months to finish)
 }
 ```
 ## The first loop
@@ -116,7 +117,7 @@ The code for this logic is in PivotCellDescription.java.
 
 
 # Depth 1 of the algo details:
-Once inside the first loop, we enter into an algorithm that recursively adds 1 cell/square to the net at a time by attaching it sideways or above/below a cell/square that's already there. In order to avoid finding the same solution several times, but with different symmetries, I went out of my way to force the first depth to only have 5 configurations and added hard-coded rules for where the top cell is allowed to be. The details of the rules live in SymmetryResolver.java. If these rules weren't there, it would still work, but I think it would be 5-10 times slower because of all the redundant work the algorithm would do without the rules. I'll explain in more detail in each section. The reason I'm bothering to explain this is because I think this background info will help explain a lot of what the output looks like.
+Once inside the first loop, we enter into an algorithm that recursively adds 1 cell(or square) to the net at a time by attaching it sideways or above/below a cell/square that's already there. In order to avoid finding the same solution several times, but with different symmetries, I went out of my way to force the first depth to only have 5 configurations and added hard-coded rules for where the top cell is allowed to be. The details of the rules live in SymmetryResolver.java. If these rules weren't there, it would still work, but I think it would be 5-10 times slower because of all the redundant work the algorithm would do without the rules. I'll explain in more detail in each section. The reason I'm bothering to explain this is because I think this background info will help explain a lot of what the output looks like.
 
 ## General rules
 1. Top cell attaches to just as many cells as bottom cell or less
@@ -183,9 +184,9 @@ In this phase, the bottom cell has 2 neighbours, and those neighbours are above 
 ```
 
 ### The simple phase
-In this phase, the bottom cell only has 1 neighbour, and  the bottom cell. Also, the top cell should not be left of the bottom cell. (The rules are similar to the cross phase)
-This phase is by far the fastest for the algorithm to go through and easiest to look at. The top cell is on the top, the bottom cell is on the bottom, and there's 4 cells in each row in between. Also, the 4 cells of each row must have a different position mod 4. I also <b>think</b> there's only 4 ways for an in-between row to be configured, which makes me <b>think</b> this phase is liable to be optimized with an even better algorithm.
-(I haven't worked on this yet, so that's why I'm not 100% sure...) Proving that there are only 4 ways to do it should be simple enough, but I haven't done it yet. :(
+In this phase, the top and bottom cell only have 1 neighbour. Also, the top cell should not be left of the bottom cell. (The rules are similar to the cross phase)
+This phase is by far the fastest for the algorithm to go through and easiest to look at because the top cell is on the top, the bottom cell is on the bottom, and there's 4 cells in each row in between. Also, the 4 cells of each row must have a different x position mod 4. I also <b>think</b> there's only 4 ways for an in-between row to be configured, which makes me <b>think</b> this phase is liable to be optimized with an even better algorithm.
+(See the CuboidSimplePhaseNetSearch repo for my attempt at searching for nets of only this phase) Proving that there are only 4 ways to do it should be simple enough, but I haven't done it yet :(. I'm convinced it's true because I've experimentally verified it for N=1 to 6, and I can't imagine suddenly finding a counter-example once N=8+.
 
 #### Examples:
 ````
@@ -239,7 +240,10 @@ The trick is to add an artificial constraint on how to add cells to the cuboid w
 
 I don't think it's possible to over-estimate how important idea #3 is. I think it's a greater improvement than all the other optimizations I created combined.
 
-At this point, I hope the idea in pics/exampleTransformation.png is starting to make sense.
+Update: Through working on the problem of just enumerating polyominoes on a square lattice, I came to the realization that the algorithm I just described is just a slight variant on Redelmeier’s algorithm. The definitions and description are superficially different, but both algorithm accomplish the same goals
+with similar time and space complexities. Though I am very biased, I feel that understanding both algorithms and how they are related is more enlightening than just understanding one of them. (See high-level summary of the algorithm here: https://en.wikipedia.org/wiki/Polyomino and https://math.stackexchange.com/questions/1861614/enumerating-polyominos)
+
+At this point, I hope the picture in pics/exampleTransformation.png is starting to make sense.
 
 *: Technically, if you're looking for a net that fits two cuboid shapes, the max number of duplicates is more like 8 times the number of iterations of the first loop, but it's still relatively small, and, in practice, that number is probably way above average.
  
