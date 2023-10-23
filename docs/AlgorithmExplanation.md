@@ -240,7 +240,7 @@ The trick is to add an artificial constraint on how to add cells to the cuboid w
 
 I don't think it's possible to over-estimate how important idea #3 is. I think it's a greater improvement than all the other optimizations I created combined.
 
-Update: Through working on the problem of just enumerating polyominoes on a square lattice, I came to the realization that the algorithm I just described is just a slight variant of Redelmeier’s algorithm. The definitions and description are superficially different, but both algorithm accomplish the same goals
+Update: Through working on the problem of just enumerating polyominoes on a square lattice, I came to the realization that the algorithm I just described is just a slight variant of Redelmeier’s algorithm. The definitions and description are superficially different, but both algorithms accomplish the same goals
 with similar time and space complexities. Though I am very biased, I feel that understanding both algorithms and how they are related is more enlightening than just understanding one of them. (See high-level summary of the algorithm here: https://en.wikipedia.org/wiki/Polyomino and https://math.stackexchange.com/questions/1861614/enumerating-polyominos)
 
 At this point, I hope the picture in pics/exampleTransformation.png is starting to make sense.
