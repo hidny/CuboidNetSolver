@@ -12,6 +12,11 @@ public class SurfaceAreaFinder {
 		
 		for(int a=1; a<50; a++) {
 			for(int b=a; b<50; b++) {
+				
+				// find nets that aren't: Nx1x1:
+				/*if(b==1) {
+					continue;
+				}*/
 				for(int c=b; c<50; c++) {
 					
 					int surfaceArea = 2 * (a*b + a*c + b*c);
