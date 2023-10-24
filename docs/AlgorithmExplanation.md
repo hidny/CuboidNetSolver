@@ -186,7 +186,7 @@ In this phase, the bottom cell has 2 neighbours, and those neighbours are above 
 ### The simple phase
 In this phase, the top and bottom cell only have 1 neighbour. Also, the top cell should not be left of the bottom cell. (The rules are similar to the cross phase)
 This phase is by far the fastest for the algorithm to go through and easiest to look at because the top cell is on the top, the bottom cell is on the bottom, and there's 4 cells in each row in between. Also, the 4 cells of each row must have a different x position mod 4. I also <b>think</b> there's only 4 ways for an in-between row to be configured, which makes me <b>think</b> this phase is liable to be optimized with an even better algorithm.
-(See the CuboidSimplePhaseNetSearch repo for my attempt at searching for nets of only this phase) Proving that there are only 4 ways to do it should be simple enough, but I haven't done it yet :(. I'm convinced it's true because I've experimentally verified it for N=1 to 6, and I can't imagine suddenly finding a counter-example once N=8+.
+(See the CuboidSimplePhaseNetSearch repo for my attempt at searching for nets of only this phase) Proving that there are only 4 ways to do it should be simple enough, but I haven't done it yet :(. I'm convinced it's true because I've experimentally verified it for N=1 to 7, and I can't imagine suddenly finding a counter-example once N=8+.
 
 #### Examples:
 ````
@@ -209,6 +209,18 @@ The 4 ways the in-between rows can be:
 {1, 1, 0, 1, 0, 0, 1}, or
 {1, 0, 1, 1, 0, 1, 0}, or
 {1, 0, 0, 1, 0, 1, 1}
+```
+
+Example that uses all 4 ways:
+
+````
+|..|..|..|..|##|..|..|
+|..|..|..|##|##|##|##|
+|..|##|..|##|##|..|##|
+|##|##|..|##|..|..|##|
+|##|..|..|##|..|##|##|
+|##|##|##|##|..|..|..|
+|..|..|##|..|..|..|..|
 ```
 
 # A more detailed explanation of the recursive algo and the 'secret sauce'
@@ -238,12 +250,15 @@ The trick is to add an artificial constraint on how to add cells to the cuboid w
 2. At every step of the recursive function, the number of options will be constrained by the last cell added, severely reducing its branching factor.
 3. Because the breadth-first search algorithm is deterministic, if we ignore symmetry for a minute, every net and partial net will have only 1 way the breadth-first search algo will explore it, so without bothering to record previously checked paths, we will visit every possible net once. If we don't ignore symmetry, every net could be visited up to 8* times, which is still not too bad.
 
-I don't think it's possible to over-estimate how important idea #3 is. I think it's a greater improvement than all the other optimizations I created combined.
+At this point, I hope the picture in pics/exampleTransformation.png is starting to make sense.
 
-Update: Through working on the problem of just enumerating polyominoes on a square lattice, I came to the realization that the algorithm I just described is just a slight variant of Redelmeier’s algorithm. The definitions and description are superficially different, but both algorithms accomplish the same goals
+I don't think it's possible to over-estimate how important idea #3 is. I think it's a greater improvement than all the other optimizations I created combined.
+For a simple example of this algorithm being used, see the code I wrote to find the number of 'lattice animals' in a 2D lattice: https://github.com/hidny/MikeTsCubeCode/blob/main/src/Demo/DFSPolyCubeCounterFixed2D.java
+(I'm a bit embarrassed about that code because I forgot to rename one of the functions, and I didn't bother removing references to the 3rd dimension, but I guess it's fine...)
+
+Update: Through working on the problem of just enumerating polyominoes on a square lattice, I came to the realization that the algorithm I just described is just a slight variant of Redelmeier’s algorithm. The definitions and description are different, but both algorithms accomplish the same goals
 with similar time and space complexities. Though I am very biased, I feel that understanding both algorithms and how they are related is more enlightening than just understanding one of them. (See high-level summary of the algorithm here: https://en.wikipedia.org/wiki/Polyomino and https://math.stackexchange.com/questions/1861614/enumerating-polyominos)
 
-At this point, I hope the picture in pics/exampleTransformation.png is starting to make sense.
 
 *: Technically, if you're looking for a net that fits two cuboid shapes, the max number of duplicates is more like 8 times the number of iterations of the first loop, but it's still relatively small, and, in practice, that number is probably way above average.
  
