@@ -138,6 +138,8 @@ public class DFSIntersectFinder2 {
 		
 		
 		System.out.println("Final number of unique solutions: " + solutionResolver.getNumUniqueFound());
+		
+		System.out.println("Number of iterations: " + numIterations);
 	}
 	
 	
@@ -150,6 +152,7 @@ public class DFSIntersectFinder2 {
 			boolean debugNope, long debugIterations[],
 			HashMap <Integer, Integer> CellIndexToOrderOfDev, int minIndexToUse, int minRotationToUse) {
 
+		numIterations++;
 		if(numCellsUsedDepth == cuboid.getNumCellsToFill()) {
 
 			int indexes[][][] = new int[2][][];
@@ -175,7 +178,6 @@ public class DFSIntersectFinder2 {
 		//Utils.printFoldWithIndex(indexCuboidonPaper);
 		
 		//Display debug/what's-going-on update
-		numIterations++;
 		
 		//if(numIterations % 10000000L == 0) {
 		if(numIterations % 100000000L == 0) {
@@ -272,8 +274,8 @@ public class DFSIntersectFinder2 {
 					continue;
 				}
 				
-				boolean cantAddCellBecauseOfOtherPaperNeighbours = cantAddCellBecauseOfOtherPaperNeighbours(paperToDevelop, indexCuboidonPaper,
-						//ALLOW_HOLES_cantAddCellBecauseOfOtherPaperNeighbours(paperToDevelop, indexCuboidonPaper,
+				boolean cantAddCellBecauseOfOtherPaperNeighbours = //cantAddCellBecauseOfOtherPaperNeighbours(paperToDevelop, indexCuboidonPaper,
+						ALLOW_HOLES_cantAddCellBecauseOfOtherPaperNeighbours(paperToDevelop, indexCuboidonPaper,
 						paperUsed, cuboid, numCellsUsedDepth,
 						CellIndexToOrderOfDev, minIndexToUse, minRotationToUse,
 						indexNewCell, new_i, new_j, curOrderedIndexToUse
@@ -449,7 +451,7 @@ public class DFSIntersectFinder2 {
 		System.out.println("Fold Resolver Ordered Regions intersection skip symmetries Nx1x1:");
 
 		
-		solveCuboidIntersections(new CuboidToFoldOn(13, 1, 1), new CuboidToFoldOn(3, 3, 3));
+		//solveCuboidIntersections(new CuboidToFoldOn(13, 1, 1), new CuboidToFoldOn(3, 3, 3));
 		
 		//solveCuboidIntersections(new CuboidToFoldOn(11, 1, 1), new CuboidToFoldOn(5, 3, 1));
 		
@@ -468,7 +470,7 @@ public class DFSIntersectFinder2 {
 		// I got 1080 when I allow the solution to have an apparent hole in it!
 		// took 34 minutes
 		
-		//solveCuboidIntersections(new CuboidToFoldOn(5, 1, 1), new CuboidToFoldOn(3, 2, 1));
+		solveCuboidIntersections(new CuboidToFoldOn(5, 1, 1), new CuboidToFoldOn(3, 2, 1));
 		//It got 2263!
 		//I got 2290 when I allow the solution to have an apparent hole in it.
 
