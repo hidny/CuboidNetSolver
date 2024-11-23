@@ -7,7 +7,6 @@ import Coord.Coord2D;
 import Coord.CoordWithRotationAndIndex;
 //import Cuboid.SymmetryResolver.SymmetryResolver;
 import SolutionResolver.SolutionResolverInterface;
-import SolutionResolver.StandardResolverForSmallIntersectHoleSolutions;
 import SolutionResolver.StandardResolverForSmallIntersectSolutions;
 import SolutionResolver.StandardResolverUsingMemory;
 import SymmetryResolver.SymmetryResolver;
@@ -15,7 +14,7 @@ import GraphUtils.PivotCellDescription;
 import Model.CuboidToFoldOn;
 import Model.Utils;
 
-public class DFSIntersectFinder2 {
+public class DFSIntersectFinderSimplePhaseNets {
 
 	
 	public static final int NUM_ROTATIONS = 4;
@@ -36,17 +35,13 @@ public class DFSIntersectFinder2 {
 		}
 		
 		// Set the solution resolver to different things depending on the size of the cuboid:
-		/*
+		
 		if(Utils.cuboidDimensionsMatch(cuboidToBuild, cuboidToBringAlong)) {
 			//solutionResolver = new StandardResolverUsingMemory();
 			solutionResolver = new StandardResolverForSmallIntersectSolutions();
 		} else {
 			solutionResolver = new StandardResolverForSmallIntersectSolutions();
-		}*/
-
-		//HOLE FINDER:
-		solutionResolver = new StandardResolverForSmallIntersectHoleSolutions();
-		
+		}
 		
 		
 		solveCuboidIntersections(cuboidToBuild, cuboidToBringAlong, skipSymmetries, solutionResolver);
@@ -264,6 +259,36 @@ public class DFSIntersectFinder2 {
 
 				int indexNewCell = neighbours[neighbourArrayIndex].getIndex();
 				
+				//Hack added for simple phase nets:
+				if(Utils.getSideCell(cuboid, indexToUse) != Utils.getSideCell(cuboid, indexNewCell)) {
+					//Simple Phase Filter hack
+					
+					boolean simplePhaseFilter = false;
+					if(Utils.getSideCell(cuboid, indexToUse) == 0
+							&& dirNewCellAdd != 0) {
+						simplePhaseFilter = true;
+
+					} else if(Utils.getSideCell(cuboid, indexToUse) == 5
+							&& dirNewCellAdd != 2) {
+						simplePhaseFilter = true;
+
+					} else if(Utils.getSideCell(cuboid, indexNewCell) == 0
+							&& dirNewCellAdd != 2) {
+						simplePhaseFilter = true;
+
+					} else if(Utils.getSideCell(cuboid, indexNewCell) == 5
+							&& dirNewCellAdd != 0) {
+						simplePhaseFilter = true;
+
+					}
+					
+					if(simplePhaseFilter) {
+						//System.out.println("Simple phase filter: " + indexToUse + " to " + indexNewCell +". Rotation: " +  dirNewCellAdd);
+						continue;
+					}
+				}
+				//END Hack added for simple phase nets:
+				
 				
 				if(paperUsed[new_i][new_j]) {
 					//Cell we are considering to add is already there...
@@ -457,88 +482,22 @@ public class DFSIntersectFinder2 {
 		System.out.println("Fold Resolver Ordered Regions intersection skip symmetries Nx1x1:");
 
 		
-		//solveCuboidIntersections(new CuboidToFoldOn(13, 1, 1), new CuboidToFoldOn(3, 3, 3));
+		//Simple Phase Nets test: (It's wrong, but good enough to test the eigenvalue)
+		//84
+		//solveCuboidIntersections(new CuboidToFoldOn(1, 2, 1), new CuboidToFoldOn(1, 2, 1));
 		
-		//solveCuboidIntersections(new CuboidToFoldOn(11, 1, 1), new CuboidToFoldOn(5, 3, 1));
-		
-		//solveCuboidIntersections(new CuboidToFoldOn(11, 1, 1), new CuboidToFoldOn(7, 2, 1));
-		
-		//solveCuboidIntersections(new CuboidToFoldOn(9, 1, 1), new CuboidToFoldOn(4, 3, 1));
-		//It got 4469 solutions and it took about 41.5 hours
-		
-		//solveCuboidIntersections(new CuboidToFoldOn(8, 1, 1), new CuboidToFoldOn(5, 2, 1));
-		//It got 35675 again, but this time it only took 3 hours! It took almost 2 days last time!
-		//With apparent holes: 35697
-
-		
-		//solveCuboidIntersections(new CuboidToFoldOn(7, 1, 1), new CuboidToFoldOn(3, 3, 1));
-		////It got 1070 (again) (They got 1080, but I think they were wrong)
-		// I got 1080 when I allow the solution to have an apparent hole in it!
-		// took 34 minutes
-		
-		//solveCuboidIntersections(new CuboidToFoldOn(5, 1, 1), new CuboidToFoldOn(3, 2, 1));
-		//It got 2263!
-		//I got 2290 when I allow the solution to have an apparent hole in it.
-
-		//solveCuboidIntersections(new CuboidToFoldOn(4, 1, 1), new CuboidToFoldOn(4, 1, 1));
-		
-		//Best 5,1,1: 3 minute 45 seconds (3014430 solutions) (December 27th)
-		//solveCuboidIntersections(new CuboidToFoldOn(5, 1, 1), new CuboidToFoldOn(5, 1, 1));
-		//Got 3061249 solutions while allowing apparent holes.
-		
-		//Find non-trivial cuboid intersections:
-		//solveCuboidIntersections(new CuboidToFoldOn(8, 1, 1), new CuboidToFoldOn(8, 1, 1));
-		//Nx1x1: suprise intersections: (Not on OEIS :( )
-		// I don't know to predict the entries. I was honestly hoping this would tend towards 0.
-		//1: 0
-		//2: 72
-		//3: 47
-		//4: 204
-		//5: 189
-		//6: 372
-		//7: 217
-		//8: 1114
-		//9: 495
-
-		//solveCuboidIntersections(new CuboidToFoldOn(3, 1, 1), new CuboidToFoldOn(3, 1, 1));
-		
-		// 10,892,643 distinct solutions for 2x2x2:
-		//solveCuboidIntersections(new CuboidToFoldOn(2, 2, 2), new CuboidToFoldOn(2, 2, 2));
-
-		// 94,391 distinct solutions for 2x2x1 (Don't allow invisible cuts)
+		//847
 		//solveCuboidIntersections(new CuboidToFoldOn(2, 2, 1), new CuboidToFoldOn(2, 2, 1));
 
-		// (June 28th, 2023)
-		// I only recently learned the 2 cuboids below have the same area, but It's a big one and the code
-		// isn't optimized for it... A paper says that there is 1458 ways to do it.
-		// or 1458 + 133 + 2 = 1593 ways?
-		// I'm also not sure if they counted solutions with invisible cuts or not. I'll check this eventually.
-		
-		//Paper: Search for developments of a box having multiple ways of folding by SAT solver
-		//Riona Tadaki and Kazuyuki Amano
-		//solveCuboidIntersections(new CuboidToFoldOn(1, 2, 6), new CuboidToFoldOn(2, 2, 4));
-		
-		//723
-		//solveCuboidIntersections(new CuboidToFoldOn(2, 1, 1), new CuboidToFoldOn(2, 1, 1));
-		
-		//99919
-		//solveCuboidIntersections(new CuboidToFoldOn(2, 1, 2), new CuboidToFoldOn(2, 1, 2));
-
-		//??
-		//solveCuboidIntersections(new CuboidToFoldOn(2, 1, 3), new CuboidToFoldOn(2, 1, 3));
-		
-		
-		//Get holes:
-		//solveCuboidIntersections(new CuboidToFoldOn(5, 1, 1), new CuboidToFoldOn(5, 1, 1));
-		//solveCuboidIntersections(new CuboidToFoldOn(5, 1, 1), new CuboidToFoldOn(3, 2, 1));
+		//23013
 		//solveCuboidIntersections(new CuboidToFoldOn(3, 2, 1), new CuboidToFoldOn(3, 2, 1));
 		
-
-		//solveCuboidIntersections(new CuboidToFoldOn(1, 7, 2), new CuboidToFoldOn(5, 3, 1));
+		//661473
+		solveCuboidIntersections(new CuboidToFoldOn(4, 2, 1), new CuboidToFoldOn(4, 2, 1));
 		
-
-		//Get holes 2:
-		solveCuboidIntersections(new CuboidToFoldOn(3, 1, 1), new CuboidToFoldOn(3, 1, 1));
+		// 661473/23013 = 28.743
+		// eigenvalue = 28.7559620
+		// close enough!
 		
 		System.out.println("Current UTC timestamp in milliseconds: " + System.currentTimeMillis());
 		

@@ -10,13 +10,16 @@ public class SurfaceAreaFinder {
 		
 		ArrayList <cuboidDimensionComparable>list = new ArrayList <cuboidDimensionComparable>();
 		
-		for(int a=1; a<50; a++) {
-			for(int b=a; b<50; b++) {
-				for(int c=b; c<50; c++) {
+		int MAX_AREA = 1000;
+		for(int a=1; a<200; a++) {
+			for(int b=a; b<200; b++) {
+				for(int c=b; c<200; c++) {
 					
 					int surfaceArea = 2 * (a*b + a*c + b*c);
 					
-					list.add(new cuboidDimensionComparable(c, b, a, surfaceArea));
+					if(surfaceArea <= MAX_AREA) {
+						list.add(new cuboidDimensionComparable(c, b, a, surfaceArea));
+					}
 					
 				}
 			}
@@ -43,7 +46,7 @@ public class SurfaceAreaFinder {
 		
 		for(int i=0; i<list.size(); i++) {
 			
-			if(list.get(i).getArea() > 200) {
+			if(list.get(i).getArea() > MAX_AREA) {
 				break;
 			}
 			System.out.println(list.get(i));
@@ -217,3 +220,14 @@ public class SurfaceAreaFinder {
 
 	 */
 }
+
+/*New target:
+ * 9 x 8 x 1: 178
+11 x 4 x 3: 178
+
+14 x 5 x 1: 178
+17 x 4 x 1: 178
+29 x 2 x 1: 178
+44 x 1 x 1: 178
+*/
+
