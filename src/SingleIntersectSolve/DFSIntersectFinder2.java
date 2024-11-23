@@ -538,7 +538,9 @@ public class DFSIntersectFinder2 {
 		
 
 		//Get holes 2:
-		solveCuboidIntersections(new CuboidToFoldOn(3, 1, 1), new CuboidToFoldOn(3, 1, 1));
+		//solveCuboidIntersections(new CuboidToFoldOn(3, 1, 1), new CuboidToFoldOn(3, 1, 1));
+		//Get holes 2 illadvised:
+		solveCuboidIntersections(new CuboidToFoldOn(5, 1, 1), new CuboidToFoldOn(3, 2, 1));
 		
 		System.out.println("Current UTC timestamp in milliseconds: " + System.currentTimeMillis());
 		
