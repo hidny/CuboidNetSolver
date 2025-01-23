@@ -19,9 +19,10 @@ public class StandardResolverForSmallIntersectSolutions implements SolutionResol
 	public long resolveSolution(CuboidToFoldOn cuboidDimensionsAndNeighbours, Coord2D[] paperToDevelop,
 			int[][][] indexCuboidonPaper, boolean[][] paperUsed) {	
 
-		System.out.println(numFound +
-				" (num unique: " + numUniqueFound + ")");
-		
+		if(numFound % 1000 == 0) {
+			System.out.println(numFound +
+					" (num unique: " + numUniqueFound + ")");
+		}
 		numFound++;
 		
 

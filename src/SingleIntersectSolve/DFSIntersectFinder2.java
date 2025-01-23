@@ -25,6 +25,8 @@ public class DFSIntersectFinder2 {
 		solveCuboidIntersections(cuboidToWrap, cuboidToBringAlong, true);
 	}
 	
+	public static int impliedHoleDepth = -1;
+	
 	public static void solveCuboidIntersections(CuboidToFoldOn cuboidToBuild, CuboidToFoldOn cuboidToBringAlong, boolean skipSymmetries) {
 		SolutionResolverInterface solutionResolver = null;
 		
@@ -106,6 +108,7 @@ public class DFSIntersectFinder2 {
 		//(Set i=1 for non-trial Nx1x1 self-intersections (This is just a side-problem))
 		//for(int i=1; i<startingPointsAndRotationsToCheck.size(); i++) {
 		for(int i=0; i<startingPointsAndRotationsToCheck.size(); i++) {
+		//for(int i=0; i<1; i++) {
 			//if(i != 0 && i != 4 && i != 6 && i != 10 && i != 14) {
 			//	continue;
 			//}
@@ -155,6 +158,10 @@ public class DFSIntersectFinder2 {
 		numIterations++;
 		if(numCellsUsedDepth == cuboid.getNumCellsToFill()) {
 
+			if(impliedHoleDepth == -1) {
+				return 0;
+			}
+			
 			int indexes[][][] = new int[2][][];
 			indexes[0] = indexCuboidonPaper;
 			indexes[1] = indexCuboidOnPaper2ndCuboid;
@@ -203,6 +210,10 @@ public class DFSIntersectFinder2 {
 		
 		//DEPTH-FIRST START:
 		for(int curOrderedIndexToUse=minIndexToUse; curOrderedIndexToUse<numCellsUsedDepth && curOrderedIndexToUse<paperToDevelop.length && paperToDevelop[curOrderedIndexToUse] != null; curOrderedIndexToUse++) {
+			
+			if(impliedHoleDepth >= numCellsUsedDepth) {
+				impliedHoleDepth = -1;
+			}
 			
 			int indexToUse = indexCuboidonPaper[paperToDevelop[curOrderedIndexToUse].i][paperToDevelop[curOrderedIndexToUse].j];
 			
@@ -423,6 +434,9 @@ public class DFSIntersectFinder2 {
 			if(cuboid.getNeighbours(indexOtherCell)[neighbourIndexNeeded].getIndex() != indexNewCell) {
 				//In this case, there's an implied hole...
 				// I want to see what happens when we allow this...
+				if(impliedHoleDepth == -1) {
+					impliedHoleDepth = numCellsUsedDepth;
+				}
 				continue;
 				
 			} else if(CellIndexToOrderOfDev.containsKey(indexOtherCell)
@@ -470,7 +484,7 @@ public class DFSIntersectFinder2 {
 		// I got 1080 when I allow the solution to have an apparent hole in it!
 		// took 34 minutes
 		
-		solveCuboidIntersections(new CuboidToFoldOn(5, 1, 1), new CuboidToFoldOn(3, 2, 1));
+		 solveCuboidIntersections(new CuboidToFoldOn(5, 1, 1), new CuboidToFoldOn(3, 2, 1));
 		//It got 2263!
 		//I got 2290 when I allow the solution to have an apparent hole in it.
 
@@ -479,6 +493,7 @@ public class DFSIntersectFinder2 {
 		//Best 5,1,1: 3 minute 45 seconds (3014430 solutions) (December 27th)
 		//solveCuboidIntersections(new CuboidToFoldOn(5, 1, 1), new CuboidToFoldOn(5, 1, 1));
 		//Got 3061249 solutions while allowing apparent holes.
+		//solveCuboidIntersections(new CuboidToFoldOn(3, 2, 1), new CuboidToFoldOn(3, 2, 1));
 		
 		//Find non-trivial cuboid intersections:
 		//solveCuboidIntersections(new CuboidToFoldOn(8, 1, 1), new CuboidToFoldOn(8, 1, 1));
