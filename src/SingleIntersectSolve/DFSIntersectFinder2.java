@@ -7,7 +7,6 @@ import Coord.Coord2D;
 import Coord.CoordWithRotationAndIndex;
 //import Cuboid.SymmetryResolver.SymmetryResolver;
 import SolutionResolver.SolutionResolverInterface;
-import SolutionResolver.StandardResolverForSmallIntersectHoleSolutions;
 import SolutionResolver.StandardResolverForSmallIntersectSolutions;
 import SolutionResolver.StandardResolverUsingMemory;
 import SymmetryResolver.SymmetryResolver;
@@ -45,7 +44,7 @@ public class DFSIntersectFinder2 {
 		}*/
 
 		//HOLE FINDER:
-		solutionResolver = new StandardResolverForSmallIntersectHoleSolutions();
+		solutionResolver = new StandardResolverForSmallIntersectSolutions();
 		
 		
 		
