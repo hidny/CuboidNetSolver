@@ -86,17 +86,23 @@ public class UniqueCheckRecordCuts {
 				uniqListNoCut.put(lowestScoreNoCut, lowestScore);
 				
 			} else {
-				System.out.println("BINGO:");
+				//System.out.println("BINGO:");
 				
-				System.out.println(lowestScore);
-				System.out.println("vs:");
-				System.out.println(uniqListNoCut.get(lowestScoreNoCut));
+				//System.out.println(lowestScore);
+				//System.out.println("vs:");
+				//System.out.println(uniqListNoCut.get(lowestScoreNoCut));
+				
+				bingoString = "BINGO:" + "\n";
+				bingoString += uniqListNoCut.get(lowestScoreNoCut) + "\n";
+				bingoString += "vs:" + "\n";
+				bingoString += lowestScore + "\n";
 				
 				//System.exit(1);
 				
 			}
 			
 			//System.out.println("Max number: " + max);
+			UniqueCheckRecordCuts.debugLastScore = lowestScore;
 			
 			return true;
 		} else {
@@ -106,6 +112,7 @@ public class UniqueCheckRecordCuts {
 		
 	}
 	
+	public static String bingoString = null;
 	
 
 	public static BigInteger[] getScoreRotatedAndFlipped(int symmetryIndex, int arrayIndex[][], boolean array[][], CuboidToFoldOn cuboid) {

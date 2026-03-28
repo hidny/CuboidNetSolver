@@ -46,9 +46,14 @@ public class StandardResolverForSmallIntersectHoleSolutions implements SolutionR
 			Utils.printFoldWithIndex(indexCuboidonPaper[1]);
 			
 			System.out.println("Solution code: " + BasicUniqueCheckImproved.debugLastScore);
+			System.out.println("Solution code with cut information: " + UniqueCheckRecordCuts.debugLastScore);
 			System.out.println("Num unique solutions found: " + 
 					numUniqueFound);
 
+			if(UniqueCheckRecordCuts.bingoString != null) {
+				System.out.println(UniqueCheckRecordCuts.bingoString);
+				UniqueCheckRecordCuts.bingoString = null;
+			}
 			
 
 			return 1L;
